@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Controller2 {
+public class Sample2 {
     public Button btnback;
 
     public void btnback(ActionEvent actionEvent) throws IOException {
