@@ -17,5 +17,6 @@
       <Button layoutX="527.0" layoutY="37.0" mnemonicParsing="false" onAction="#insert" text="Insert" />
       <TextField fx:id="tfdel" layoutX="30.0" layoutY="81.0" prefHeight="33.0" prefWidth="91.0" promptText="username" />
       <Button layoutX="135.0" layoutY="85.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+      <Button fx:id="btnnext" layoutX="463.0" layoutY="157.0" onAction="#nextScreen" mnemonicParsing="false" text="NextScreen" />
    </children>
 </AnchorPane>

@@ -3,11 +3,15 @@ package sample;
 import connection.ConnectionManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class Controller {
@@ -20,6 +24,7 @@ public class Controller {
     public TextField tfpw;
     public TextField tffname;
     public TextField tfdel;
+    public Button btnnext;
 
     private static Connection conn;
 
@@ -71,5 +76,11 @@ public class Controller {
         statement.executeUpdate(sql);
         statement.close();
 //        conn.close();
+    }
+
+    public void nextScreen(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("newScreen.fxml"));
+        Stage stage = (Stage)btnnext.getScene().getWindow();
+        stage.setScene(new Scene(root, 600, 500));
     }
 }
