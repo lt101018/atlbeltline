@@ -1,14 +1,17 @@
 package sample;
 
 import connection.ConnectionManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.*;
 
 public class Controller {
+
     public TextField tftest;
     public Label lbtest;
     public TextField tfstatus;
@@ -18,9 +21,14 @@ public class Controller {
     public TextField tffname;
     public TextField tfdel;
 
+    private static Connection conn;
+
+    public void initialize() {
+        System.out.println("Controller initializing!");
+        conn = ConnectionManager.getConn();
+    }
+
     public void read(ActionEvent actionEvent) throws SQLException {
-        ConnectionManager connectionManager = new ConnectionManager();
-        Connection conn = connectionManager.getConnection();
         String sql = "SELECT * FROM user";
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -34,12 +42,10 @@ public class Controller {
             lbtest.setText(lbtest.getText() + username + " " + firstname + " " + lastname + " " + status + " " + password + "\n");
         }
         statement.close();
-        conn.close();
+//        conn.close();
     }
 
     public void insert(ActionEvent actionEvent) throws SQLException {
-        ConnectionManager connectionManager = new ConnectionManager();
-        Connection conn = connectionManager.getConnection();
         String sql = "INSERT INTO user\n" +
                 "(`username`,\n" +
                 "`firstname`,\n" +
@@ -55,17 +61,15 @@ public class Controller {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
-        conn.close();
+//        conn.close();
     }
 
     public void delete(ActionEvent actionEvent) throws SQLException {
-        ConnectionManager connectionManager = new ConnectionManager();
-        Connection conn = connectionManager.getConnection();
         String sql = "DELETE FROM user\n" +
                 "WHERE username ='"+tfdel.getText()+"'";
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
-        conn.close();
+//        conn.close();
     }
 }
