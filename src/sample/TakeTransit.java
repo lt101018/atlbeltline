@@ -1,6 +1,7 @@
 package sample;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,6 +14,7 @@ public class TakeTransit {
     public TableColumn col3;
     public TableColumn col4;
     public Button filter;
+    public DatePicker datepicker;
 
     public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
@@ -26,6 +28,12 @@ public class TakeTransit {
         TakeTransitRow row = new TakeTransitRow("newRout", "newType", 2.5, 5);
         table.getItems().add(row);
     }
+
+// this is how to change date format
+/*
+String mrgDate3 = mrgRqstDt.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+System.out.println("Date of Merge: " + mrgDate3);
+*/
 
 }
 
