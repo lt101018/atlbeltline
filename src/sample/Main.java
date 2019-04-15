@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         ConnectionManager.init();
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("takeTransit.fxml"));
         primaryStage.setTitle("Atlanta Beltline");
         primaryStage.setScene(new Scene(root, 600, 500));
 
