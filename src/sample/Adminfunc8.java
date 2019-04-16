@@ -2,7 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 
-public class Adminfunc {
+public class Adminfunc8 {
     public void manageProfile(ActionEvent actionEvent) {
     }
 

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerVisitorFunc">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerFunc10">
    <children>
       <Label layoutX="211.0" layoutY="47.0" text="Manager Functionality">
          <font>
@@ -18,9 +18,6 @@
       <Button layoutX="300.0" layoutY="149.0" mnemonicParsing="false" onAction="#viewSiteReport" prefHeight="25.0" prefWidth="121.0" text="View Site Report" />
       <Button layoutX="169.0" layoutY="187.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="27.0" prefWidth="121.0" text="Take Transit" />
       <Button layoutX="300.0" layoutY="187.0" mnemonicParsing="false" onAction="#viewTransitHistory" prefHeight="25.0" prefWidth="121.0" text="View Transit History" />
-      <Button layoutX="300.0" layoutY="266.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="121.0" text="Back" />
-      <Button layoutX="169.0" layoutY="228.0" mnemonicParsing="false" onAction="#exploreSite" prefHeight="27.0" prefWidth="121.0" text="Explore Site" />
-      <Button layoutX="300.0" layoutY="228.0" mnemonicParsing="false" onAction="#exploreEvent" prefHeight="27.0" prefWidth="121.0" text="Explore Event" />
-      <Button layoutX="169.0" layoutY="266.0" mnemonicParsing="false" onAction="#viewVisitHistory" prefHeight="27.0" prefWidth="121.0" text="View Visit History" />
+      <Button layoutX="239.0" layoutY="225.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="121.0" text="Back" />
    </children>
 </AnchorPane>

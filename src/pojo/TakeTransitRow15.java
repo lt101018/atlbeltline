@@ -1,12 +1,12 @@
 package pojo;
 
-public class TakeTransitRow {
+public class TakeTransitRow15 {
     private String route;
     private String type;
     private double price;
     private int numSite;
 
-    public TakeTransitRow(String route, String type, double price, int numSite) {
+    public TakeTransitRow15(String route, String type, double price, int numSite) {
         this.route = route;
         this.type = type;
         this.price = price;

@@ -2,7 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 
-public class Stafffunc {
+public class StaffVisitorfunc13 {
     public void takeTransit(ActionEvent actionEvent) {
     }
 
@@ -16,5 +16,14 @@ public class Stafffunc {
     }
 
     public void viewSchedule(ActionEvent actionEvent) {
+    }
+
+    public void exploreSite(ActionEvent actionEvent) {
+    }
+
+    public void exploreEvent(ActionEvent actionEvent) {
+    }
+
+    public void viewVisitHistory(ActionEvent actionEvent) {
     }
 }

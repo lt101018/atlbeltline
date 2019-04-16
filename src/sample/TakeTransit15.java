@@ -1,13 +1,10 @@
 package sample;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import pojo.TakeTransitRow;
+import pojo.TakeTransitRow15;
 
-public class TakeTransit {
+public class TakeTransit15 {
     public TableView table;
     public TableColumn col1;
     public TableColumn col2;
@@ -15,6 +12,10 @@ public class TakeTransit {
     public TableColumn col4;
     public Button filter;
     public DatePicker datepicker;
+    public MenuButton menusite;
+    public MenuButton menutransport;
+    public TextField price1;
+    public TextField price2;
 
     public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
@@ -25,8 +26,17 @@ public class TakeTransit {
 
 
     public void addElement(String route, String type, double price, int numSite) {
-        TakeTransitRow row = new TakeTransitRow("newRout", "newType", 2.5, 5);
+        TakeTransitRow15 row = new TakeTransitRow15("newRout", "newType", 2.5, 5);
         table.getItems().add(row);
+    }
+
+    public void btnFilter(ActionEvent actionEvent) {
+    }
+
+    public void btnBack(ActionEvent actionEvent) {
+    }
+
+    public void btnLogTransit(ActionEvent actionEvent) {
     }
 
 // this is how to change date format

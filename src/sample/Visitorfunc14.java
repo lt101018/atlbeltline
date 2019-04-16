@@ -2,7 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 
-public class Visitorfunc {
+public class Visitorfunc14 {
     public void takeTransit(ActionEvent actionEvent) {
     }
 

@@ -2,7 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 
-public class ManagerFunc {
+public class ManagerVisitorFunc11 {
     public void manageProfile(ActionEvent actionEvent) {
     }
 
@@ -22,5 +22,14 @@ public class ManagerFunc {
     }
 
     public void back(ActionEvent actionEvent) {
+    }
+
+    public void exploreSite(ActionEvent actionEvent) {
+    }
+
+    public void exploreEvent(ActionEvent actionEvent) {
+    }
+
+    public void viewVisitHistory(ActionEvent actionEvent) {
     }
 }

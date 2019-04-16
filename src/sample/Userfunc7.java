@@ -2,7 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 
-public class Userfunc {
+public class Userfunc7 {
 
     public void takeTransit(ActionEvent actionEvent) {
     }

@@ -2,20 +2,26 @@ package sample;
 
 import javafx.event.ActionEvent;
 
-public class StaffVisitorfunc {
+public class AdminVisitorfunc9 {
+    public void manageProfile(ActionEvent actionEvent) {
+    }
+
     public void takeTransit(ActionEvent actionEvent) {
+    }
+
+    public void manageUser(ActionEvent actionEvent) {
     }
 
     public void viewTransitHistory(ActionEvent actionEvent) {
     }
 
+    public void manageTransit(ActionEvent actionEvent) {
+    }
+
     public void back(ActionEvent actionEvent) {
     }
 
-    public void manageProfile(ActionEvent actionEvent) {
-    }
-
-    public void viewSchedule(ActionEvent actionEvent) {
+    public void manageSite(ActionEvent actionEvent) {
     }
 
     public void exploreSite(ActionEvent actionEvent) {
