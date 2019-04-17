@@ -26,8 +26,8 @@ public class ManageTransit22 {
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
         col2.setCellValueFactory(new PropertyValueFactory<>("transportType"));
         col3.setCellValueFactory(new PropertyValueFactory<>("price"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("numConnectedSites"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("numTransitLogged"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("numConnectedSites"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("numTransitLogged"));
     }
 
     public void addElement(String route, String transportType, double price, int numConnectedSites, int numTransitLogged) {

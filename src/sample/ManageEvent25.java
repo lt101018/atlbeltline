@@ -30,8 +30,8 @@ public class ManageEvent25 {
         col1.setCellValueFactory(new PropertyValueFactory<>("name"));
         col2.setCellValueFactory(new PropertyValueFactory<>("staffCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("totalRevenue"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("totalRevenue"));
     }
 
     public void addElement(String name, int staffCount, int duration, int totalVisits, int totalRevenue) {

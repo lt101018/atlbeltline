@@ -30,8 +30,8 @@ public class SiteReport29 {
         col1.setCellValueFactory(new PropertyValueFactory<>("date"));
         col2.setCellValueFactory(new PropertyValueFactory<>("eventCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("staffCount"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("totalRevenue"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("totalRevenue"));
     }
 
     public void addElement(String date, int eventCount, int staffCount, int totalVisits, int totalRevenue) {
