@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TransitHistory16">
    <children>
-      <Label layoutX="252.0" layoutY="14.0" text="Take Transit">
+      <Label layoutX="252.0" layoutY="14.0" text="Transit History">
          <font>
             <Font size="18.0" />
          </font>
@@ -36,14 +36,14 @@
       <TextField fx:id="tfroute" layoutX="99.0" layoutY="81.0" prefHeight="25.0" prefWidth="51.0" />
       <TableView fx:id="table" layoutX="88.0" layoutY="163.0" prefHeight="175.0" prefWidth="424.0">
         <columns>
-          <TableColumn fx:id="col1" prefWidth="100.0" sortable="false" text="Route" />
-          <TableColumn fx:id="col2" prefWidth="100.0" text="Transport Type" />
-            <TableColumn fx:id="col3" prefWidth="100.0" text="Price" />
-            <TableColumn fx:id="col4" prefWidth="123.99996948242188" text="# Connected Sites" />
+          <TableColumn fx:id="col1" prefWidth="100.0" text="Date" />
+          <TableColumn fx:id="col2" prefWidth="100.0" text="Route" />
+            <TableColumn fx:id="col3" prefWidth="100.0" text="Transport Type" />
+            <TableColumn fx:id="col4" prefWidth="123.99996948242188" text="Price" />
         </columns>
       </TableView>
-      <Button layoutX="268.0" layoutY="353.0" onAction="#btnBack" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Back" />
-      <Button layoutX="260.0" layoutY="119.0" onAction="#btnFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Filter" />
+      <Button layoutX="268.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Button layoutX="260.0" layoutY="119.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="80.0" text="Filter" />
       <Label layoutX="158.0" layoutY="85.0" text="Start Date" />
       <Label layoutX="323.0" layoutY="85.0" text="End Date" />
       <DatePicker fx:id="datepicker1" layoutX="221.0" layoutY="81.0" prefHeight="25.0" prefWidth="99.0" />
