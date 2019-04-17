@@ -4,13 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import pojo.ManageEventRow25;
 import pojo.SiteReportRow29;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -60,5 +59,11 @@ public class SiteReport29 {
     }
 
     public void btnDailyDetail(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a site.");
+            return;
+        }
+        SiteReportRow29 selectedItem = (SiteReportRow29)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 }

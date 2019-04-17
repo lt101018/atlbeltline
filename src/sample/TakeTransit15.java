@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.TakeTransitRow15;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public class TakeTransit15 {
 
 
     public void addElement(String route, String type, double price, int numSite) {
-        TakeTransitRow15 row = new TakeTransitRow15("newRout", "newType", 2.5, 5);
+        TakeTransitRow15 row = new TakeTransitRow15(route, type, price, numSite);
         table.getItems().add(row);
     }
 
@@ -51,7 +52,14 @@ public class TakeTransit15 {
     }
 
     public void btnLogTransit(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a transit.");
+            return;
+        }
+        TakeTransitRow15 selectedItem = (TakeTransitRow15)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
+
 
 // this is how to change date format
 /*

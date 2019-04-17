@@ -4,13 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.ManageUserRow18;
+import pojo.TakeTransitRow15;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -51,8 +50,20 @@ public class ManageUser18 {
     }
 
     public void btnApprove(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a user.");
+            return;
+        }
+        ManageUserRow18 selectedItem = (ManageUserRow18)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 
     public void btnDecline(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a user.");
+            return;
+        }
+        ManageUserRow18 selectedItem = (ManageUserRow18)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 }

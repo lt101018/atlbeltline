@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.TransitDetailRow36;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -46,5 +47,11 @@ public class TransitDetail36 {
     }
 
     public void btnLogTransit(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a transit.");
+            return;
+        }
+        TransitDetailRow36 selectedItem = (TransitDetailRow36)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 }

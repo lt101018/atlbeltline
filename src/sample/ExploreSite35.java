@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.ExploreSiteRow35;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -55,8 +56,20 @@ public class ExploreSite35 {
     }
 
     public void btnSiteDetail(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a site.");
+            return;
+        }
+        ExploreSiteRow35 selectedItem = (ExploreSiteRow35)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 
     public void btnTransitDetail(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a site.");
+            return;
+        }
+        ExploreSiteRow35 selectedItem = (ExploreSiteRow35)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 }

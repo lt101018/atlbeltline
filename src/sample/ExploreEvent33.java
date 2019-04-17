@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.ExploreEventRow33;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -62,5 +63,11 @@ public class ExploreEvent33 {
     }
 
     public void btnEventDetail(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select an event.");
+            return;
+        }
+        ExploreEventRow33 selectedItem = (ExploreEventRow33)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 }

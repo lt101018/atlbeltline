@@ -4,12 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.ManageSiteRow19;
+import pojo.ManageUserRow18;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -49,9 +52,21 @@ public class ManageSite19 {
     }
 
     public void btnEdit(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a site.");
+            return;
+        }
+        ManageSiteRow19 selectedItem = (ManageSiteRow19)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 
     public void btnDelete(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a site.");
+            return;
+        }
+        ManageSiteRow19 selectedItem = (ManageSiteRow19)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 
     public void btnCreate(ActionEvent actionEvent) {

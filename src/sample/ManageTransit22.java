@@ -4,13 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import pojo.ManageSiteRow19;
 import pojo.ManageTransitRow22;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -56,9 +55,21 @@ public class ManageTransit22 {
     }
 
     public void btnEdit(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a transit.");
+            return;
+        }
+        ManageTransitRow22 selectedItem = (ManageTransitRow22)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 
     public void btnDelete(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select a transit.");
+            return;
+        }
+        ManageTransitRow22 selectedItem = (ManageTransitRow22)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 
     public void btnCreate(ActionEvent actionEvent) {

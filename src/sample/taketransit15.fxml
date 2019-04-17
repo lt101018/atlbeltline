@@ -36,7 +36,7 @@
       <TextField fx:id="price1" layoutX="136.0" layoutY="81.0" prefHeight="25.0" prefWidth="51.0" />
       <TextField fx:id="price2" layoutX="209.0" layoutY="81.0" prefHeight="25.0" prefWidth="51.0" />
       <Label layoutX="195.0" layoutY="85.0" text="-" />
-      <Button fx:id="filter" layoutX="336.0" layoutY="81.0" onAction="#btnFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Filter" />
+      <Button fx:id="filter" layoutX="336.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="95.0" text="Filter" />
       <TableView fx:id="table" layoutX="59.0" layoutY="127.0" prefHeight="175.0" prefWidth="424.0">
         <columns>
           <TableColumn fx:id="col1" prefWidth="100.0" sortable="false" text="Route" />
@@ -47,7 +47,7 @@
       </TableView>
       <Button layoutX="59.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
       <Label layoutX="150.0" layoutY="325.0" text="Transite Date" />
-      <Button layoutX="423.0" layoutY="321.0" onAction="#btnLogTransit" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Log Transit" />
+      <Button layoutX="423.0" layoutY="321.0" mnemonicParsing="false" onAction="#btnLogTransit" prefHeight="25.0" prefWidth="80.0" text="Log Transit" />
       <DatePicker fx:id="datepicker" layoutX="230.0" layoutY="321.0" prefHeight="25.0" prefWidth="153.0" />
    </children>
 </AnchorPane>

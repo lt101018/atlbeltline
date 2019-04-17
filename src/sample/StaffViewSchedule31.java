@@ -4,13 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.StaffViewScheduleRow31;
+import tools.MyAlert;
 
 import java.io.IOException;
 
@@ -54,5 +52,11 @@ public class StaffViewSchedule31 {
     }
 
     public void btnViewEvent(ActionEvent actionEvent) {
+        if(table.getSelectionModel().getSelectedItem() == null) {
+            MyAlert.showAlert("You need to select an event.");
+            return;
+        }
+        StaffViewScheduleRow31 selectedItem = (StaffViewScheduleRow31)table.getSelectionModel().getSelectedItem();
+        ///following jobs
     }
 }
