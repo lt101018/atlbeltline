@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="501.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SiteReport29">
+   <children>
+      <Label layoutX="252.0" layoutY="48.0" text="Site Report">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="87.0" text="Start Date" />
+      <TableView fx:id="table" layoutX="71.0" layoutY="237.0" prefHeight="200.0" prefWidth="476.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="56.666656494140625" text="Date" />
+          <TableColumn fx:id="col2" prefWidth="94.6666488647461" text="Event Count" />
+            <TableColumn fx:id="col3" prefWidth="91.33338928222656" text="Staff Count" />
+            <TableColumn fx:id="col4" prefWidth="116.0" text="Total Visits" />
+            <TableColumn fx:id="col5" prefWidth="115.33334350585938" text="Total Revenues($)" />
+        </columns>
+      </TableView>
+      <Button layoutX="277.0" layoutY="458.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Button layoutX="91.0" layoutY="193.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="80.0" text="Filter" />
+      <Button layoutX="432.0" layoutY="193.0" mnemonicParsing="false" onAction="#btnDailyDetail" prefHeight="25.0" prefWidth="80.0" text="Daily Detail" />
+      <TextField fx:id="tfRevenue1" layoutX="452.0" layoutY="155.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="tfRevenue2" layoutX="512.0" layoutY="155.0" prefHeight="25.0" prefWidth="38.0" />
+      <Label layoutX="317.0" layoutY="159.0" text="Total Revenue Range" />
+      <Label layoutX="497.0" layoutY="159.0" text="--" />
+      <TextField fx:id="tfeventcount1" layoutX="174.0" layoutY="118.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="tfeventcount2" layoutX="234.0" layoutY="118.0" prefHeight="25.0" prefWidth="38.0" />
+      <Label layoutX="63.0" layoutY="122.0" text="Event Count Range" />
+      <Label layoutX="217.0" layoutY="122.0" text="--" />
+      <TextField fx:id="tfTotalVisits1" layoutX="173.0" layoutY="155.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="tfTotalVisits2" layoutX="240.0" layoutY="155.0" prefHeight="25.0" prefWidth="38.0" />
+      <Label layoutX="64.0" layoutY="159.0" text="Total Visits Range" />
+      <Label layoutX="223.0" layoutY="159.0" text="--" />
+      <DatePicker fx:id="datepicker1" layoutX="122.0" layoutY="83.0" />
+      <Label layoutX="315.0" layoutY="87.0" text="End Date" />
+      <DatePicker fx:id="datepicker2" layoutX="373.0" layoutY="83.0" />
+      <TextField fx:id="tfStaffCount1" layoutX="453.0" layoutY="118.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="tfStaffCount2" layoutX="513.0" layoutY="118.0" prefHeight="25.0" prefWidth="38.0" />
+      <Label layoutX="318.0" layoutY="122.0" text="Staff Count Range" />
+      <Label layoutX="496.0" layoutY="122.0" text="--" />
+   </children>
+</AnchorPane>

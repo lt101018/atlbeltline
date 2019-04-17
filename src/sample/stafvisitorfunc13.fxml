@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.StaffVisitorfunc13">
+   <children>
+      <Label layoutX="229.0" layoutY="82.0" text="Staff Functionality">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="162.0" layoutY="184.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
+      <Button layoutX="162.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewTransitHistory" text="View Transit History" />
+      <Button layoutX="299.0" layoutY="216.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="121.0" text="Back" />
+      <Button layoutX="162.0" layoutY="116.0" mnemonicParsing="false" fx:id="manageProfile" onAction="#manageProfile" prefHeight="13.0" prefWidth="121.0" text="Manage Profile" />
+      <Button layoutX="162.0" layoutY="150.0" mnemonicParsing="false" onAction="#viewSchedule" prefHeight="25.0" prefWidth="121.0" text="View Schedule" />
+      <Button layoutX="299.0" layoutY="149.0" mnemonicParsing="false" onAction="#exploreSite" prefHeight="27.0" prefWidth="121.0" text="Explore Site" />
+      <Button layoutX="299.0" layoutY="115.0" mnemonicParsing="false" onAction="#exploreEvent" prefHeight="27.0" prefWidth="121.0" text="Explore Event" />
+      <Button layoutX="299.0" layoutY="183.0" mnemonicParsing="false" onAction="#viewVisitHistory" prefHeight="27.0" prefWidth="121.0" text="View Visit History" />
+   </children>
+</AnchorPane>

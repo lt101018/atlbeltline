@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="364.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DailyDetail30">
+   <children>
+      <Label layoutX="252.0" layoutY="48.0" text="Daily Detail">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="71.0" layoutY="100.0" prefHeight="200.0" prefWidth="476.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="135.9999771118164" text="Event Name" />
+          <TableColumn fx:id="col2" prefWidth="157.3333282470703" text="Staff Names" />
+            <TableColumn fx:id="col3" prefWidth="73.33331298828125" text="Visits" />
+            <TableColumn fx:id="col4" prefWidth="109.33328247070312" text="Revenue($)" />
+        </columns>
+      </TableView>
+      <Button layoutX="277.0" layoutY="319.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+   </children>
+</AnchorPane>
