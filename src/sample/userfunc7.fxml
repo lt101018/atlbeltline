@@ -13,8 +13,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="236.0" layoutY="93.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
-      <Button layoutX="238.0" layoutY="133.0" mnemonicParsing="false" onAction="#viewTransitHistory" text="View Transit History" />
-      <Button layoutX="236.0" layoutY="174.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="121.0" text="Back" />
+      <Button layoutX="236.0" layoutY="93.0" mnemonicParsing="false" fx:id="btnTakeTransit" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
+      <Button layoutX="238.0" layoutY="133.0" mnemonicParsing="false" fx:id="btnViewTransitHistory" onAction="#viewTransitHistory" text="View Transit History" />
+      <Button layoutX="236.0" layoutY="174.0" mnemonicParsing="false" fx:id="btnBack" onAction="#back" prefHeight="25.0" prefWidth="121.0" text="Back" />
    </children>
 </AnchorPane>

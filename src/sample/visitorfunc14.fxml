@@ -12,7 +12,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="239.0" layoutY="225.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
+      <Button layoutX="239.0" layoutY="225.0" mnemonicParsing="false" fx:id="btnTakeTransit" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
       <Button layoutX="239.0" layoutY="258.0" mnemonicParsing="false" onAction="#viewTransitHistory" text="View Transit History" />
       <Button layoutX="239.0" layoutY="291.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="121.0" text="Back" />
       <Button layoutX="239.0" layoutY="157.0" mnemonicParsing="false" onAction="#exploreSite" prefHeight="27.0" prefWidth="121.0" text="Explore Site" />

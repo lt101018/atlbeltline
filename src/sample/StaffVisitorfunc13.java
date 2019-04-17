@@ -1,29 +1,63 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class StaffVisitorfunc13 {
-    public void takeTransit(ActionEvent actionEvent) {
+
+    public Button manageProfile;
+
+    public void takeTransit(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("taketransit15.fxml"));
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
-    public void viewTransitHistory(ActionEvent actionEvent) {
+    public void viewTransitHistory(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("transithistory16.fxml"));
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
-    public void back(ActionEvent actionEvent) {
+    public void back(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
-    public void manageProfile(ActionEvent actionEvent) {
+    public void manageProfile(ActionEvent actionEvent) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("manageprofile17.fxml"));
+//        Stage stage = (Stage)manageProfile.getScene().getWindow();
+//        stage.setScene(new Scene(root));
     }
 
-    public void viewSchedule(ActionEvent actionEvent) {
+    public void viewSchedule(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("staffviewschedule31.fxml"));
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
-    public void exploreSite(ActionEvent actionEvent) {
+    public void exploreSite(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("exploresite35.fxml"));
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
-    public void exploreEvent(ActionEvent actionEvent) {
+    public void exploreEvent(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("exploreevent33.fxml"));
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
-    public void viewVisitHistory(ActionEvent actionEvent) {
+    public void viewVisitHistory(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("visitorhistory38.fxml"));
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }

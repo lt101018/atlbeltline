@@ -13,7 +13,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="168.0" layoutY="108.0" mnemonicParsing="false" onAction="#manageProfile" prefHeight="25.0" prefWidth="121.0" text="Manage Profile" />
+      <Button layoutX="168.0" layoutY="108.0" mnemonicParsing="false" fx:id="btnManageProfile" onAction="#manageProfile" prefHeight="25.0" prefWidth="121.0" text="Manage Profile" />
       <Button layoutX="300.0" layoutY="108.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
       <Button layoutX="168.0" layoutY="149.0" mnemonicParsing="false" onAction="#manageUser" prefHeight="25.0" prefWidth="121.0" text="Manage User" />
       <Button layoutX="300.0" layoutY="149.0" mnemonicParsing="false" onAction="#viewTransitHistory" text="View Transit History" />

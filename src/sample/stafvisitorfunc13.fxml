@@ -15,7 +15,7 @@
       <Button layoutX="162.0" layoutY="184.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
       <Button layoutX="162.0" layoutY="217.0" mnemonicParsing="false" onAction="#viewTransitHistory" text="View Transit History" />
       <Button layoutX="299.0" layoutY="216.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="121.0" text="Back" />
-      <Button layoutX="162.0" layoutY="116.0" mnemonicParsing="false" onAction="#manageProfile" prefHeight="13.0" prefWidth="121.0" text="Manage Profile" />
+      <Button layoutX="162.0" layoutY="116.0" mnemonicParsing="false" fx:id="manageProfile" onAction="#manageProfile" prefHeight="13.0" prefWidth="121.0" text="Manage Profile" />
       <Button layoutX="162.0" layoutY="150.0" mnemonicParsing="false" onAction="#viewSchedule" prefHeight="25.0" prefWidth="121.0" text="View Schedule" />
       <Button layoutX="299.0" layoutY="149.0" mnemonicParsing="false" onAction="#exploreSite" prefHeight="27.0" prefWidth="121.0" text="Explore Site" />
       <Button layoutX="299.0" layoutY="115.0" mnemonicParsing="false" onAction="#exploreEvent" prefHeight="27.0" prefWidth="121.0" text="Explore Event" />

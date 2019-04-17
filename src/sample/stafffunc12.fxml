@@ -16,7 +16,7 @@
       <Button layoutX="239.0" layoutY="187.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
       <Button layoutX="239.0" layoutY="220.0" mnemonicParsing="false" onAction="#viewTransitHistory" text="View Transit History" />
       <Button layoutX="239.0" layoutY="255.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="121.0" text="Back" />
-      <Button layoutX="239.0" layoutY="116.0" mnemonicParsing="false" onAction="#manageProfile" prefHeight="13.0" prefWidth="121.0" text="Manage Profile" />
+      <Button layoutX="239.0" layoutY="116.0" mnemonicParsing="false" fx:id="manageProfile" onAction="#manageProfile" prefHeight="13.0" prefWidth="121.0" text="Manage Profile" />
       <Button layoutX="239.0" layoutY="150.0" mnemonicParsing="false" onAction="#viewSchedule" prefHeight="25.0" prefWidth="121.0" text="View Schedule" />
    </children>
 </AnchorPane>
