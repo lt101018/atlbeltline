@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="427.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TransitDetail36">
+   <children>
+      <Label layoutX="261.0" layoutY="34.0" text="Transit Detail">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="216.0" layoutY="348.0" text="Transite Date" />
+      <TableView fx:id="table" layoutX="39.0" layoutY="112.0" prefHeight="200.0" prefWidth="517.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="138.66667938232422" text="Route" />
+          <TableColumn fx:id="col2" prefWidth="120.66664123535156" text="Transport Type" />
+            <TableColumn fx:id="col3" prefWidth="87.33331298828125" text="Price" />
+            <TableColumn fx:id="col4" prefWidth="168.66667683919275" text="# Connected Sites" />
+        </columns>
+      </TableView>
+      <Button layoutX="87.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Button layoutX="479.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnLogTransit" prefHeight="25.0" prefWidth="80.0" text="Log Transit" />
+      <DatePicker fx:id="datepicker" layoutX="296.0" layoutY="344.0" />
+      <Label layoutX="119.0" layoutY="70.0" text="Site" />
+      <Label layoutX="316.0" layoutY="70.0" text="Transport Type" />
+      <MenuButton fx:id="menuTransportType" layoutX="407.0" layoutY="66.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="MenuButton">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <Label fx:id="siteName" layoutX="150.0" layoutY="70.0" prefHeight="17.0" prefWidth="159.0" text="Label" />
+   </children>
+</AnchorPane>
