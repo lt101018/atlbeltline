@@ -1,9 +1,15 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import pojo.TransitDetailRow36;
+
+import java.io.IOException;
 
 public class TransitDetail36 {
     public TableView table;
@@ -14,6 +20,11 @@ public class TransitDetail36 {
     public DatePicker datepicker;
     public MenuButton menuTransportType;
     public Label siteName;
+    public String lastFxml;
+
+    public void setLastFxml(String lastFxml) {
+        this.lastFxml = lastFxml;
+    }
 
     public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
@@ -28,7 +39,10 @@ public class TransitDetail36 {
     }
 
 
-    public void btnBack(ActionEvent actionEvent) {
+    public void btnBack(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void btnLogTransit(ActionEvent actionEvent) {

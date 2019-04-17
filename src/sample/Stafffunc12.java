@@ -13,13 +13,19 @@ public class Stafffunc12 {
     public Button manageProfile;
 
     public void takeTransit(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("taketransit15.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("taketransit15.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        TakeTransit15 controller = fxmlLoader.getController();
+        controller.setLastFxml("stafffunc12.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 
     public void viewTransitHistory(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("transithistory16.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transithistory16.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        TransitHistory16 controller = fxmlLoader.getController();
+        controller.setLastFxml("stafffunc12.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -37,7 +43,10 @@ public class Stafffunc12 {
     }
 
     public void viewSchedule(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("staffviewschedule31.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("staffviewschedule31.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        StaffViewSchedule31 controller = fxmlLoader.getController();
+        controller.setLastFxml("stafffunc12.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }

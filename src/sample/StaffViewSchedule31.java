@@ -1,12 +1,18 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import pojo.StaffViewScheduleRow31;
+
+import java.io.IOException;
 
 public class StaffViewSchedule31 {
     public TableView table;
@@ -19,6 +25,11 @@ public class StaffViewSchedule31 {
     public TextField tfEventName;
     public DatePicker datepicker1;
     public DatePicker datepicker2;
+    public String lastFxml;
+
+    public void setLastFxml(String lastFxml) {
+        this.lastFxml = lastFxml;
+    }
 
     public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("eventName"));
@@ -33,7 +44,10 @@ public class StaffViewSchedule31 {
         table.getItems().add(row);
     }
 
-    public void btnBack(ActionEvent actionEvent) {
+    public void btnBack(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void btnFilter(ActionEvent actionEvent) {

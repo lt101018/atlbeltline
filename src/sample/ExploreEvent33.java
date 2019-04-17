@@ -1,9 +1,15 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import pojo.ExploreEventRow33;
+
+import java.io.IOException;
 
 public class ExploreEvent33 {
     public TableView table;
@@ -25,6 +31,12 @@ public class ExploreEvent33 {
     public CheckBox checkVisited;
     public CheckBox checkSoldOut;
 
+    public String lastFxml;
+
+    public void setLastFxml(String lastFxml) {
+        this.lastFxml = lastFxml;
+    }
+
     public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         col2.setCellValueFactory(new PropertyValueFactory<>("siteName"));
@@ -40,7 +52,10 @@ public class ExploreEvent33 {
     }
 
 
-    public void btnBack(ActionEvent actionEvent) {
+    public void btnBack(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void btnFilter(ActionEvent actionEvent) {

@@ -1,12 +1,18 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import pojo.ManageTransitRow22;
+
+import java.io.IOException;
 
 public class ManageTransit22 {
     public MenuButton menutransport;
@@ -20,6 +26,11 @@ public class ManageTransit22 {
     public TextField tfroute;
     public TextField tfprice1;
     public TextField tfprice2;
+    public String lastFxml;
+
+    public void setLastFxml(String lastFxml) {
+        this.lastFxml = lastFxml;
+    }
 
 
     public void initialize(){
@@ -35,7 +46,10 @@ public class ManageTransit22 {
         table.getItems().add(row);
     }
 
-    public void btnBack(ActionEvent actionEvent) {
+    public void btnBack(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)menusite.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void btnFilter(ActionEvent actionEvent) {
