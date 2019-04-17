@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="494.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManageStaff28">
+   <children>
+      <Label layoutX="252.0" layoutY="35.0" text="Manage Staff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="125.0" text="First Name" />
+      <Label layoutX="68.0" layoutY="167.0" text="Start Date" />
+      <TableView fx:id="table" layoutX="181.0" layoutY="237.0" prefHeight="200.0" prefWidth="247.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="128.00001525878906" text="Staff Name" />
+          <TableColumn fx:id="col2" prefWidth="118.0" text="Event Shifts" />
+        </columns>
+      </TableView>
+      <Button layoutX="273.0" layoutY="445.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Button layoutX="257.0" layoutY="202.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="80.0" text="Filter" />
+      <Label layoutX="319.0" layoutY="125.0" text="Last Name" />
+      <TextField fx:id="tfLastName" layoutX="389.0" layoutY="121.0" />
+      <TextField fx:id="tfFirstName" layoutX="137.0" layoutY="121.0" prefHeight="25.0" prefWidth="127.0" />
+      <DatePicker fx:id="datepicker1" layoutX="126.0" layoutY="163.0" />
+      <Label layoutX="319.0" layoutY="167.0" text="End Date" />
+      <DatePicker fx:id="datepicker2" layoutX="377.0" layoutY="163.0" />
+      <Label layoutX="201.0" layoutY="79.0" text="Site" />
+      <MenuButton fx:id="menuSite" layoutX="238.0" layoutY="75.0" mnemonicParsing="false" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>

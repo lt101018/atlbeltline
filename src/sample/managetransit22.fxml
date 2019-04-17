@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="462.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManageTransit22">
+   <children>
+      <Label layoutX="252.0" layoutY="35.0" text="Manage Transit">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="85.0" text="Transport Type" />
+      <MenuButton fx:id="menutransport" layoutX="185.0" layoutY="81.0" mnemonicParsing="false" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <Label layoutX="91.0" layoutY="126.0" text="Contain Site" />
+      <MenuButton fx:id="menusite" layoutX="184.0" layoutY="122.0" mnemonicParsing="false" text="MenuButton">
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
+      </MenuButton>
+      <TableView fx:id="table" layoutX="67.0" layoutY="218.0" prefHeight="175.0" prefWidth="476.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="56.666656494140625" sortable="false" text="Route" />
+          <TableColumn fx:id="col2" prefWidth="94.6666488647461" text="Transport Type" />
+            <TableColumn fx:id="col3" prefWidth="91.33338928222656" text="Price" />
+            <TableColumn fx:id="col4" prefWidth="116.0" text="# Connected Sites" />
+            <TableColumn fx:id="col5" prefWidth="115.33334350585938" text="# Transit Logged" />
+        </columns>
+      </TableView>
+      <Button layoutX="273.0" layoutY="404.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Button layoutX="95.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="80.0" text="Filter" />
+      <Button layoutX="333.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnEdit" prefHeight="25.0" prefWidth="80.0" text="Edit" />
+      <Button layoutX="432.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="25.0" prefWidth="80.0" text="Delete" />
+      <Button layoutX="233.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnCreate" prefHeight="25.0" prefWidth="80.0" text="Create" />
+      <Label layoutX="313.0" layoutY="85.0" text="Route" />
+      <TextField fx:id="tfroute" layoutX="358.0" layoutY="81.0" />
+      <TextField fx:id="tfprice1" layoutX="383.0" layoutY="126.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="tfprice2" layoutX="472.0" layoutY="126.0" prefHeight="25.0" prefWidth="65.0" />
+      <Label layoutX="314.0" layoutY="130.0" text="Price Range" />
+      <Label layoutX="455.0" layoutY="130.0" text="--" />
+   </children>
+</AnchorPane>

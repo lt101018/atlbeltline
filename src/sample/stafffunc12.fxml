@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Stafffunc12">
+   <children>
+      <Label layoutX="229.0" layoutY="82.0" text="Staff Functionality">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="239.0" layoutY="187.0" mnemonicParsing="false" onAction="#takeTransit" prefHeight="25.0" prefWidth="121.0" text="Take Transit" />
+      <Button layoutX="239.0" layoutY="220.0" mnemonicParsing="false" onAction="#viewTransitHistory" text="View Transit History" />
+      <Button layoutX="239.0" layoutY="255.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="121.0" text="Back" />
+      <Button layoutX="239.0" layoutY="116.0" mnemonicParsing="false" fx:id="manageProfile" onAction="#manageProfile" prefHeight="13.0" prefWidth="121.0" text="Manage Profile" />
+      <Button layoutX="239.0" layoutY="150.0" mnemonicParsing="false" onAction="#viewSchedule" prefHeight="25.0" prefWidth="121.0" text="View Schedule" />
+   </children>
+</AnchorPane>
