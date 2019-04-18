@@ -23,7 +23,7 @@ public class TakeTransit15 {
     public MenuButton menutransport;
     public TextField price1;
     public TextField price2;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

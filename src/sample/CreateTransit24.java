@@ -16,7 +16,7 @@ public class CreateTransit24 {
     public Label labelRoute;
     public Label labelPrice;
     public MenuButton menuTransportType;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

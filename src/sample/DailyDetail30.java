@@ -18,7 +18,7 @@ public class DailyDetail30 {
     public TableColumn col2;
     public TableColumn col3;
     public TableColumn col4;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

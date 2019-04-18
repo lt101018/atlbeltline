@@ -19,7 +19,7 @@ public class VisitorEventDetail34 {
     public Label labelTicketPrice;
     public Label labelTicketRemaining;
     public Label description;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLabels(String eventName, String siteName, int ticketPrice, int ticketRemaining) {
         labelEvent.setText(eventName);

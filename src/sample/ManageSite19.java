@@ -24,7 +24,7 @@ public class ManageSite19 {
     public TableColumn col2;
     public TableColumn col3;
     public MenuButton menuopeneveryday;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

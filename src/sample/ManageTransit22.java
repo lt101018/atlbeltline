@@ -25,7 +25,7 @@ public class ManageTransit22 {
     public TextField tfroute;
     public TextField tfprice1;
     public TextField tfprice2;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

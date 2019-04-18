@@ -30,7 +30,7 @@ public class SiteReport29 {
     public DatePicker datepicker2;
     public TextField tfStaffCount1;
     public TextField tfStaffCount2;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

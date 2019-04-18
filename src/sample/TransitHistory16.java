@@ -22,7 +22,7 @@ public class TransitHistory16 {
     public TableColumn col4;
     public DatePicker datepicker1;
     public DatePicker datepicker2;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

@@ -30,7 +30,7 @@ public class ManageEvent25 {
     public TextField tfname;
     public DatePicker datepicker1;
     public DatePicker datepicker2;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

@@ -21,7 +21,7 @@ public class TransitDetail36 {
     public DatePicker datepicker;
     public MenuButton menuTransportType;
     public Label siteName;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

@@ -32,7 +32,7 @@ public class ExploreEvent33 {
     public CheckBox checkVisited;
     public CheckBox checkSoldOut;
 
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

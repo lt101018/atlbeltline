@@ -19,7 +19,7 @@ public class StaffEventDetail32 {
     public Label description;
     public Label labelStaffAssigned;
     public Label labelDurationDays;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLabels(String site, String event, String startDate, String endDate) {
         labelSite.setText(site);

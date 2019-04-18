@@ -27,7 +27,7 @@ public class ExploreSite35 {
     public MenuButton menuName;
     public CheckBox checkVisited;
     public MenuButton menuOpenEveryday;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

@@ -20,7 +20,7 @@ public class ManageStaff28 {
     public DatePicker datepicker1;
     public DatePicker datepicker2;
     public MenuButton menuSite;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

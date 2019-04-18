@@ -15,7 +15,7 @@ public class EditTransit23 {
     public Label labelTransportType;
     public Label labelRoute;
     public Label labelPrice;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

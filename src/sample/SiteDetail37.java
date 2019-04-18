@@ -15,7 +15,7 @@ public class SiteDetail37 {
     public Label siteName;
     public Label openEveryday;
     public Label address;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setSite(String site) {
         siteName.setText(site);

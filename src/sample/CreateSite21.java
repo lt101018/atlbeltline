@@ -17,7 +17,7 @@ public class CreateSite21 {
     public TextField tfZipcode;
     public MenuButton menuManager;
     public CheckBox cbOpenEveryday;
-    public String lastFxml;
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
