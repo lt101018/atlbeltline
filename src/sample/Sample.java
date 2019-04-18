@@ -1,7 +1,6 @@
 package sample;
 
 import connection.ConnectionManager;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,7 @@ import javafx.concurrent.Service;
 import java.io.IOException;
 import java.sql.*;
 
-public class Controller {
+public class Sample {
 
     public TextField tftest;
     public Label lbtest;
@@ -31,7 +30,7 @@ public class Controller {
 
 
     public void initialize() {
-        System.out.println("Controller initializing!");
+        System.out.println("Sample initializing!");
         conn = ConnectionManager.getConn();
 //        btnnext.setOnAction(event -> {
 //            //btnnext.setText("fuck Database!");
@@ -86,7 +85,7 @@ public class Controller {
     }
 
     public void nextScreen(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("registeremployee.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("sample2.fxml"));
         Stage stage = (Stage)btnnext.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 500));
     }

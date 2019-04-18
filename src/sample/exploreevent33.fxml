@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="535.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ExploreEvent33">
+   <children>
+      <Label layoutX="252.0" layoutY="35.0" text="Explore Event">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="85.0" text="Name" />
+      <Label layoutX="61.0" layoutY="158.0" text="Start Date" />
+      <TableView fx:id="table" layoutX="13.0" layoutY="284.0" prefHeight="200.0" prefWidth="564.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="108.00000286102295" text="Event Name" />
+          <TableColumn fx:id="col2" prefWidth="116.66667938232422" text="Site Name" />
+            <TableColumn fx:id="col3" prefWidth="73.33326721191406" text="Ticket Price" />
+            <TableColumn fx:id="col4" prefWidth="107.33329772949219" text="Ticket Remaining" />
+            <TableColumn fx:id="col5" prefWidth="83.33331298828125" text="Total Visits" />
+            <TableColumn fx:id="col6" prefWidth="75.33334350585938" text="My Visits" />
+        </columns>
+      </TableView>
+      <Button layoutX="277.0" layoutY="495.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Button layoutX="141.0" layoutY="253.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="80.0" text="Filter" />
+      <Button layoutX="342.0" layoutY="253.0" mnemonicParsing="false" onAction="#btnEventDetail" prefHeight="25.0" prefWidth="80.0" text="Event Detail" />
+      <Label layoutX="266.0" layoutY="85.0" text="Description Keyword" />
+      <TextField fx:id="tfKeyword" layoutX="381.0" layoutY="81.0" />
+      <TextField fx:id="tfPriceRange1" layoutX="392.0" layoutY="188.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="tfPriceRange2" layoutX="481.0" layoutY="188.0" prefHeight="25.0" prefWidth="65.0" />
+      <Label layoutX="294.0" layoutY="192.0" text="Ticket Price Range" />
+      <Label layoutX="464.0" layoutY="192.0" text="--" />
+      <TextField fx:id="tfTotalVisits1" layoutX="170.0" layoutY="188.0" prefHeight="25.0" prefWidth="41.0" />
+      <TextField fx:id="tfTotalVisits2" layoutX="240.0" layoutY="188.0" prefHeight="25.0" prefWidth="41.0" />
+      <Label layoutX="60.0" layoutY="192.0" text="Total Visits Range" />
+      <Label layoutX="223.0" layoutY="192.0" text="--" />
+      <TextField fx:id="tfname" layoutX="107.0" layoutY="81.0" />
+      <DatePicker fx:id="datepicker1" layoutX="119.0" layoutY="154.0" />
+      <Label layoutX="312.0" layoutY="158.0" text="End Date" />
+      <DatePicker fx:id="datepicker2" layoutX="370.0" layoutY="154.0" />
+      <Label layoutX="61.0" layoutY="123.0" text="Site Name" />
+      <MenuButton fx:id="menuSiteName" layoutX="121.0" layoutY="119.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <CheckBox fx:id="checkVisited" layoutX="141.0" layoutY="222.0" mnemonicParsing="false" text="Include Visited" />
+      <CheckBox fx:id="checkSoldOut" layoutX="311.0" layoutY="222.0" mnemonicParsing="false" text="Include Sold Out Event" />
+   </children>
+</AnchorPane>

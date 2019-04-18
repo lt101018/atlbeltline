@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="507.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.StaffEventDetail32">
+   <children>
+      <Label layoutX="254.0" layoutY="43.0" text="Event Detail">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="247.0" layoutY="446.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Label layoutX="349.0" layoutY="83.0" text="Site" />
+      <Label layoutX="58.0" layoutY="83.0" text="Event" />
+      <Label fx:id="labelSite" layoutX="380.0" layoutY="83.0" prefHeight="17.0" prefWidth="159.0" text="Label" />
+      <Label fx:id="labelEvent" layoutX="98.0" layoutY="83.0" prefHeight="17.0" prefWidth="192.0" text="Label" />
+      <Label layoutX="58.0" layoutY="124.0" prefHeight="17.0" prefWidth="53.0" text="Start Date" />
+      <Label fx:id="labelStartDate" layoutX="127.0" layoutY="124.0" prefHeight="17.0" prefWidth="103.0" text="Label" />
+      <Label layoutX="248.0" layoutY="124.0" prefHeight="17.0" prefWidth="53.0" text="End Date" />
+      <Label fx:id="labelEndDate" layoutX="317.0" layoutY="124.0" prefHeight="17.0" prefWidth="103.0" text="Label" />
+      <Label layoutX="385.0" layoutY="161.0" prefHeight="17.0" prefWidth="53.0" text="Price($)" />
+      <Label fx:id="labelPrice" layoutX="438.0" layoutY="161.0" prefHeight="17.0" prefWidth="95.0" text="Label" />
+      <Label layoutX="254.0" layoutY="161.0" prefHeight="17.0" prefWidth="63.0" text="Capacity" />
+      <Label fx:id="labelCapacity" layoutX="304.0" layoutY="161.0" prefHeight="17.0" prefWidth="80.0" text="Label" />
+      <Label layoutX="60.0" layoutY="216.0" prefHeight="17.0" prefWidth="63.0" text="Description" />
+      <Label fx:id="description" layoutX="131.0" layoutY="216.0" prefHeight="219.0" prefWidth="406.0" text="Label" />
+      <Label layoutX="58.0" layoutY="161.0" prefHeight="17.0" prefWidth="80.0" text="Staff Assigned" />
+      <Label fx:id="labelStaffAssigned" layoutX="146.0" layoutY="161.0" prefHeight="17.0" prefWidth="103.0" text="Label" />
+      <Label layoutX="438.0" layoutY="124.0" prefHeight="17.0" prefWidth="80.0" text="Duration Days" />
+      <Label fx:id="labelDurationDays" layoutX="518.0" layoutY="124.0" prefHeight="17.0" prefWidth="63.0" text="Label" />
+   </children>
+</AnchorPane>
