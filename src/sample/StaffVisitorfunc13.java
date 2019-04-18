@@ -11,7 +11,8 @@ import java.io.IOException;
 
 public class StaffVisitorfunc13 {
 
-    public static Button manageProfile;
+
+    public Button manageProfile;
 
     public void takeTransit(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("taketransit15.fxml"));
