@@ -51,12 +51,22 @@ public class StaffViewSchedule31 {
     public void btnFilter(ActionEvent actionEvent) {
     }
 
-    public void btnViewEvent(ActionEvent actionEvent) {
+    public void btnViewEvent(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
         }
         StaffViewScheduleRow31 selectedItem = (StaffViewScheduleRow31)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("staffeventdetail32.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        StaffEventDetail32 controller = fxmlLoader.getController();
+        controller.setLastFxml("staffviewschedule31.fxml");
+        controller.setLabels(selectedItem.getSiteName(), selectedItem.getEventName(), selectedItem.getStartDate(), selectedItem.getEndDate());
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }

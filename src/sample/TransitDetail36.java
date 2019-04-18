@@ -27,6 +27,10 @@ public class TransitDetail36 {
         this.lastFxml = lastFxml;
     }
 
+    public void setSite(String name){
+        siteName.setText(name);
+    }
+
     public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
         col2.setCellValueFactory(new PropertyValueFactory<>("transportType"));

@@ -62,12 +62,22 @@ public class ExploreEvent33 {
     public void btnFilter(ActionEvent actionEvent) {
     }
 
-    public void btnEventDetail(ActionEvent actionEvent) {
+    public void btnEventDetail(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
         }
         ExploreEventRow33 selectedItem = (ExploreEventRow33)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("visitoreventdetail34.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        VisitorEventDetail34 controller = fxmlLoader.getController();
+        controller.setLastFxml("exploreevent33.fxml");
+        controller.setLabels(selectedItem.getSiteName(),selectedItem.getEventName(),selectedItem.getTicketPrice(),selectedItem.getTicketRemaining());
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }

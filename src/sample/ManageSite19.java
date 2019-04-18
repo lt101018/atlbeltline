@@ -58,6 +58,9 @@ public class ManageSite19 {
         }
         ManageSiteRow19 selectedItem = (ManageSiteRow19)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+
+        //go 20
     }
 
     public void btnDelete(ActionEvent actionEvent) {
@@ -70,5 +73,7 @@ public class ManageSite19 {
     }
 
     public void btnCreate(ActionEvent actionEvent) {
+
+        //go 21
     }
 }

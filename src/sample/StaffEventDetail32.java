@@ -21,6 +21,13 @@ public class StaffEventDetail32 {
     public Label labelDurationDays;
     public String lastFxml;
 
+    public void setLabels(String site, String event, String startDate, String endDate) {
+        labelSite.setText(site);
+        labelEvent.setText(event);
+        labelStartDate.setText(startDate);
+        labelEndDate.setText(endDate);
+    }
+
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
     }

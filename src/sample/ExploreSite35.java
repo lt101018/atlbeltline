@@ -34,8 +34,8 @@ public class ExploreSite35 {
     }
 
     public void initialize(){
-        col1.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        col2.setCellValueFactory(new PropertyValueFactory<>("siteName"));
+        col1.setCellValueFactory(new PropertyValueFactory<>("siteName"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("eventCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
         col4.setCellValueFactory(new PropertyValueFactory<>("myVisits"));
     }
@@ -53,23 +53,44 @@ public class ExploreSite35 {
     }
 
     public void btnFilter(ActionEvent actionEvent) {
+        ////test below
+        addElement("yoyoyo",1,5,7);
+        addElement("heyyyy",3,6,1);
+        ///test above
     }
 
-    public void btnSiteDetail(ActionEvent actionEvent) {
+    public void btnSiteDetail(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
         }
         ExploreSiteRow35 selectedItem = (ExploreSiteRow35)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sitedetail37.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        SiteDetail37 controller = fxmlLoader.getController();
+        controller.setLastFxml("exploresite35.fxml");
+        controller.setSite(selectedItem.getSiteName());
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
-    public void btnTransitDetail(ActionEvent actionEvent) {
+    public void btnTransitDetail(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
         }
         ExploreSiteRow35 selectedItem = (ExploreSiteRow35)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transitdetail36.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        TransitDetail36 controller = fxmlLoader.getController();
+        controller.setLastFxml("exploresite35.fxml");
+        controller.setSite(selectedItem.getSiteName());
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }

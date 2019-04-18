@@ -61,6 +61,9 @@ public class ManageTransit22 {
         }
         ManageTransitRow22 selectedItem = (ManageTransitRow22)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+
+        //go23
     }
 
     public void btnDelete(ActionEvent actionEvent) {
@@ -73,5 +76,6 @@ public class ManageTransit22 {
     }
 
     public void btnCreate(ActionEvent actionEvent) {
+        //go 24
     }
 }

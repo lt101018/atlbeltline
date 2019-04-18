@@ -58,12 +58,22 @@ public class SiteReport29 {
     public void btnFilter(ActionEvent actionEvent) {
     }
 
-    public void btnDailyDetail(ActionEvent actionEvent) {
+    public void btnDailyDetail(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
         }
         SiteReportRow29 selectedItem = (SiteReportRow29)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dailydetail30.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        DailyDetail30 controller = fxmlLoader.getController();
+        controller.setLastFxml("sitereport29.fxml");
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }

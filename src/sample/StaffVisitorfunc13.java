@@ -17,7 +17,7 @@ public class StaffVisitorfunc13 {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("taketransit15.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         TakeTransit15 controller = fxmlLoader.getController();
-        controller.setLastFxml("stafvisitorfunc13.fxml");
+        controller.setLastFxml("staffvisitorfunc13.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -26,7 +26,7 @@ public class StaffVisitorfunc13 {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transithistory16.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         TransitHistory16 controller = fxmlLoader.getController();
-        controller.setLastFxml("stafvisitorfunc13.fxml");
+        controller.setLastFxml("staffvisitorfunc13.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -47,7 +47,7 @@ public class StaffVisitorfunc13 {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("staffviewschedule31.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         StaffViewSchedule31 controller = fxmlLoader.getController();
-        controller.setLastFxml("stafvisitorfunc13.fxml");
+        controller.setLastFxml("staffvisitorfunc13.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -56,7 +56,7 @@ public class StaffVisitorfunc13 {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("exploresite35.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         ExploreSite35 controller = fxmlLoader.getController();
-        controller.setLastFxml("stafvisitorfunc13.fxml");
+        controller.setLastFxml("staffvisitorfunc13.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -65,7 +65,7 @@ public class StaffVisitorfunc13 {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("exploreevent33.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         ExploreEvent33 controller = fxmlLoader.getController();
-        controller.setLastFxml("stafvisitorfunc13.fxml");
+        controller.setLastFxml("staffvisitorfunc13.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -74,7 +74,7 @@ public class StaffVisitorfunc13 {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("visitorhistory38.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         VisitorHistory38 controller = fxmlLoader.getController();
-        controller.setLastFxml("stafvisitorfunc13.fxml");
+        controller.setLastFxml("staffvisitorfunc13.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }

@@ -64,7 +64,9 @@ public class ManageEvent25 {
             return;
         }
         ManageEventRow25 selectedItem = (ManageEventRow25)table.getSelectionModel().getSelectedItem();
-        ///following jobs
+        ///following
+
+        //go 26
     }
 
     public void btnDelete(ActionEvent actionEvent) {
@@ -77,5 +79,7 @@ public class ManageEvent25 {
     }
 
     public void btnCreate(ActionEvent actionEvent) {
+        //go 27
+
     }
 }

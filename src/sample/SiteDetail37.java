@@ -17,6 +17,10 @@ public class SiteDetail37 {
     public Label address;
     public String lastFxml;
 
+    public void setSite(String site) {
+        siteName.setText(site);
+    }
+
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
     }
