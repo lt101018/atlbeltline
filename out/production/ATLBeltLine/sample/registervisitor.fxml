@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<Button layoutX="135.0" layoutY="85.0" mnemonicParsing="false" onAction="#delete" text="Delete" />-->
+<!--<Button fx:id="btnnext" layoutX="463.0" layoutY="157.0" onAction="#nextScreen" mnemonicParsing="false" text="NextScreen" />-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.registerVisitorController">
+
+    <TextField fx:id="usernameTF" layoutX="145.0" layoutY="134.0" prefHeight="33.0" prefWidth="91.0" promptText="username" />
+    <Label layoutX="65.0" layoutY="139.0" text="Username" />
+    <!--<Button fx:id="btntest" layoutX="30.0" layoutY="157.0" mnemonicParsing="false" onAction="#read" text="Read" />-->
+
+    <!--<Label fx:id="lbtest" layoutX="33.0" layoutY="189.0" prefHeight="89.0" prefWidth="541.0" text="Label" wrapText="true" />-->
+
+    <!--<TextField fx:id="tflname" layoutX="227.0" layoutY="30.0" prefHeight="33.0" prefWidth="91.0" promptText="lastname" />-->
+
+    <Label layoutX="65.0" layoutY="199.0" text="Password" />
+
+
+    <Label layoutX="65.0" layoutY="79.0" text="First Name" />
+    <TextField fx:id="firstNameTF" layoutX="145.0" layoutY="74.0" prefHeight="33.0" prefWidth="91.0" promptText="firstname" />
+    <!--<Button layoutX="527.0" layoutY="37.0" mnemonicParsing="false" onAction="#insert" text="Insert" />-->
+
+    <Label layoutX="335.0" layoutY="79.0" text="Last Name" />
+    <TextField fx:id="lastNameTF" layoutX="415.0" layoutY="74.0" prefHeight="33.0" prefWidth="91.0" promptText="lastname" />
+
+    <Label layoutX="295.0" layoutY="199.0" text="Confirm Password" />
+
+    <Label layoutX="72.0" layoutY="247.0" text="Email" />
+
+    <Button fx:id="registerBttn" layoutX="215.0" layoutY="357.0" mnemonicParsing="false" onAction="#ensureRegister" text="Register" />
+
+    <Button fx:id="cancelBttn" layoutX="315.0" layoutY="357.0" mnemonicParsing="false" onAction="#ensureCancel" text="Cancel" />
+   <Label layoutX="233.0" layoutY="24.0" text="Register Visitor">
+      <font>
+         <Font size="21.0" />
+      </font>
+   </Label>
+
+    <TextField fx:id="emailTF1" layoutX="140.0" layoutY="242.0" prefHeight="17.0" prefWidth="150.0" promptText="email" />
+    <Button fx:id="addEmailBttn1" layoutX="386.0" layoutY="242.0" mnemonicParsing="false" text="Add" />
+
+    <TextField fx:id="emailTF2" layoutX="140.0" layoutY="283.0" prefHeight="17.0" prefWidth="150.0" promptText="email" />
+    <Button fx:id="addEmailBttn2" layoutX="386.0" layoutY="283.0" mnemonicParsing="false" text="Add" />
+
+    <TextField fx:id="emailTF3" layoutX="140.0" layoutY="323.0" prefHeight="17.0" prefWidth="150.0" promptText="email" />
+    <Button fx:id="addEmailBttn3" layoutX="386.0" layoutY="323.0" mnemonicParsing="false" text="Add" />
+
+    <Button fx:id="removeEmailBttn1" layoutX="445.0" layoutY="242.0" mnemonicParsing="false" text="Remove" />
+
+    <Button fx:id="removeEmailBttn2" layoutX="445.0" layoutY="283.0" mnemonicParsing="false" text="Remove" />
+
+    <Button fx:id="removeEmailBttn3" layoutX="445.0" layoutY="323.0" mnemonicParsing="false" text="Remove" />
+
+    <PasswordField fx:id="passwordTF" layoutX="132.0" layoutY="194.0" prefHeight="27.0" prefWidth="135.0" promptText="password" />
+
+   <PasswordField fx:id="comfirmpasswordTF" layoutX="415.0" layoutY="194.0" prefHeight="27.0" prefWidth="135.0" promptText="password" />
+
+</AnchorPane>

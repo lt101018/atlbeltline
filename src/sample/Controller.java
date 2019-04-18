@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.concurrent.Service;
 
 import java.io.IOException;
 import java.sql.*;
@@ -28,9 +29,18 @@ public class Controller {
 
     private static Connection conn;
 
+
     public void initialize() {
         System.out.println("Controller initializing!");
         conn = ConnectionManager.getConn();
+//        btnnext.setOnAction(event -> {
+//            //btnnext.setText("fuck Database!");
+//            // show the label
+//            tfdel.setVisible(true);
+//            // hide finish label
+//            tffname.setVisible(false);
+//            // start background computation
+//        });
     }
 
     public void read(ActionEvent actionEvent) throws SQLException {
@@ -47,7 +57,6 @@ public class Controller {
             lbtest.setText(lbtest.getText() + username + " " + firstname + " " + lastname + " " + status + " " + password + "\n");
         }
         statement.close();
-//        conn.close();
     }
 
     public void insert(ActionEvent actionEvent) throws SQLException {
@@ -66,7 +75,6 @@ public class Controller {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
-//        conn.close();
     }
 
     public void delete(ActionEvent actionEvent) throws SQLException {
@@ -75,11 +83,10 @@ public class Controller {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
-//        conn.close();
     }
 
     public void nextScreen(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("newScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("registeremployee.fxml"));
         Stage stage = (Stage)btnnext.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 500));
     }
