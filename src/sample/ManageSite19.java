@@ -51,7 +51,7 @@ public class ManageSite19 {
     public void btnFilter(ActionEvent actionEvent) {
     }
 
-    public void btnEdit(ActionEvent actionEvent) {
+    public void btnEdit(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
@@ -59,8 +59,12 @@ public class ManageSite19 {
         ManageSiteRow19 selectedItem = (ManageSiteRow19)table.getSelectionModel().getSelectedItem();
         ///following jobs
 
-
-        //go 20
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editsite20.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        EditSite20 controller = fxmlLoader.getController();
+        controller.setLastFxml("managesite19.fxml");
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void btnDelete(ActionEvent actionEvent) {
@@ -70,10 +74,18 @@ public class ManageSite19 {
         }
         ManageSiteRow19 selectedItem = (ManageSiteRow19)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+
+
     }
 
-    public void btnCreate(ActionEvent actionEvent) {
+    public void btnCreate(ActionEvent actionEvent) throws IOException {
 
-        //go 21
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createsite21.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        CreateSite21 controller = fxmlLoader.getController();
+        controller.setLastFxml("managesite19.fxml");
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }
