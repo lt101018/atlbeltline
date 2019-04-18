@@ -54,7 +54,7 @@ public class ManageTransit22 {
     public void btnFilter(ActionEvent actionEvent) {
     }
 
-    public void btnEdit(ActionEvent actionEvent) {
+    public void btnEdit(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
@@ -63,7 +63,13 @@ public class ManageTransit22 {
         ///following jobs
 
 
-        //go23
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edittransit23.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        EditTransit23 controller = fxmlLoader.getController();
+        controller.setLastFxml("managetransit22.fxml");
+        controller.setTransportType(selectedItem.getTransportType());
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void btnDelete(ActionEvent actionEvent) {
@@ -73,9 +79,15 @@ public class ManageTransit22 {
         }
         ManageTransitRow22 selectedItem = (ManageTransitRow22)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
     }
 
-    public void btnCreate(ActionEvent actionEvent) {
-        //go 24
+    public void btnCreate(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("createtransit24.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        CreateTransit24 controller = fxmlLoader.getController();
+        controller.setLastFxml("managetransit22.fxml");
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }
