@@ -22,7 +22,7 @@ public class ManagerFunc10 {
     public void manageEvent(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("manageevent25.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        ManageEvent25 controller = fxmlLoader.<ManageEvent25>getController();
+        ManageEvent25 controller = fxmlLoader.getController();
         controller.setLastFxml("managerfunc10.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));

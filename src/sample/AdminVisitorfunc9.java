@@ -21,7 +21,7 @@ public class AdminVisitorfunc9 {
     public void takeTransit(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("taketransit15.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        TakeTransit15 controller = fxmlLoader.<TakeTransit15>getController();
+        TakeTransit15 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -30,7 +30,7 @@ public class AdminVisitorfunc9 {
     public void manageUser(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("manageuser18.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        ManageUser18 controller = fxmlLoader.<ManageUser18>getController();
+        ManageUser18 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -39,7 +39,7 @@ public class AdminVisitorfunc9 {
     public void viewTransitHistory(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transithistory16.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        TransitHistory16 controller = fxmlLoader.<TransitHistory16>getController();
+        TransitHistory16 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -48,7 +48,7 @@ public class AdminVisitorfunc9 {
     public void manageTransit(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managetransit22.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        ManageTransit22 controller = fxmlLoader.<ManageTransit22>getController();
+        ManageTransit22 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -63,7 +63,7 @@ public class AdminVisitorfunc9 {
     public void manageSite(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managesite19.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        ManageSite19 controller = fxmlLoader.<ManageSite19>getController();
+        ManageSite19 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -72,7 +72,7 @@ public class AdminVisitorfunc9 {
     public void exploreSite(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("exploresite35.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        ExploreSite35 controller = fxmlLoader.<ExploreSite35>getController();
+        ExploreSite35 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -81,7 +81,7 @@ public class AdminVisitorfunc9 {
     public void exploreEvent(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("exploreevent33.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        ExploreEvent33 controller = fxmlLoader.<ExploreEvent33>getController();
+        ExploreEvent33 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -90,7 +90,7 @@ public class AdminVisitorfunc9 {
     public void viewVisitHistory(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("visitorhistory38.fxml"));
         Parent root = (Parent)fxmlLoader.load();
-        VisitorHistory38 controller = fxmlLoader.<VisitorHistory38>getController();
+        VisitorHistory38 controller = fxmlLoader.getController();
         controller.setLastFxml("adminvisitorfunc9.fxml");
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
