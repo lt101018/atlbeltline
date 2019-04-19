@@ -129,8 +129,15 @@ public class ManageSite19 {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("editsite20.fxml"));
         Parent root = (Parent)fxmlLoader.load();
+
         EditSite20 controller = fxmlLoader.getController();
         controller.setLastFxml("managesite19.fxml");
+        controller.sitename = selectedItem.getName();
+        try {
+            controller.initialize1();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
