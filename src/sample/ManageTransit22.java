@@ -40,9 +40,11 @@ public class ManageTransit22 {
         col5.setCellValueFactory(new PropertyValueFactory<>("numTransitLogged"));
 
         cbtransport.getItems().addAll(
+                "ALL",
                 "MARTA",
                 "Bus",
-                "Bike"
+                "Bike",
+                "Other"
         );
     }
 

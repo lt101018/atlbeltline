@@ -22,9 +22,11 @@ public class CreateTransit24 {
     public void initialize(){
 
         cbTransportType.getItems().addAll(
+                "ALL",
                 "MARTA",
                 "Bus",
-                "Bike"
+                "Bike",
+                "Other"
         );
     }
 

@@ -34,9 +34,11 @@ public class TransitHistory16 {
         col3.setCellValueFactory(new PropertyValueFactory<>("transport"));
         col4.setCellValueFactory(new PropertyValueFactory<>("price"));
         cbTransportType.getItems().addAll(
+                "ALL",
                 "MARTA",
                 "Bus",
-                "Bike"
+                "Bike",
+                "Other"
         );
     }
 

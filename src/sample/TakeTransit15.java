@@ -45,9 +45,11 @@ public class TakeTransit15 {
         col4.setCellValueFactory(new PropertyValueFactory<>("numSite"));
 
         cbTransportType.getItems().addAll(
+                "ALL",
                 "MARTA",
                 "Bus",
-                "Bike"
+                "Bike",
+                "Other"
         );
 
         String sql = "select name from site";
@@ -59,6 +61,9 @@ public class TakeTransit15 {
         }
 
         statement.close();
+
+        cbSite.getSelectionModel().select(0);
+        cbTransportType.getSelectionModel().select(0);
     }
 
 
@@ -69,18 +74,27 @@ public class TakeTransit15 {
 
     public void btnFilter(ActionEvent actionEvent) throws SQLException {
 
+        table.getItems().clear();
+        String transportSql = "";
+        String cbContent = cbTransportType.getValue().toString();
+        if(cbContent.equals("MARTA") || cbContent.equals("Bus") || cbContent.equals("Bike"))
+            transportSql = "and t.type='"+cbTransportType.getValue().toString()+"'";
 
-        ////////////////////////not done here
-//        String sql = "select t.route, t.type, t.price, count(case when c.route=t.route then 1 end) as connected_sites\n" +
-//                "from transit as t, connect as c\n" +
-//                "where t.type in (select type from connect where name='Inman Park') and t.type='MARTA' and t.price between 0 and 3\n" +
-//                "group by t.route;";
-//        System.out.println(sql);
-//        Statement statement = conn.createStatement();
-//        ResultSet resultSet = statement.executeQuery(sql);
-//
-//
-//        statement.close();
+        String priceSql = "";
+        if(price1.getText().length()!=0 && price2.getText().length()!=0)
+            priceSql = "and t.price between "+price1.getText()+" and "+price2.getText();
+
+        String sql = "select t.route, t.type, t.price, count(case when c.route=t.route then 1 end) as connected_sites\n" +
+                "from transit as t, connect as c\n" +
+                "where t.type in (select type from connect where name='"+cbSite.getValue().toString()+"') "+transportSql+ priceSql +
+                " group by t.route;";
+        System.out.println(sql);
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getDouble(3),resultSet.getInt(4));
+        }
+        statement.close();
     }
 
     public void btnBack(ActionEvent actionEvent) throws IOException {
@@ -92,6 +106,10 @@ public class TakeTransit15 {
     public void btnLogTransit(ActionEvent actionEvent) throws SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
+            return;
+        }
+        if(datepicker.getValue() == null){
+            MyAlert.showAlert("You need to select a date.");
             return;
         }
         TakeTransitRow15 selectedItem = (TakeTransitRow15)table.getSelectionModel().getSelectedItem();
