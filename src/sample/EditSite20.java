@@ -28,8 +28,11 @@ public class EditSite20 {
     public static String sitename;
     private static Connection conn;
 
-    public void initialize1() throws SQLException {
+    public void initialize() throws SQLException {
         conn = ConnectionManager.getConn();
+    }
+
+    public void initialize1() throws SQLException {
         String sql = "(select u.firstname, u.lastname\n" +
                 "from user as u, employee as e, site as s\n" +
                 "where s.name = '"+sitename+"' and s.managerusername = e.username and u.username = e.username)\n" +
