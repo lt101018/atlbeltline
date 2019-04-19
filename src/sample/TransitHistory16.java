@@ -99,11 +99,10 @@ public class TransitHistory16 {
             dateSql = "and ta.takedate between '"+formattedDate1+"' and '"+formattedDate2+"'";
         }
 
-
-        ///the price is not correct here
         String sql = "select distinct ta.takedate, ta.route, ta.type, t.price\n" +
                 "from take as ta, transit as t, connect as c\n" +
-                "where ta.username='"+ UserInfo.username +"' "+transportSql+" "+siteSql+" "+routeSql+" "+dateSql+"\n" +
+                "where ta.type = t.type and ta.route = t.route and c.type = t.type and c.route = t.route " +
+                "and ta.username='"+UserInfo.username+"' "+transportSql+" "+siteSql+" "+routeSql+" "+dateSql+"\n" +
                 "order by ta.takedate;";
 
         System.out.println(sql);
