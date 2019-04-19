@@ -84,7 +84,6 @@ public class ExploreSite35 {
         ExploreSiteRow35 selectedItem = (ExploreSiteRow35)table.getSelectionModel().getSelectedItem();
         ///following jobs
 
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transitdetail36.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         TransitDetail36 controller = fxmlLoader.getController();
