@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class UserLogin {
     public TextField tfemail;
     public TextField tfpassword;
@@ -37,7 +38,7 @@ public class UserLogin {
         System.out.println(sql);
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
-        if (resultSet.next() == false) {
+        if (!resultSet.next()) {
             MyAlert.showAlert("User not found");
             return;
         }
@@ -47,7 +48,7 @@ public class UserLogin {
                 "where email = '"+tfemail.getText()+"' and password = '"+tfpassword.getText()+"';";
         System.out.println(sql);
         ResultSet resultSet1 = statement.executeQuery(sql);
-        if (resultSet1.next() == false) {
+        if (!resultSet1.next()) {
             MyAlert.showAlert("Password is wrong");
         } else {
             UserInfo.username = resultSet1.getString("username");
@@ -55,28 +56,49 @@ public class UserLogin {
             UserInfo.usertype = resultSet1.getString("usertype");
             System.out.println("Login Success: "+UserInfo.username+","+UserInfo.status+","+UserInfo.usertype);
 
+            if(UserInfo.usertype.equals("employee")||UserInfo.usertype.equals("employeevisitor")){
+                sql = "select employeetype from employee where username= '"+UserInfo.username+"'";
+                System.out.println(sql);
+                ResultSet resultSet2 = statement.executeQuery(sql);
+                if(resultSet2.next()){
+                    UserInfo.employeetype = resultSet2.getString("employeetype");
+                }else{
+                    MyAlert.showAlert("Employee type not found");
+                }
+            }
 
-            //////////need to fix from here
             String nextFxml = "userlogin";
-            if(UserInfo.usertype == "user"){
-
-            }else if(UserInfo.usertype == "employee"){
-
-            }else if(UserInfo.usertype == "visitor"){
-
-            }else if(UserInfo.usertype == "employeevisitor"){
-
+            if(UserInfo.usertype.equals("user")){
+                nextFxml = "userfunc7";
+            }else if(UserInfo.usertype.equals("visitor")){
+                nextFxml = "visitorfunc14";
+            }else if(UserInfo.usertype.equals("employee")){
+                if(UserInfo.employeetype.equals("administrator"))
+                    nextFxml = "adminfunc8";
+                else if(UserInfo.employeetype.equals("manager"))
+                    nextFxml = "managerfunc10";
+                else if(UserInfo.employeetype.equals("staff"))
+                    nextFxml = "stafffunc12";
+                else
+                    MyAlert.showAlert("Employee type not found");
+            }else if(UserInfo.usertype.equals("employeevisitor")){
+                if(UserInfo.employeetype.equals("administrator"))
+                    nextFxml = "adminvisitorfunc9";
+                else if(UserInfo.employeetype.equals("manager"))
+                    nextFxml = "managervisitorfunc11";
+                else if(UserInfo.employeetype.equals("staff"))
+                    nextFxml = "staffvisitorfunc13";
+                else
+                    MyAlert.showAlert("Employee type not found");
             }else{
                 MyAlert.showAlert("User tpye has error. Unknown user type.");
             }
-            //////////need to fix end here
 
             Parent root = FXMLLoader.load(getClass().getResource(nextFxml+".fxml"));
             Stage stage = (Stage)tfemail.getScene().getWindow();
             stage.setScene(new Scene(root));
         }
         statement.close();
-
     }
 
     public void register(ActionEvent actionEvent) {
