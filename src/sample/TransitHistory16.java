@@ -12,8 +12,6 @@ import pojo.TransitHistroyRow16;
 import java.io.IOException;
 
 public class TransitHistory16 {
-    public MenuButton menutransport;
-    public MenuButton menusite;
     public TextField tfroute;
     public TableView table;
     public TableColumn col1;
@@ -23,6 +21,8 @@ public class TransitHistory16 {
     public DatePicker datepicker1;
     public DatePicker datepicker2;
     public static String lastFxml;
+    public ComboBox cbSite;
+    public ComboBox cbTransportType;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -42,7 +42,7 @@ public class TransitHistory16 {
 
     public void btnBack(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
-        Stage stage = (Stage)menutransport.getScene().getWindow();
+        Stage stage = (Stage)datepicker1.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 

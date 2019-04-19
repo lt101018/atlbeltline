@@ -1,4 +1,5 @@
 package sample;
+import connection.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,9 +8,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.TakeTransitRow15;
+import pojo.UserInfo;
 import tools.MyAlert;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 
 public class TakeTransit15 {
     public TableView table;
@@ -19,21 +26,39 @@ public class TakeTransit15 {
     public TableColumn col4;
     public Button filter;
     public DatePicker datepicker;
-    public MenuButton menusite;
-    public MenuButton menutransport;
     public TextField price1;
     public TextField price2;
     public static String lastFxml;
+    private static Connection conn;
+    public ComboBox cbTransportType;
+    public ComboBox cbSite;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize(){
+    public void initialize() throws SQLException {
+        conn = ConnectionManager.getConn();
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
         col2.setCellValueFactory(new PropertyValueFactory<>("type"));
         col3.setCellValueFactory(new PropertyValueFactory<>("price"));
         col4.setCellValueFactory(new PropertyValueFactory<>("numSite"));
+
+        cbTransportType.getItems().addAll(
+                "MARTA",
+                "Bus",
+                "Bike"
+        );
+
+        String sql = "select name from site";
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while(resultSet.next()){
+            cbSite.getItems().add(resultSet.getString("name"));
+        }
+
+        statement.close();
     }
 
 
@@ -42,7 +67,20 @@ public class TakeTransit15 {
         table.getItems().add(row);
     }
 
-    public void btnFilter(ActionEvent actionEvent) {
+    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+
+
+        ////////////////////////not done here
+//        String sql = "select t.route, t.type, t.price, count(case when c.route=t.route then 1 end) as connected_sites\n" +
+//                "from transit as t, connect as c\n" +
+//                "where t.type in (select type from connect where name='Inman Park') and t.type='MARTA' and t.price between 0 and 3\n" +
+//                "group by t.route;";
+//        System.out.println(sql);
+//        Statement statement = conn.createStatement();
+//        ResultSet resultSet = statement.executeQuery(sql);
+//
+//
+//        statement.close();
     }
 
     public void btnBack(ActionEvent actionEvent) throws IOException {
@@ -51,21 +89,26 @@ public class TakeTransit15 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnLogTransit(ActionEvent actionEvent) {
+    public void btnLogTransit(ActionEvent actionEvent) throws SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
         }
         TakeTransitRow15 selectedItem = (TakeTransitRow15)table.getSelectionModel().getSelectedItem();
+        String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         ///following jobs
+        String sql = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
+        System.out.println(sql);
+        Statement statement = conn.createStatement();
+        statement.executeUpdate(sql);
+        statement.close();
     }
 
 
 // this is how to change date format
-/*
-String mrgDate3 = mrgRqstDt.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-System.out.println("Date of Merge: " + mrgDate3);
-*/
+
+
+
 
 }
 
