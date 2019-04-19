@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,9 +16,9 @@ public class EditSite20 {
     public TextField tfName;
     public TextField tfAddress;
     public TextField tfZipcode;
-    public MenuButton menuManager;
     public CheckBox cbOpenEveryday;
     public static String lastFxml;
+    public ComboBox cbManager;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

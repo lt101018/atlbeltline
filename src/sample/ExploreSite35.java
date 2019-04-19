@@ -26,8 +26,9 @@ public class ExploreSite35 {
     public DatePicker datepicker2;
     public MenuButton menuName;
     public CheckBox checkVisited;
-    public MenuButton menuOpenEveryday;
     public static String lastFxml;
+    public ComboBox cbName;
+    public ComboBox cbOpenEveryday;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;

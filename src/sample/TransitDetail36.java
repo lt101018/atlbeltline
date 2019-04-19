@@ -19,7 +19,6 @@ public class TransitDetail36 {
     public TableColumn col3;
     public TableColumn col4;
     public DatePicker datepicker;
-    public MenuButton menuTransportType;
     public Label siteName;
     public static String lastFxml;
 

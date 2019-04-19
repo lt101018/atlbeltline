@@ -14,8 +14,6 @@ import tools.MyAlert;
 import java.io.IOException;
 
 public class ManageUser18 {
-    public MenuButton menuusertype;
-    public MenuButton menustatus;
     public TextField tfusername;
     public TableView table;
     public TableColumn col1;
@@ -23,6 +21,8 @@ public class ManageUser18 {
     public TableColumn col3;
     public TableColumn col4;
     public static String lastFxml;
+    public ComboBox cbusertype;
+    public ComboBox cbstatus;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -42,7 +42,7 @@ public class ManageUser18 {
 
     public void btnBack(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
-        Stage stage = (Stage)menuusertype.getScene().getWindow();
+        Stage stage = (Stage)tfusername.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 

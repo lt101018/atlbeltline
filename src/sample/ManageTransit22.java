@@ -14,8 +14,6 @@ import tools.MyAlert;
 import java.io.IOException;
 
 public class ManageTransit22 {
-    public MenuButton menutransport;
-    public MenuButton menusite;
     public TableView table;
     public TableColumn col1;
     public TableColumn col2;
@@ -26,6 +24,8 @@ public class ManageTransit22 {
     public TextField tfprice1;
     public TextField tfprice2;
     public static String lastFxml;
+    public ComboBox cbtransport;
+    public ComboBox cbsite;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -47,7 +47,7 @@ public class ManageTransit22 {
 
     public void btnBack(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
-        Stage stage = (Stage)menusite.getScene().getWindow();
+        Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 

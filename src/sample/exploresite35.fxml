@@ -4,14 +4,13 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="535.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ExploreSite35">
    <children>
       <Label layoutX="261.0" layoutY="34.0" text="Explore Site">
@@ -43,20 +42,14 @@
       <Label layoutX="315.0" layoutY="106.0" text="End Date" />
       <DatePicker fx:id="datepicker2" layoutX="373.0" layoutY="102.0" />
       <Label layoutX="64.0" layoutY="71.0" text="Name" />
-      <MenuButton fx:id="menuName" layoutX="122.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="MenuButton">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
-      <CheckBox fx:id="checkVisited" layoutX="246.0" layoutY="174.0" mnemonicParsing="false" text="Include Visited" />
+
+       <ComboBox fx:id="cbName" layoutX="122.0" layoutY="67.0" prefHeight="25.0" prefWidth="117.0" />
+
+       <CheckBox fx:id="checkVisited" layoutX="246.0" layoutY="174.0" mnemonicParsing="false" text="Include Visited" />
       <Label layoutX="316.0" layoutY="70.0" text="Open Everyday" />
-      <MenuButton fx:id="menuOpenEveryday" layoutX="407.0" layoutY="66.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="MenuButton">
-         <items>
-            <MenuItem mnemonicParsing="false" text="Action 1" />
-            <MenuItem mnemonicParsing="false" text="Action 2" />
-         </items>
-      </MenuButton>
-      <Button layoutX="448.0" layoutY="201.0" mnemonicParsing="false" onAction="#btnTransitDetail" prefHeight="25.0" prefWidth="87.0" text="Transit Detail" />
+
+       <ComboBox fx:id="cbOpenEveryday" layoutX="407.0" layoutY="66.0" prefHeight="25.0" prefWidth="117.0" />
+
+       <Button layoutX="448.0" layoutY="201.0" mnemonicParsing="false" onAction="#btnTransitDetail" prefHeight="25.0" prefWidth="87.0" text="Transit Detail" />
    </children>
 </AnchorPane>
