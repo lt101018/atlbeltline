@@ -56,10 +56,11 @@ public class TakeTransit15 {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
+        cbSite.getItems().add("ALL");
         while(resultSet.next()){
             cbSite.getItems().add(resultSet.getString("name"));
         }
-
+        cbSite.getItems().add("Other");
         statement.close();
 
         cbSite.getSelectionModel().select(0);
@@ -75,6 +76,11 @@ public class TakeTransit15 {
     public void btnFilter(ActionEvent actionEvent) throws SQLException {
 
         table.getItems().clear();
+
+        String siteSql = "";
+        if(!cbSite.getValue().toString().equals("ALL"))
+            siteSql = "where name='"+cbSite.getValue().toString()+"'";
+
         String transportSql = "";
         String cbContent = cbTransportType.getValue().toString();
         if(cbContent.equals("MARTA") || cbContent.equals("Bus") || cbContent.equals("Bike"))
@@ -86,7 +92,7 @@ public class TakeTransit15 {
 
         String sql = "select t.route, t.type, t.price, count(case when c.route=t.route then 1 end) as connected_sites\n" +
                 "from transit as t, connect as c\n" +
-                "where t.type in (select type from connect where name='"+cbSite.getValue().toString()+"') "+transportSql+ priceSql +
+                "where t.type in (select type from connect "+siteSql+") "+transportSql+ priceSql +
                 " group by t.route;";
         System.out.println(sql);
         Statement statement = conn.createStatement();
@@ -121,10 +127,6 @@ public class TakeTransit15 {
         statement.executeUpdate(sql);
         statement.close();
     }
-
-
-// this is how to change date format
-
 
 
 
