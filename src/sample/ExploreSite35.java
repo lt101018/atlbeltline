@@ -26,8 +26,9 @@ public class ExploreSite35 {
     public DatePicker datepicker2;
     public MenuButton menuName;
     public CheckBox checkVisited;
-    public MenuButton menuOpenEveryday;
     public static String lastFxml;
+    public ComboBox cbName;
+    public ComboBox cbOpenEveryday;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -38,6 +39,10 @@ public class ExploreSite35 {
         col2.setCellValueFactory(new PropertyValueFactory<>("eventCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
         col4.setCellValueFactory(new PropertyValueFactory<>("myVisits"));
+        cbOpenEveryday.getItems().addAll(
+                "Yes",
+                "No"
+        );
     }
 
     public void addElement(String siteName, int eventCount, int totalVisits, int myVisits) {

@@ -12,7 +12,6 @@ import pojo.VisitorHistoryRow38;
 import java.io.IOException;
 
 public class VisitorHistory38 {
-    public MenuButton menuSite;
     public TextField tfEvent;
     public TableView table;
     public TableColumn col1;

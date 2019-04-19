@@ -28,11 +28,11 @@ public class ExploreEvent33 {
     public TextField tfname;
     public DatePicker datepicker1;
     public DatePicker datepicker2;
-    public MenuButton menuSiteName;
     public CheckBox checkVisited;
     public CheckBox checkSoldOut;
 
     public static String lastFxml;
+    public ComboBox cbSiteName;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
