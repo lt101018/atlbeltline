@@ -103,9 +103,11 @@ public class ManageTransit22 {
         if(!cbsite.getValue().toString().equals("ALL"))
             siteSql = "where name='"+cbsite.getValue().toString()+"'";
 
-        String priceSql = "";
-        if(tfprice1.getText().length()!=0 && tfprice2.getText().length()!=0)
-            priceSql = "and t.price between "+tfprice1.getText()+" and "+tfprice2.getText();
+
+        String priceL = "0", priceR = Integer.MAX_VALUE+"";
+        if(tfprice1.getText().length()!=0) priceL = tfprice1.getText();
+        if(tfprice2.getText().length()!=0) priceR = tfprice2.getText();
+        String priceSql = "and t.price between "+priceL+" and "+priceR;
 
         String sql1 = "select t.route, t.type, t.price, count(*) as connected_sites\n" +
                 "from transit as t, connect as c\n" +

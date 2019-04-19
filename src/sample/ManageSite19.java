@@ -86,7 +86,6 @@ public class ManageSite19 {
     }
 
 
-    ///////////////the result is wrong
     public void btnFilter(ActionEvent actionEvent) throws SQLException {
         table.getItems().clear();
 

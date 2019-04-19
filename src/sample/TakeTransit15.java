@@ -87,8 +87,10 @@ public class TakeTransit15 {
             transportSql = "and t.type='"+cbTransportType.getValue().toString()+"'";
 
         String priceSql = "";
-        if(price1.getText().length()!=0 && price2.getText().length()!=0)
-            priceSql = "and t.price between "+price1.getText()+" and "+price2.getText();
+        String priceL = "0", priceR = Integer.MAX_VALUE+"";
+        if(price1.getText().length()!=0) priceL = price1.getText();
+        if(price2.getText().length()!=0) priceR = price2.getText();
+        priceSql = "and t.price between "+priceL+" and "+priceR;
 
         String sql = "select t.route, t.type, t.price, count(case when c.route=t.route then 1 end) as connected_sites\n" +
                 "from transit as t, connect as c\n" +
