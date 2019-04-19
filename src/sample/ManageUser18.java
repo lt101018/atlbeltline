@@ -33,6 +33,17 @@ public class ManageUser18 {
         col2.setCellValueFactory(new PropertyValueFactory<>("emailCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("userType"));
         col4.setCellValueFactory(new PropertyValueFactory<>("status"));
+        cbstatus.getItems().addAll(
+                "Approved",
+                "Pending",
+                "Declined"
+        );
+        cbusertype.getItems().addAll(
+                "User",
+                "Visitor",
+                "Staff",
+                "Manager"
+        );
     }
 
     public void addElement(String username, int emailCount, String userType, String status) {

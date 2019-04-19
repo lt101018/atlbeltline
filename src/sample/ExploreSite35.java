@@ -39,6 +39,10 @@ public class ExploreSite35 {
         col2.setCellValueFactory(new PropertyValueFactory<>("eventCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
         col4.setCellValueFactory(new PropertyValueFactory<>("myVisits"));
+        cbOpenEveryday.getItems().addAll(
+                "Yes",
+                "No"
+        );
     }
 
     public void addElement(String siteName, int eventCount, int totalVisits, int myVisits) {

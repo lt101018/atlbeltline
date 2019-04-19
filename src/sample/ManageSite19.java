@@ -18,10 +18,10 @@ public class ManageSite19 {
     public TableColumn col1;
     public TableColumn col2;
     public TableColumn col3;
-    public MenuButton menuopeneveryday;
     public static String lastFxml;
     public ComboBox cbsite;
     public ComboBox cbmanager;
+    public ComboBox cbopeneveryday;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -31,6 +31,10 @@ public class ManageSite19 {
         col1.setCellValueFactory(new PropertyValueFactory<>("name"));
         col2.setCellValueFactory(new PropertyValueFactory<>("manager"));
         col3.setCellValueFactory(new PropertyValueFactory<>("openeveryday"));
+        cbopeneveryday.getItems().addAll(
+                "Yes",
+                "No"
+        );
     }
 
     public void addElement(String name, String manager, String openeveryday) {
