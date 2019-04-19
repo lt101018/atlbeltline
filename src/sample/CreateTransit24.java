@@ -19,6 +19,17 @@ public class CreateTransit24 {
     public static String lastFxml;
     public ComboBox cbTransportType;
 
+    public void initialize(){
+
+        cbTransportType.getItems().addAll(
+                "ALL",
+                "MARTA",
+                "Bus",
+                "Bike",
+                "Other"
+        );
+    }
+
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
     }

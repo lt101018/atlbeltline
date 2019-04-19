@@ -1,5 +1,6 @@
 package sample;
 
+import connection.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,10 @@ import pojo.TakeTransitRow15;
 import tools.MyAlert;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ManageUser18 {
     public TextField tfusername;
@@ -23,6 +28,7 @@ public class ManageUser18 {
     public static String lastFxml;
     public ComboBox cbusertype;
     public ComboBox cbstatus;
+    private static Connection conn;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -33,6 +39,24 @@ public class ManageUser18 {
         col2.setCellValueFactory(new PropertyValueFactory<>("emailCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("userType"));
         col4.setCellValueFactory(new PropertyValueFactory<>("status"));
+        conn = ConnectionManager.getConn();
+        cbstatus.getItems().addAll(
+                "ALL",
+                "Approved",
+                "Pending",
+                "Declined",
+                "Other"
+        );
+        cbusertype.getItems().addAll(
+                "ALL",
+                "User",
+                "Visitor",
+                "Staff",
+                "Manager",
+                "Other"
+        );
+        cbstatus.getSelectionModel().select(0);
+        cbusertype.getSelectionModel().select(0);
     }
 
     public void addElement(String username, int emailCount, String userType, String status) {
@@ -46,7 +70,11 @@ public class ManageUser18 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) {
+    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+        table.getItems().clear();
+
+
+
     }
 
     public void btnApprove(ActionEvent actionEvent) {

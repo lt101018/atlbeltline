@@ -25,6 +25,10 @@ public class UserLogin {
     public void initialize() {
         System.out.println("Sample initializing!");
         conn = ConnectionManager.getConn();
+
+        ////for testing
+        tfemail.setText("jsmith@gmail.com");
+        tfpassword.setText("jsmith123");
     }
 
     public void login(ActionEvent actionEvent) throws IOException, SQLException {

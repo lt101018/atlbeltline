@@ -38,6 +38,14 @@ public class ManageTransit22 {
         col3.setCellValueFactory(new PropertyValueFactory<>("price"));
         col4.setCellValueFactory(new PropertyValueFactory<>("numConnectedSites"));
         col5.setCellValueFactory(new PropertyValueFactory<>("numTransitLogged"));
+
+        cbtransport.getItems().addAll(
+                "ALL",
+                "MARTA",
+                "Bus",
+                "Bike",
+                "Other"
+        );
     }
 
     public void addElement(String route, String transportType, double price, int numConnectedSites, int numTransitLogged) {
