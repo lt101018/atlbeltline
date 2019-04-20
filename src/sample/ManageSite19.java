@@ -137,11 +137,8 @@ public class ManageSite19 {
         EditSite20 controller = fxmlLoader.getController();
         controller.setLastFxml("managesite19.fxml");
         controller.sitename = selectedItem.getName();
-        try {
-            controller.initialize1();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        controller.initialize1();
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
