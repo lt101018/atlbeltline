@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,9 +22,9 @@
       <ListView fx:id="listView" layoutX="161.0" layoutY="126.0" prefHeight="200.0" prefWidth="378.0" />
       <Button layoutX="155.0" layoutY="340.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="55.0" text="Back" />
       <Button layoutX="350.0" layoutY="340.0" mnemonicParsing="false" onAction="#btnCreate" text="Create" />
-      <Label fx:id="labelRoute" layoutX="319.0" layoutY="76.0" text="Label" />
-      <Label fx:id="labelPrice" layoutX="452.0" layoutY="75.0" text="Label" />
 
       <ComboBox fx:id="cbTransportType" layoutX="155.0" layoutY="72.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="tfRoute" layoutX="308.0" layoutY="71.0" prefHeight="25.0" prefWidth="89.0" />
+      <TextField fx:id="tfPrice" layoutX="440.0" layoutY="72.0" prefHeight="25.0" prefWidth="89.0" />
    </children>
 </AnchorPane>

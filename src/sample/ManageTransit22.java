@@ -82,6 +82,9 @@ public class ManageTransit22 {
         stage.setScene(new Scene(root));
     }
 
+
+
+    /////////////query has some problme here. not done.
     public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
 

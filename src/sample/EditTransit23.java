@@ -97,7 +97,7 @@ public class EditTransit23 {
             statement.executeUpdate(sql);
         }
 
-        MyAlert.showAlert("Site updated.");
+        MyAlert.showAlert("Transit updated.");
         statement.close();
     }
 }
