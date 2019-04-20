@@ -68,7 +68,7 @@ public class ManageUser18 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
         String inputType = cbusertype.getValue().toString();
 
@@ -95,6 +95,7 @@ public class ManageUser18 {
                 "from user as u, email as e\n" +
                 "where u.username = e.username "+usernameSql+" "+statusSql+" "+userTypeSql2+"\n" +
                 "group by e.username\n";
+        try{
         if(inputType.equals("Manager")||inputType.equals("Staff")){
             System.out.println(sql1);
             Statement statement = conn.createStatement();
@@ -133,9 +134,12 @@ public class ManageUser18 {
             }
             statement.close();
         }
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void btnApprove(ActionEvent actionEvent) throws SQLException {
+    public void btnApprove(ActionEvent actionEvent){
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a user.");
             return;
@@ -146,13 +150,17 @@ public class ManageUser18 {
         String sql = "update user\n" +
                 "set status = 'approved' \n" +
                 "where username = '"+selectedItem.getUsername()+"';";
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
         btnFilter(null);
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void btnDecline(ActionEvent actionEvent) throws SQLException {
+    public void btnDecline(ActionEvent actionEvent) {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a user.");
             return;
@@ -163,9 +171,13 @@ public class ManageUser18 {
         String sql = "update user\n" +
                 "set status = 'declined'\n" +
                 "where username = '"+selectedItem.getUsername()+"' and status='pending';\n";
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
         btnFilter(null);
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 }

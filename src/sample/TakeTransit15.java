@@ -37,7 +37,7 @@ public class TakeTransit15 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         conn = ConnectionManager.getConn();
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
         col2.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -52,14 +52,18 @@ public class TakeTransit15 {
         );
 
         String sql = "select name from site";
-        Statement statement = conn.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
 
-        cbSite.getItems().add("ALL");
-        while(resultSet.next()){
-            cbSite.getItems().add(resultSet.getString("name"));
+            cbSite.getItems().add("ALL");
+            while (resultSet.next()) {
+                cbSite.getItems().add(resultSet.getString("name"));
+            }
+            statement.close();
+        }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
         }
-        statement.close();
 
         cbSite.getSelectionModel().select(0);
         cbTransportType.getSelectionModel().select(0);
@@ -71,7 +75,7 @@ public class TakeTransit15 {
         table.getItems().add(row);
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
 
         table.getItems().clear();
 
@@ -95,12 +99,16 @@ public class TakeTransit15 {
                 "where t.type in (select type from connect "+siteSql+") "+transportSql+ priceSql +
                 " group by t.route;";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getDouble(3),resultSet.getInt(4));
         }
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnBack(ActionEvent actionEvent) throws IOException {

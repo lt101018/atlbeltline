@@ -38,7 +38,7 @@ public class ManageTransit22 {
     }
 
 
-    public void initialize() throws SQLException {
+    public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
         col2.setCellValueFactory(new PropertyValueFactory<>("transportType"));
         col3.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -54,6 +54,7 @@ public class ManageTransit22 {
 
 
         String sql = "select name from site";
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -65,6 +66,9 @@ public class ManageTransit22 {
         cbsite.getSelectionModel().select(0);
         cbtransport.getSelectionModel().select(0);
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void addElement(String route, String transportType, double price, int numConnectedSites, int numTransitLogged) {
@@ -78,7 +82,7 @@ public class ManageTransit22 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
 
         String typeSql1 = "";
@@ -118,6 +122,7 @@ public class ManageTransit22 {
                 "group by ta.type, ta.route;";
         System.out.println(sql1);
         System.out.println(sql2);
+        try{
         Statement statement1 = conn.createStatement();
         Statement statement2 = conn.createStatement();
         ResultSet resultSet1 = statement1.executeQuery(sql1);
@@ -127,6 +132,9 @@ public class ManageTransit22 {
         }
         statement1.close();
         statement2.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnEdit(ActionEvent actionEvent) throws IOException {
@@ -146,7 +154,7 @@ public class ManageTransit22 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnDelete(ActionEvent actionEvent) throws SQLException {
+    public void btnDelete(ActionEvent actionEvent) {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
@@ -156,6 +164,7 @@ public class ManageTransit22 {
         String sql = "delete from take \n" +
                 "where route = '"+selectedItem.getRoute()+"';";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -163,7 +172,9 @@ public class ManageTransit22 {
         btnFilter(null);
 
         statement.close();
-
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnCreate(ActionEvent actionEvent) throws IOException {

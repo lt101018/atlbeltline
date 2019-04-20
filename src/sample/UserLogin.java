@@ -31,13 +31,13 @@ public class UserLogin {
         tfpassword.setText("jsmith123");
     }
 
-    public void login(ActionEvent actionEvent) throws IOException, SQLException {
+    public void login(ActionEvent actionEvent) throws IOException {
 //        String nextFxml = tfemail.getText();
 //        Parent root = FXMLLoader.load(getClass().getResource(nextFxml+".fxml"));
 //        Stage stage = (Stage)tfemail.getScene().getWindow();
 //        stage.setScene(new Scene(root));
 
-
+        try{
         String sql = "select email from email where email = '"+ tfemail.getText()+"'";
         System.out.println(sql);
         Statement statement = conn.createStatement();
@@ -103,6 +103,9 @@ public class UserLogin {
             stage.setScene(new Scene(root));
         }
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void register(ActionEvent actionEvent) throws IOException {

@@ -32,12 +32,13 @@ public class CreateSite21 {
     private static Connection conn;
     private Map<String, String> map = new HashMap<>();
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         conn = ConnectionManager.getConn();
         String sql = "select distinct u.firstname, u.lastname, u.username\n" +
                 "from site as s, employee as e, user as u\n" +
                 "where e.username not in (select managerusername from site) and e.employeetype = 'manager' and u.username = e.username and u.status = 'approved';\n";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -49,6 +50,9 @@ public class CreateSite21 {
         cbManager.getSelectionModel().select(0);
 
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void setLastFxml(String lastFxml) {
@@ -61,7 +65,7 @@ public class CreateSite21 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnCreate(ActionEvent actionEvent) throws SQLException {
+    public void btnCreate(ActionEvent actionEvent) {
         if(tfName.getText().length()==0 || tfZipcode.getText().length()==0 || tfAddress.getText().length()==0){
             MyAlert.showAlert("Please fill all fields");
             return;
@@ -71,8 +75,12 @@ public class CreateSite21 {
         String openeverydaySql = (cbOpenEveryday.isSelected())?"Yes":"No";
         String sql = "insert into site(name, zipcode, address, openeveryday, managerusername) values('"+tfName.getText()+"','"+tfZipcode.getText()+"','"+tfAddress.getText()+"','"+openeverydaySql+"','"+username+"');";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         MyAlert.showAlert("Site created.");
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 }

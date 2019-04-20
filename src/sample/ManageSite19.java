@@ -33,7 +33,7 @@ public class ManageSite19 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         col1.setCellValueFactory(new PropertyValueFactory<>("name"));
         col2.setCellValueFactory(new PropertyValueFactory<>("manager"));
         col3.setCellValueFactory(new PropertyValueFactory<>("openeveryday"));
@@ -45,6 +45,7 @@ public class ManageSite19 {
         conn = ConnectionManager.getConn();
 
         String sql = "select name from site";
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -68,6 +69,9 @@ public class ManageSite19 {
         cbopeneveryday.getSelectionModel().select(0);
 
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void addElement(String name, String manager, String openeveryday) {
@@ -83,7 +87,7 @@ public class ManageSite19 {
     }
 
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
 
         String siteSql = "";
@@ -107,12 +111,16 @@ public class ManageSite19 {
                 "and e.username in (select username from user "+managerSql+") \n" +
                 openeverydaySql;
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             addElement(resultSet.getString(1), resultSet.getString(2)+" "+resultSet.getString(3), resultSet.getString(4));
         }
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnEdit(ActionEvent actionEvent) throws IOException {
@@ -138,7 +146,7 @@ public class ManageSite19 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnDelete(ActionEvent actionEvent) throws SQLException {
+    public void btnDelete(ActionEvent actionEvent) {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
@@ -148,6 +156,7 @@ public class ManageSite19 {
         String sql = "delete from site\n" +
                 "where name = '"+selectedItem.getName()+"'";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -163,6 +172,9 @@ public class ManageSite19 {
         }
         statement.close();
         cbsite.getSelectionModel().select(0);
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnCreate(ActionEvent actionEvent) throws IOException {
