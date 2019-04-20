@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterEmployeeVisitor">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterEmployeeVisitor6">
 
     <TextField fx:id="usernameTF" layoutX="139.0" layoutY="134.0" prefHeight="27.0" prefWidth="91.0" promptText="username" />
     <Label layoutX="65.0" layoutY="139.0" text="Username" />
@@ -64,12 +64,12 @@
    <Label layoutX="336.0" layoutY="139.0" text="User Type" />
    <Label layoutX="73.0" layoutY="230.0" text="Phone" />
    <Label layoutX="72.0" layoutY="268.0" text="City" />
-   <TextField id="phonenumberTF" layoutX="139.0" layoutY="225.0" prefHeight="27.0" prefWidth="135.0" promptText="Phone Number" />
-   <TextField id="cityTF" layoutX="140.0" layoutY="263.0" prefHeight="27.0" prefWidth="66.0" promptText="City" />
-   <Label layoutX="335.0" layoutY="230.0" text="Address" />
-   <TextField id="addressTF" layoutX="415.0" layoutY="225.0" prefHeight="27.0" prefWidth="172.0" promptText="address" />
-   <Label layoutX="267.0" layoutY="268.0" text="State" />
-   <Label layoutX="400.0" layoutY="268.0" text="Zipcode" />
-   <TextField id="zipcodeTF" layoutX="467.0" layoutY="263.0" prefHeight="27.0" prefWidth="68.0" />
+    <TextField fx:id="phonenumberTF" layoutX="139.0" layoutY="225.0" prefHeight="27.0" prefWidth="135.0" promptText="Phone Number" />
+    <TextField fx:id="cityTF" layoutX="140.0" layoutY="263.0" prefHeight="27.0" prefWidth="66.0" promptText="City" />
+    <Label layoutX="335.0" layoutY="230.0" text="Address" />
+    <TextField fx:id="addressTF" layoutX="415.0" layoutY="225.0" prefHeight="27.0" prefWidth="172.0" promptText="address" />
+    <Label layoutX="267.0" layoutY="268.0" text="State" />
+    <Label layoutX="400.0" layoutY="268.0" text="Zipcode" />
+    <TextField fx:id="zipcodeTF" layoutX="467.0" layoutY="263.0" prefHeight="27.0" prefWidth="68.0" />
 
 </AnchorPane>
