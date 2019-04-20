@@ -122,6 +122,7 @@ public class ManagerCreateEvent27 {
         stage.setScene(new Scene(root));
     }
 
+
     public void filterStaff(ActionEvent actionEvent) throws SQLException {
         Statement statement = conn.createStatement();
         //*******Populate the listview*******
@@ -142,12 +143,12 @@ public class ManagerCreateEvent27 {
                 "from user as u, employee as emp, event as e, assign_to as at\n" +
                 " where emp.username not in (select staffusername from assign_to) and emp.employeetype = 'staff'\n" +
                 "and u.status = 'approved' and at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate\n" +
-                "and at.staffusername = emp.username and emp.username = u.username and (e.enddate<'" +startdate +"' or e.startdate>'"+ enddate+ "')";
+                "and at.staffusername = emp.username and emp.username = u.username and (e.enddate<'" + startdate + "' or e.startdate>'" + enddate + "')";
         System.out.println(sql);
         ResultSet resultSet = statement.executeQuery(sql);
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             System.out.println(list);
-            list.add(resultSet.getString("firstname") +" " + resultSet.getString("lastname"));
+            list.add(resultSet.getString("firstname") + " " + resultSet.getString("lastname"));
         }
         statement.close();
         //*******Populate the listview*******
