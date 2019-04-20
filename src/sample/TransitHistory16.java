@@ -45,8 +45,7 @@ public class TransitHistory16 {
                 "ALL",
                 "MARTA",
                 "Bus",
-                "Bike",
-                "Other"
+                "Bike"
         );
 
         conn = ConnectionManager.getConn();
@@ -58,7 +57,6 @@ public class TransitHistory16 {
         while(resultSet.next()){
             cbSite.getItems().add(resultSet.getString("name"));
         }
-        cbSite.getItems().add("Other");
         statement.close();
 
         cbSite.getSelectionModel().select(0);

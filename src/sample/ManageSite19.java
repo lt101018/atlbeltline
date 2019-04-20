@@ -40,8 +40,7 @@ public class ManageSite19 {
         cbopeneveryday.getItems().addAll(
                 "ALL",
                 "Yes",
-                "No",
-                "Other"
+                "No"
         );
         conn = ConnectionManager.getConn();
 
@@ -53,7 +52,6 @@ public class ManageSite19 {
         while(resultSet.next()){
             cbsite.getItems().add(resultSet.getString("name"));
         }
-        cbsite.getItems().add("Other");
 
         sql = "select firstname, lastname\n" +
                 "from user\n" +
@@ -64,7 +62,6 @@ public class ManageSite19 {
         while(resultSet1.next()){
             cbmanager.getItems().add(resultSet1.getString(1)+" "+resultSet1.getString(2));
         }
-        cbmanager.getItems().add("Other");
 
         cbsite.getSelectionModel().select(0);
         cbmanager.getSelectionModel().select(0);
@@ -164,7 +161,6 @@ public class ManageSite19 {
         while(resultSet.next()){
             cbsite.getItems().add(resultSet.getString("name"));
         }
-        cbsite.getItems().add("Other");
         statement.close();
         cbsite.getSelectionModel().select(0);
     }

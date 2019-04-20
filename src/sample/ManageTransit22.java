@@ -49,8 +49,7 @@ public class ManageTransit22 {
                 "ALL",
                 "MARTA",
                 "Bus",
-                "Bike",
-                "Other"
+                "Bike"
         );
 
 
@@ -62,7 +61,6 @@ public class ManageTransit22 {
         while(resultSet.next()){
             cbsite.getItems().add(resultSet.getString("name"));
         }
-        cbsite.getItems().add("Other");
 
         cbsite.getSelectionModel().select(0);
         cbtransport.getSelectionModel().select(0);

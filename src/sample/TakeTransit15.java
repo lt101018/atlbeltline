@@ -48,8 +48,7 @@ public class TakeTransit15 {
                 "ALL",
                 "MARTA",
                 "Bus",
-                "Bike",
-                "Other"
+                "Bike"
         );
 
         String sql = "select name from site";
@@ -60,7 +59,6 @@ public class TakeTransit15 {
         while(resultSet.next()){
             cbSite.getItems().add(resultSet.getString("name"));
         }
-        cbSite.getItems().add("Other");
         statement.close();
 
         cbSite.getSelectionModel().select(0);

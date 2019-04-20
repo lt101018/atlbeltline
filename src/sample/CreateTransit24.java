@@ -25,8 +25,7 @@ public class CreateTransit24 {
                 "ALL",
                 "MARTA",
                 "Bus",
-                "Bike",
-                "Other"
+                "Bike"
         );
     }
 
