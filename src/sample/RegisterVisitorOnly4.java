@@ -3,10 +3,14 @@ package sample;
 import connection.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,7 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class registerVisitorController {
+public class RegisterVisitorOnly4 {
 
     @FXML
     public Button addEmailBttn1;
@@ -54,6 +58,12 @@ public class registerVisitorController {
     public ArrayList<String> emailList;
 
     public int emailNumber;
+
+    public static String lastFxml;
+
+    public void setLastFxml(String lastFxml) {
+        this.lastFxml = lastFxml;
+    }
 
     private static Connection conn;
 
@@ -150,7 +160,6 @@ public class registerVisitorController {
 //
 //    }
 
-
     public void ensureRegister(ActionEvent actionEvent) throws SQLException {
         String status = "pending";
         String inputPwd = passwordTF.getText();
@@ -158,53 +167,52 @@ public class registerVisitorController {
 
         if(!checkPassWord(inputPwd, inputConfirmedPwd)) return;
 
+        Statement statement = conn.createStatement();
         String sql = "INSERT INTO user\n" +
                 "(`username`,\n" +
                 "`firstname`,\n" +
                 "`lastname`,\n" +
                 "`status`,\n" +
-                "`password`)\n" +
+                "`password`,\n" +
+                "`usertype`)\n" +
                 "VALUES\n" +
                 "('"+usernameTF.getText()+"',\n'" +
                 firstNameTF.getText()+"',\n'" +
                 lastNameTF.getText()+"',\n'" +
                 status+"',\n'" +
-                passwordTF.getText()+"')";
-        Statement statement = conn.createStatement();
+                passwordTF.getText()+"',\n'"+
+                "user" +
+                "')";
+
         statement.executeUpdate(sql);
 
-//        for(int i=)
-//        String sqlForEmails = "INSERT INTO user\n" +
-//                "(`email`,\n" +
-//                "`username`)\n" +
-//                "VALUES\n" +
-//                "('"+emailTF1.getText()+"',\n'" +
-//                usernameTF.getText()+"')";
-//        Statement statementForEmails = conn.createStatement();
-//        statementForEmails.executeUpdate(sqlForEmails);
+        String sqlForVisitor = "INSERT INTO visitor\n" +
+        "(`username`)\n" +
+        "VALUES\n" +
+        "('" + usernameTF.getText()+"')";
 
-        statement.close();
+        statement.executeUpdate(sqlForVisitor);
 
         String emailAdd = "";
-        Statement statementForEmails = conn.createStatement();
 
         for(int i=emailNumber; i>0; i--) {
-            emailAdd = emailTF1.getText();
-            String sqlForEmails = "INSERT INTO user\n" +
+            emailAdd = emailList.get(i-1);
+            String sqlForEmails = "INSERT INTO email\n" +
                     "(`email`,\n" +
                     "`username`)\n" +
                     "VALUES\n" +
                     "('"+emailAdd+"',\n'" +
                     usernameTF.getText()+"')";
-
-            statementForEmails.executeUpdate(sqlForEmails);
+            statement.executeUpdate(sqlForEmails);
         }
 
-        statementForEmails.close();
-        //statementForEmails.close();
+        statement.close();
     }
 
     public void ensureCancel(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)registerBttn.getScene().getWindow();
+        stage.setScene(new Scene(root));
 
     }
 

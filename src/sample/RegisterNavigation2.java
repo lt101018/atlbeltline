@@ -35,7 +35,7 @@ public class registerNavigationController {
     public Button backBttn;
 
     public void userOnlyRegister(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("registeremployee.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("registeremployeeonly.fxml"));
         Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 500));
     }
@@ -46,4 +46,20 @@ public class registerNavigationController {
         stage.setScene(new Scene(root, 600, 500));
     }
 
+    public void employeeOnlyRegister(ActionEvent actionEvent) throws IOException {
+
+    }
+
+    public void employeeVisitorRegister(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+        Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
+        stage.setScene(new Scene(root, 600, 500));
+
+    }
+
+    public void backFun(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+        Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
+        stage.setScene(new Scene(root, 600, 500));
+    }
 }
