@@ -78,8 +78,10 @@ public class ManageEvent25 {
         ///following jobs
     }
 
-    public void btnCreate(ActionEvent actionEvent) {
+    public void btnCreate(ActionEvent actionEvent) throws IOException {
         //go 27
-
+        Parent root = FXMLLoader.load(getClass().getResource("managercreateevent27.fxml"));
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }

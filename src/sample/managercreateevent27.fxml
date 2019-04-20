@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerViewEdit26">
+<AnchorPane prefHeight="560.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerCreateEvent27">
    <children>
       <Label layoutX="252.0" layoutY="48.0" text="Create Event">
          <font>
@@ -16,23 +16,25 @@
          </font>
       </Label>
       <Label layoutX="72.0" layoutY="167.0" text="Start Date" />
-      <Button id="back" layoutX="145.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
-      <Button layoutX="435.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnDailyDetail" prefHeight="25.0" prefWidth="80.0" text="Create" />
+      <Button fx:id="backBttn" layoutX="145.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <Button fx:id="createBttn" layoutX="435.0" layoutY="489.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="25.0" prefWidth="80.0" text="Create" />
+
       <Label layoutX="85.0" layoutY="87.0" text="Name" />
       <Label layoutX="67.0" layoutY="383.0" text="Assign Staff" />
-      <TextArea id="descriptionValue" layoutX="179.0" layoutY="213.0" prefHeight="97.0" prefWidth="315.0" />
-      <ListView id="staffListView" fx:id="listView" layoutX="179.0" layoutY="352.0" prefHeight="97.0" prefWidth="315.0" />
+      <TextArea fx:id="descriptionValue" layoutX="179.0" layoutY="213.0" prefHeight="97.0" prefWidth="315.0" />
+      <ListView fx:id="listView" layoutX="179.0" layoutY="352.0" prefHeight="97.0" prefWidth="315.0" />
       <Label layoutX="77.0" layoutY="253.0" text="Description" />
       <Label layoutX="345.0" layoutY="127.0" text="Minimum Staff Required" />
       <Label layoutX="225.0" layoutY="127.0" text="Capacity" />
-      <TextField id="nameValue" layoutX="149.0" layoutY="82.0" prefHeight="27.0" prefWidth="387.0" />
+      <TextField fx:id="nameValue" layoutX="149.0" layoutY="82.0" prefHeight="27.0" prefWidth="387.0" />
       <Label layoutX="145.0" layoutY="127.0" text="\$" />
       <Label layoutX="86.0" layoutY="127.0" text="Price" />
-      <TextField id="priceValue" layoutX="160.0" layoutY="122.0" prefHeight="27.0" prefWidth="32.0" />
-      <TextField id="capValue" layoutX="290.0" layoutY="122.0" prefHeight="27.0" prefWidth="32.0" />
-      <TextField id="minStaffValue" layoutX="506.0" layoutY="122.0" prefHeight="27.0" prefWidth="32.0" />
-      <TextField id="startdateValue" layoutX="149.0" layoutY="162.0" prefHeight="27.0" prefWidth="147.0" />
+      <TextField fx:id="priceValue" layoutX="160.0" layoutY="122.0" prefHeight="27.0" prefWidth="32.0" />
+      <TextField fx:id="capValue" layoutX="290.0" layoutY="122.0" prefHeight="27.0" prefWidth="32.0" />
+      <TextField fx:id="minStaffValue" layoutX="506.0" layoutY="122.0" prefHeight="27.0" prefWidth="32.0" />
+      <TextField fx:id="startdateValue" layoutX="149.0" layoutY="162.0" prefHeight="27.0" prefWidth="147.0" />
       <Label layoutX="308.0" layoutY="167.0" text="End Date" />
-      <TextField id="endDateValue" layoutX="376.0" layoutY="162.0" prefHeight="27.0" prefWidth="147.0" />
+      <TextField fx:id="endDateValue" layoutX="376.0" layoutY="162.0" prefHeight="27.0" prefWidth="147.0" />
+      <Button fx:id="filterBttn" layoutX="293.0" layoutY="319.0" mnemonicParsing="false" onAction="#filterStaff" text="Filter" />
    </children>
 </AnchorPane>
