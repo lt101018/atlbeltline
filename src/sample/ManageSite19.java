@@ -166,6 +166,7 @@ public class ManageSite19 {
         }
         cbsite.getItems().add("Other");
         statement.close();
+        cbsite.getSelectionModel().select(0);
     }
 
     public void btnCreate(ActionEvent actionEvent) throws IOException {

@@ -17,6 +17,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditSite20 {
     public TextField tfName;
@@ -27,17 +29,18 @@ public class EditSite20 {
     public ComboBox cbManager;
     public static String sitename;
     private static Connection conn;
+    private Map<String, String> map = new HashMap<>();
 
     public void initialize() throws SQLException {
         conn = ConnectionManager.getConn();
     }
 
     public void initialize1() throws SQLException {
-        String sql = "(select u.firstname, u.lastname\n" +
+        String sql = "(select u.firstname, u.lastname, u.username\n" +
                 "from user as u, employee as e, site as s\n" +
                 "where s.name = '"+sitename+"' and s.managerusername = e.username and u.username = e.username)\n" +
                 "union\n" +
-                "(select u.firstname, u.lastname\n" +
+                "(select u.firstname, u.lastname, u.username\n" +
                 "from site as s, employee as e, user as u\n" +
                 "where e.username not in (select managerusername from site) and e.employeetype = 'manager' and s.name = '"+sitename+"' and u.username = e.username and u.status = 'approved');";
         System.out.println(sql);
@@ -48,6 +51,7 @@ public class EditSite20 {
 
         while(resultSet.next()){
             cbManager.getItems().add(resultSet.getString(1)+" "+resultSet.getString(2));
+            map.put(resultSet.getString(1)+" "+resultSet.getString(2),resultSet.getString(3));
         }
 
         cbManager.getSelectionModel().select(0);
@@ -84,8 +88,9 @@ public class EditSite20 {
             return;
         }
         String openeverydaySql = (cbOpenEveryday.isSelected())?"Yes":"No";
+        String username = map.get(cbManager.getValue().toString());
         String sql = "update site\n" +
-                "set name = '"+tfName.getText()+"', zipcode = '"+tfZipcode.getText()+"', address = '"+tfAddress.getText()+"', openeveryday = '"+openeverydaySql+"'\n" +
+                "set name = '"+tfName.getText()+"', zipcode = '"+tfZipcode.getText()+"', address = '"+tfAddress.getText()+"',managerusername = '"+username+"', openeveryday = '"+openeverydaySql+"'\n" +
                 "where name = '"+sitename+"';";
         sitename = tfName.getText();
         System.out.println(sql);
