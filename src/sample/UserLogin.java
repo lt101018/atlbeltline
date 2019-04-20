@@ -27,8 +27,8 @@ public class UserLogin {
         conn = ConnectionManager.getConn();
 
         ////for testing
-        tfemail.setText("jsmith@gmail.com");
-        tfpassword.setText("jsmith123");
+        tfemail.setText("dsmith@outlook.com");
+        tfpassword.setText("dsmith456");
     }
 
     public void login(ActionEvent actionEvent) throws IOException, SQLException {
