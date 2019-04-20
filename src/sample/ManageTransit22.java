@@ -137,7 +137,7 @@ public class ManageTransit22 {
         }
     }
 
-    public void btnEdit(ActionEvent actionEvent) throws IOException {
+    public void btnEdit(ActionEvent actionEvent) throws IOException, SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
@@ -149,7 +149,11 @@ public class ManageTransit22 {
         Parent root = (Parent)fxmlLoader.load();
         EditTransit23 controller = fxmlLoader.getController();
         controller.setLastFxml("managetransit22.fxml");
-        controller.setTransportType(selectedItem.getTransportType());
+
+        controller.prevType = selectedItem.getTransportType();
+        controller.prevRoute = selectedItem.getRoute();
+        controller.tfPrice.setText(selectedItem.getPrice()+"");
+        controller.initialize1();
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
