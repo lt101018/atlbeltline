@@ -181,7 +181,7 @@ public class RegisterVisitorOnly4 {
                 lastNameTF.getText()+"',\n'" +
                 status+"',\n'" +
                 passwordTF.getText()+"',\n'"+
-                "user" +
+                "visitor" +
                 "')";
 
         statement.executeUpdate(sql);

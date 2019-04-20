@@ -18,8 +18,10 @@ public class ManagerFunc10 {
         Parent root = (Parent)fxmlLoader.load();
         EmployeeManageProfile17 controller = fxmlLoader.getController();
         controller.setLastFxml("managerfunc10.fxml");
+
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
+g
     }
 
     public void manageEvent(ActionEvent actionEvent) throws IOException {

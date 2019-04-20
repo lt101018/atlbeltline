@@ -5,231 +5,247 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import pojo.UserInfo;
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EmployeeManageProfile17 {
 
-    public String lastFxml;
-
     public String firstName;
     public String lastName;
-    public String userName;
+    public static String userName;
     public String siteName;
     public String employeeID;
     public static ArrayList<String> emailList;
-    public String address;
+    public Label address;
     public String phone;
     public boolean isVisitor;
     public CheckBox isVisitorCheckBox;
-    public AnchorPane anchorpane;
-    public Label Address;
+    public TextArea emailsTA;
+    public Button updateBttn;
+    public Label username;
+    public Label employeeid;
+    public TextField phoneTF;
+    public Label sitename;
+    public Button ensureEmailBttn;
+    public Button editEmailBttn;
+    public Label updatedemails;
     private int emailNumber;
-
-    public Label Sitename;
-    public Label Username;
-    public Label Employeeid;
-    public Label Phone;
     public TextField firstNameTF;
     public TextField lastNameTF;
-
-    public Button addEmailBttn1;
-    public Button addEmailBttn2;
-    public Button addEmailBttn3;
-    public Button removeEmailBttn1;
-    public Button removeEmailBttn2;
-    public Button removeEmailBttn3;
-    public TextField emailTF1;
-    public TextField emailTF2;
-    public TextField emailTF3;
+    private String usertype;
 
     public ListView<String> emailListView;
     public static ObservableList<String> studentObservableList;
 
     private Connection conn;
 
-    public void initialize() {
-        conn = ConnectionManager.getConn();
-        emailList = new ArrayList<>();
-        studentObservableList = FXCollections.observableArrayList();
-
-        Button[] addButtonList = new Button[3];
-        Button[] removeButtonList = new Button[3];
-
-        addButtonList[0] = addEmailBttn1;
-        addButtonList[1] = addEmailBttn2;
-        addButtonList[2] = addEmailBttn3;
-        removeButtonList[0] = removeEmailBttn1;
-        removeButtonList[1] = removeEmailBttn2;
-        removeButtonList[2] = removeEmailBttn3;
-        removeEmailBttn1.setDisable(true);
-        removeEmailBttn2.setDisable(true);
-        removeEmailBttn3.setDisable(true);
-
-        emailNumber = emailList.size();
-
-        for (int i = 0; i < addButtonList.length; i++) {
-            addButtonList[i].setOnAction(event -> checkIdForAdd((Button) event.getSource()));
-            removeButtonList[i].setOnAction(event -> checkIdForRemove((Button) event.getSource()));
-        }
-        studentObservableList.addAll("email1","email2","email3");
-        emailListView.setItems(studentObservableList);
-        emailListView.setCellFactory(studentListView -> new EmailListViewCell());
-
-        emailListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-            @Override
-            public ListCell<String> call(ListView<String> emailListView) {
-                return new EmailListViewCell();
-            }
-        });
-
-        /*
-        * Below is the original version of ListView.
-        * */
-//        ObservableList<String> list = FXCollections.observableArrayList(
-//                "Item 1");
-//        lv = new ListView<>(list);
-//        lv.setCellFactory(param -> new XCell());
-//        AnchorPane.setTopAnchor(lv, 263.0);
-//        AnchorPane.setLeftAnchor(lv, 305.0);
-//        anchorpane.getChildren().add(lv);
-    }
-
-    private void checkIdForAdd(Button button) {
-
-        if(button.getId().equals("addEmailBttn1")) {
-            emailList.add(emailTF1.getText());
-            emailTF1.setDisable(true);
-            addEmailBttn1.setDisable(true);
-            removeEmailBttn1.setDisable(false);
-        } else if (button.getId().equals("addEmailBttn2")) {
-            emailList.add(emailTF2.getText());
-            emailTF2.setDisable(true);
-            addEmailBttn2.setDisable(true);
-            removeEmailBttn2.setDisable(false);
-        } else {
-            emailList.add(emailTF3.getText());
-            emailTF3.setDisable(true);
-            addEmailBttn3.setDisable(true);
-            removeEmailBttn3.setDisable(false);
-        }
-        emailNumber++;
-        System.out.println(emailList);
-    }
-
-    private void checkIdForRemove(Button button) {
-        if(button.getId().equals("removeEmailBttn1")) {
-            emailList.remove(emailTF1.getText());
-            emailTF1.setText("");
-            emailTF1.setDisable(false);
-            addEmailBttn1.setDisable(false);
-            removeEmailBttn1.setDisable(true);
-        } else if (button.getId().equals("removeEmailBttn2")) {
-            emailList.remove(emailTF2.getText());
-            emailTF2.setText("");
-            emailTF2.setDisable(false);
-            addEmailBttn2.setDisable(false);
-            removeEmailBttn2.setDisable(true);
-        } else {
-            emailList.remove(emailTF3.getText());
-            emailTF3.setText("");
-            emailTF3.setDisable(false);
-            emailTF3.setDisable(false);
-            addEmailBttn3.setDisable(false);
-            removeEmailBttn3.setDisable(true);
-        }
-
-        if(emailNumber>0) emailNumber--;
-        System.out.println(emailList);
-    }
-
-    public void getAndSetText() {
-        // Get the userName and other important information
-       // .setText("");
-
-        firstNameTF.setText(firstName);
-        lastNameTF.setText(lastName);
-        Sitename.setText(siteName);
-        Username.setText(userName);
-        Employeeid.setText(employeeID);
-        Phone.setText(phone);
-        Address.setText(address);
-    }
-
-    public void ensureUpdate() {
-        if(isVisitorCheckBox.isSelected()) {
-            // Query
-        } else {
-            // Delete all visit history of the employee
-
-            // Update the user type! and back to the screen 12!
-
-
-        }
-    }
+    public static String lastFxml;
 
     public void setLastFxml(String lastFxml) {
-        //back to the 13 screen;
         this.lastFxml = lastFxml;
     }
 
-    public void ensureRegister(ActionEvent actionEvent) {
-    }
-
-    public void ensureCancel(ActionEvent actionEvent) {
-    }
-
-
-//    static class XCell extends ListCell<String> {
-//        HBox hbox = new HBox();
-//        Label label = new Label("");
-//        TextField emailTF = new TextField();
-//        Pane pane = new Pane();
-//        Button removeButton = new Button("Remove");
-//        Button addButton = new Button("Add");
-//
-//        public XCell() {
-//            super();
-//            hbox.getChildren().addAll(emailTF, pane, addButton, removeButton);
-//            HBox.setHgrow(pane, Priority.ALWAYS);
-//            removeButton.setOnAction(event -> getListView().getItems().remove(getItem()));
-//            addButton.setOnAction(event -> addButtonAction((Button) event.getSource()));
-//            System.out.println("In Constructor!");
-//        }
-//
-//        public void addButtonAction(Button sourceButton) {
-//            String emailtext = emailTF.getText();
-//            if(!emailtext.equals("")) {
-//                getListView().getItems().add(lv.getItems().size()-1, emailTF.getText());
-//                emailTF.setDisable(true);
-//                sourceButton.setDisable(false);
-//                emailTF = new TextField();
-//            } else {
-//
-//            }
-//            System.out.println("In addButtonAction() Function, now the emailtext is " + emailtext);
-//        }
-//
-//        @Override
-//        public void updateItem(String item, boolean empty) {
-//            // don't omit this!!!
-//            super.updateItem(item, empty);
-//
-//            if (empty) {
-//                setGraphic(null);
-//            } else {
-//                // update controller and ui as necessary
-//                    if (item != null && !empty) {
-//                    emailTF.setText(item);
-//                    this.setGraphic(hbox);
-//                    emailTF = new TextField();
-//                }
-//            }
-//        }
+//    public void setAll(String username) {
+//        this.userName = username;
+//        System.out.println("Currently, in screen17 the username is: ");
 //    }
+
+    public void initialize() throws SQLException {
+        conn = ConnectionManager.getConn();
+        userName = UserInfo.username;
+
+        /*
+         * sqLl for email
+         * */
+        String sqlForEmail = "SELECT * FROM email where username=" +
+                "'" + userName + "'";
+
+        Statement statement = conn.createStatement();
+        emailList = new ArrayList<>();
+
+        ResultSet resultSet = statement.executeQuery(sqlForEmail);
+        while (resultSet.next()) {
+            String read_email = resultSet.getString("email");
+            emailList.add(read_email);
+        }
+
+        emailNumber = emailList.size();
+
+        username.setText(userName);
+        String emailListString = emailList.toString();
+        if (emailNumber != 0) {
+            emailsTA.setText(emailListString.substring(1, emailListString.lastIndexOf("]")));
+        } else {
+            emailsTA.setText("");
+        }
+        updatedemails.setText(emailListString);
+
+        /*
+         * sql for user part
+         * */
+        String sqlForUser = "SELECT * FROM user where username=" +
+                "'" + UserInfo.username + "'";
+        resultSet = statement.executeQuery(sqlForUser);
+
+        while (resultSet.next()) {
+            String read_firstname = resultSet.getString("firstname");
+            String read_lastname = resultSet.getString("lastname");
+            firstNameTF.setText(read_firstname);
+            lastNameTF.setText(read_lastname);
+        }
+
+        /*
+         * sql for user employee
+         * */
+
+        String sqlForEmployee = "SELECT * FROM employee where username=" +
+                "'" + UserInfo.username + "'";
+
+        resultSet = statement.executeQuery(sqlForEmployee);
+        while (resultSet.next()) {
+            String read_employeeid = resultSet.getString("employeeID");
+            String read_address = resultSet.getString("address");
+            String read_phone = resultSet.getString("phone");
+            employeeid.setText(read_employeeid);
+            address.setText(read_address);
+            phoneTF.setText(read_phone);
+        }
+
+        /*
+         * sql for user site
+         * */
+
+        String sqlForSite = "SELECT * FROM site where managerusername=" +
+                "'" + UserInfo.username + "'";
+        resultSet = statement.executeQuery(sqlForSite);
+        while (resultSet.next()) {
+            String read_site = resultSet.getString("name");
+            sitename.setText(read_site);
+        }
+
+        usertype = UserInfo.usertype;
+        System.out.println("The usertype is " + usertype);
+        if(usertype.equals(new String("employee"))) {
+            isVisitorCheckBox.setSelected(false);
+        }
+        if(usertype.equals(new String("employeevisitor"))) {
+            isVisitorCheckBox.setSelected(true);
+        }
+
+        statement.close();
+    }
+
+    public void updateAll() throws SQLException {
+        String newFirstName = firstNameTF.getText();
+        String newLastName = lastNameTF.getText();
+        String newPhone = phoneTF.getText();
+        String username = UserInfo.username;
+        Statement statement = conn.createStatement();
+
+        String updateUser = "update user\n" +
+                "set firstname = " +
+                "'" + newFirstName + "', " +
+                "lastname = " + "'"+ newLastName + "'\n" +
+                "where username = " + "'" + username + "'";
+        statement.executeUpdate(updateUser);
+
+        String updatePhone = "update employee\n" +
+                "set phone = " +
+                "'" + newPhone + "'\n" +
+                "where username = " + "'" + username + "'";
+        statement.executeUpdate(updatePhone);
+        statement.close();
+    }
+
+
+    public void ensureUpdateEmail(ActionEvent actionEvent) throws SQLException{
+        Statement statement = conn.createStatement();
+        for(int i=0; i<emailList.size(); i++) {
+            String sqlForDelete = "DELETE FROM email\n" +
+                    "WHERE email ='"+ emailList.get(i) +"'";
+            statement.executeUpdate(sqlForDelete);
+        }
+        String read_wroteemails = "";
+        read_wroteemails = emailsTA.getText();
+        String[] email_string = read_wroteemails.split(",");
+        emailList.clear();
+        System.out.println("After being cleaned, the emailList is: " + emailList);
+        emailList.addAll(Arrays.asList(email_string));
+        System.out.println("After being added, the emailList is: " + emailList);
+        String emailAdd = "";
+
+        emailNumber = emailList.size();
+        for(int i=emailNumber; i>0; i--) {
+            emailAdd = emailList.get(i-1);
+            String sqlForEmails = "INSERT INTO email\n" +
+                    "(`email`,\n" +
+                    "`username`)\n" +
+                    "VALUES\n" +
+                    "('"+emailAdd+"',\n'" +
+                    UserInfo.username+"')";
+            statement.executeUpdate(sqlForEmails);
+        }
+        emailsTA.setDisable(true);
+        updatedemails.setText(emailList.toString());
+    }
+
+    public void ensureUpdate() throws SQLException {
+        Statement statement = conn.createStatement();
+        System.out.println("I am here! The usertype is: " + usertype);
+        if(usertype.equals(new String("employee"))) {
+            // Query
+            System.out.println("I am a employee");
+            updateAll();
+            if(isVisitorCheckBox.isSelected()) {
+                String sqlForInsertUser = "";
+                sqlForInsertUser = "insert into visitor\n" +
+                        "(`username`)\n" +
+                        "VALUES\n" +
+                        "('" + UserInfo.username + "')";
+                statement.executeUpdate(sqlForInsertUser);
+
+            }
+        } else if(usertype.equals(new String("employeevisitor"))) {
+            System.out.println("I am a employeevisitor");
+            updateAll();
+            if(!isVisitorCheckBox.isSelected()) {
+                String sqlForDeleteVisitor = "DELETE FROM visitor\n" +
+                        "WHERE username ='"+ UserInfo.username +"'";
+                statement.executeUpdate(sqlForDeleteVisitor);
+            }
+            //System.out.println("!!Here!!");
+            // Delete all visit history of the employee
+            // Update the user type! and back to the screen 12!
+            statement.close();
+        }
+    }
+
+    public void ensureCancel(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)updateBttn.getScene().getWindow();
+        stage.setScene(new Scene(root));
+    }
+
+    public void editEmail(ActionEvent actionEvent) {
+        emailsTA.setDisable(false);
+        //updatedemails.setText(emailList.toString());
+    }
+
+    public void ensureEmail(ActionEvent actionEvent) {
+
+    }
 }

@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import tools.MyAlert;
 
 public class RegisterUserOnly3 {
 
@@ -165,7 +166,7 @@ public class RegisterUserOnly3 {
 //    }
 
 
-    public void ensureRegister(ActionEvent actionEvent) throws SQLException {
+    public void ensureRegister(ActionEvent actionEvent) {
 //        insert into user(username, firstname, lastname, status, password, usertype)
 //        values('sun96', 'yanli','sun', 'pending', '12345678', 'user');
 //        insert into email(username, email) values('sun96','xx@gmail.com');
@@ -192,8 +193,9 @@ public class RegisterUserOnly3 {
                 "user" +
                 "')";
         System.out.println(sql);
-        Statement statement = conn.createStatement();
-        statement.executeUpdate(sql);
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(sql);
 
 //        for(int i=)
 //        String sqlForEmails = "INSERT INTO user\n" +
@@ -205,23 +207,27 @@ public class RegisterUserOnly3 {
 //        Statement statementForEmails = conn.createStatement();
 //        statementForEmails.executeUpdate(sqlForEmails);
 
-        statement.close();
+            //statement.close();
 
-        String emailAdd = "";
-        Statement statementForEmails = conn.createStatement();
+            String emailAdd = "";
+            //Statement statement = conn.createStatement();
 
-        for(int i=emailNumber; i>0; i--) {
-            emailAdd = emailList.get(i-1);
-            String sqlForEmails = "INSERT INTO email\n" +
-                    "(`email`,\n" +
-                    "`username`)\n" +
-                    "VALUES\n" +
-                    "('"+emailAdd+"',\n'" +
-                    usernameTF.getText()+"')";
-            statementForEmails.executeUpdate(sqlForEmails);
+            for (int i = emailNumber; i > 0; i--) {
+                emailAdd = emailList.get(i - 1);
+                String sqlForEmails = "INSERT INTO email\n" +
+                        "(`email`,\n" +
+                        "`username`)\n" +
+                        "VALUES\n" +
+                        "('" + emailAdd + "',\n'" +
+                        usernameTF.getText() + "')";
+                statement.executeUpdate(sqlForEmails);
+            }
+
+            statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
         }
-
-        statementForEmails.close();
         //statementForEmails.close();
     }
 
@@ -231,10 +237,6 @@ public class RegisterUserOnly3 {
         //controller.setLastFxml("staffviewschedule31.fxml");
         Stage stage = (Stage)registerBttn.getScene().getWindow();
         stage.setScene(new Scene(root));
-//        Parent root = FXMLLoader.load(getClass().getResource("registeremployeevisitor.fxml"));
-//        Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
-//        stage.setScene(new Scene(root, 600, 500));
-
     }
 
     public boolean checkPassWord(String a, String b) {

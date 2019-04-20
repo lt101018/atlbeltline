@@ -5,12 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,7 +22,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class RegisterEmployeeVisitor {
+public class RegisterEmployeeVisitor6 {
 
     @FXML
     public Button addEmailBttn1;
@@ -66,6 +70,16 @@ public class RegisterEmployeeVisitor {
     public int emailNumber;
 
     private static Connection conn;
+    public TextField phonenumberTF;
+    public TextField addressTF;
+    public TextField cityTF;
+    public TextField zipcodeTF;
+
+    public static String lastFxml;
+
+    public void setLastFxml(String lastFxml) {
+        this.lastFxml = lastFxml;
+    }
 
     public void initialize() {
         emailList = new ArrayList<>();
@@ -73,18 +87,16 @@ public class RegisterEmployeeVisitor {
 
         ObservableList<String> typeOptions =
                 FXCollections.observableArrayList(
-                        "Manager",
-                        "User",
-                        "Visitor"
+                        "manager",
+                        "staff"
                 );
 
         ObservableList<String> stateOptions =
                 FXCollections.observableArrayList(
-                        "WA",
-                        "GA",
-                        "CA",
-                        "NY"
-                );
+                        "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL",
+                        "IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MO","MT","NE","NV",
+                        "NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TD",
+                        "TX","UT","VT","VA","WA","WV","WI","WY","Other");
 
         typeBox = new ComboBox(typeOptions);
         AnchorPane.setTopAnchor(typeBox, 135.0);
@@ -165,27 +177,6 @@ public class RegisterEmployeeVisitor {
         System.out.println(emailList);
     }
 
-//    public void addEmailAddress(ActionEvent actionEvent) throws SQLException {
-//
-//        String emailAdd = "";
-//        Statement statementForEmails = conn.createStatement();
-//
-//        for(int i=emailNumber; i>0; i--) {
-//            emailAdd = emailTF1.getText();
-//            String sqlForEmails = "INSERT INTO user\n" +
-//                    "(`email`,\n" +
-//                    "`username`)\n" +
-//                    "VALUES\n" +
-//                    "('"+emailAdd+"',\n'" +
-//                    usernameTF.getText()+"')";
-//
-//            statementForEmails.executeUpdate(sqlForEmails);
-//        }
-//
-//        statementForEmails.close();
-//
-//    }
-
 
     public void ensureRegister(ActionEvent actionEvent) throws SQLException {
         String status = "pending";
@@ -203,14 +194,17 @@ public class RegisterEmployeeVisitor {
                 "`firstname`,\n" +
                 "`lastname`,\n" +
                 "`status`,\n" +
-                "`password`)\n" +
+                "`password`,\n" +
+                "`usertype`)\n" +
                 "VALUES\n" +
                 "('"+usernameTF.getText()+"',\n'" +
                 firstNameTF.getText()+"',\n'" +
                 lastNameTF.getText()+"',\n'" +
                 status+"',\n'" +
-                passwordTF.getText()+"')";
-
+                passwordTF.getText()+"',\n'"+
+                "employeevisitor" +
+                "')";
+        System.out.println(sql);
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -224,28 +218,63 @@ public class RegisterEmployeeVisitor {
 //        Statement statementForEmails = conn.createStatement();
 //        statementForEmails.executeUpdate(sqlForEmails);
 
-        statement.close();
+        //statement.close();
 
         String emailAdd = "";
-        Statement statementForEmails = conn.createStatement();
+        //Statement statementForEmails = conn.createStatement();
 
         for(int i=emailNumber; i>0; i--) {
-            emailAdd = emailTF1.getText();
-            String sqlForEmails = "INSERT INTO user\n" +
+            emailAdd = emailList.get(i-1);
+            String sqlForEmails = "INSERT INTO email\n" +
                     "(`email`,\n" +
                     "`username`)\n" +
                     "VALUES\n" +
                     "('"+emailAdd+"',\n'" +
                     usernameTF.getText()+"')";
-
-            statementForEmails.executeUpdate(sqlForEmails);
+            statement.executeUpdate(sqlForEmails);
         }
 
-        statementForEmails.close();
-        //statementForEmails.close();
+        //String sqlForGettingId = "SELECT * FROM user where " + ;
+
+        String sqlForEmployee = "INSERT INTO employee\n" +
+                "(`employeeID`,\n" +
+                "`username`,\n" +
+                "`phone`,\n" +
+                "`address`,\n" +
+                "`city`,\n" +
+                "`state`,\n" +
+                "`zipcode`,\n" +
+                "`employeetype`)" +
+                "VALUES\n" +
+                "('"+"011044302"+"',\n'" +
+                usernameTF.getText() + "',\n'" +
+                phonenumberTF.getText()+"',\n'" +
+                addressTF.getText()+"',\n'" +
+                cityTF.getText() + "',\n'" +
+                state + "',\n'"+
+                zipcodeTF.getText() + "',\n'" +
+                userType +
+                "')";
+
+        System.out.println(sqlForEmployee);
+
+        statement.executeUpdate(sqlForEmployee);
+
+        String sqlForVisitor = "INSERT INTO visitor\n" +
+                "(`username`)\n" +
+                "VALUES\n" +
+                "('" + usernameTF.getText()+"')";
+
+        statement.executeUpdate(sqlForVisitor);
+
+
+        statement.close();
     }
 
     public void ensureCancel(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)registerBttn.getScene().getWindow();
+        stage.setScene(new Scene(root));
 
     }
 

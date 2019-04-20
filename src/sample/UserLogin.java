@@ -32,9 +32,10 @@ public class UserLogin {
         ////manager for testing
         tfemail.setText("m2@beltline.com");
         tfpassword.setText("manager2");
-        ////staff for testing
-//        tfemail.setText("jsmith@gmail.com");
-//        tfpassword.setText("jsmith123");
+
+        ////for testing
+//        tfemail.setText("dsmith@outlook.com");
+//        tfpassword.setText("dsmith456");
     }
 
     public void login(ActionEvent actionEvent) throws IOException {

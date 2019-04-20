@@ -50,6 +50,16 @@ public class RegisterNavigation2 {
         root = (Parent)fxmlLoader2.load();
         RegisterVisitorOnly4 controller2 = fxmlLoader2.getController();
         controller2.setLastFxml("registernavigation2.fxml");
+
+        FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("registeremployeeonly5.fxml"));
+        root = (Parent)fxmlLoader3.load();
+        RegisterEmployeeOnly5 controller3 = fxmlLoader3.getController();
+        controller3.setLastFxml("registernavigation2.fxml");
+
+        FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("registeremployeevisitor6.fxml"));
+        root = (Parent)fxmlLoader4.load();
+        RegisterEmployeeVisitor6 controller4 = fxmlLoader4.getController();
+        controller4.setLastFxml("registernavigation2.fxml");
     }
 
     public void userOnlyRegister(ActionEvent actionEvent) throws IOException {
@@ -72,7 +82,7 @@ public class RegisterNavigation2 {
     }
 
     public void employeeVisitorRegister(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("registeremployeevisitor.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("registeremployeevisitor6.fxml"));
         Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 500));
 
