@@ -26,9 +26,15 @@ public class UserLogin {
         System.out.println("Sample initializing!");
         conn = ConnectionManager.getConn();
 
-        ////for testing
-        tfemail.setText("jsmith@gmail.com");
-        tfpassword.setText("jsmith123");
+        ////admin for testing
+//        tfemail.setText("jsmith@gmail.com");
+//        tfpassword.setText("jsmith123");
+        ////manager for testing
+        tfemail.setText("m2@beltline.com");
+        tfpassword.setText("manager2");
+        ////staff for testing
+//        tfemail.setText("jsmith@gmail.com");
+//        tfpassword.setText("jsmith123");
     }
 
     public void login(ActionEvent actionEvent) throws IOException {

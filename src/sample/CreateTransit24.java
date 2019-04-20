@@ -67,6 +67,9 @@ public class CreateTransit24 {
             statement.executeUpdate(sql);
         }
 
+        sql = "insert into take(username, type, route, takedate) values(null, '"+cbTransportType.getValue().toString()+"','"+tfRoute.getText()+"', null);";
+        statement.executeUpdate(sql);
+
         MyAlert.showAlert("Transit created.");
         statement.close();
     }

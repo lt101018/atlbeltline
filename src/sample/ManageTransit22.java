@@ -106,7 +106,7 @@ public class ManageTransit22 {
 
         String siteSql = "";
         if(!cbsite.getValue().toString().equals("ALL"))
-            siteSql = "where name='"+cbsite.getValue().toString()+"'";
+            siteSql = "and t.route in (select route from connect where name='"+cbsite.getValue().toString()+"')";
 
 
         String priceL = "0", priceR = Integer.MAX_VALUE+"";
@@ -116,12 +116,12 @@ public class ManageTransit22 {
 
         String sql1 = "select t.route, t.type, t.price, count(*) as connected_sites\n" +
                 "from transit as t, connect as c\n" +
-                "where c.type=t.type and c.route=t.route "+typeSql1+" "+routeSql1+" and t.route in (select route from connect "+siteSql+") "+priceSql+" \n" +
+                "where c.type=t.type and c.route=t.route "+typeSql1+" "+routeSql1+" "+siteSql+" "+priceSql+" \n" +
                 "group by c.route, c.type;\n";
 
-        String sql2 = "select count(*) as transit_logged\n" +
+        String sql2 = "select count(ta.username) as transit_logged\n" +
                 "from take as ta, transit as t\n" +
-                "where ta.type=t.type and ta.route=t.route "+typeSql2+" "+routeSql2+" and t.route in (select route from connect "+siteSql+") "+priceSql+" \n" +
+                "where ta.type=t.type and ta.route=t.route "+typeSql2+" "+routeSql2+" "+siteSql+" "+priceSql+" \n" +
                 "group by ta.type, ta.route;";
         System.out.println(sql1);
         System.out.println(sql2);
