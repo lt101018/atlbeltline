@@ -13,9 +13,12 @@ public class Adminfunc8 {
     public Button btnManageProfile;
 
     public void manageProfile(ActionEvent actionEvent) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("17.fxml"));
-//        Stage stage = (Stage)btnManageProfile.getScene().getWindow();
-//        stage.setScene(new Scene(root));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("employeemanageprofile17.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        EmployeeManageProfile17 controller = fxmlLoader.getController();
+        controller.setLastFxml("adminfunc8.fxml");
+        Stage stage = (Stage)btnManageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void takeTransit(ActionEvent actionEvent) throws IOException {
