@@ -80,7 +80,7 @@ public class EditSite20 {
         Stage stage = (Stage)tfName.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
-g
+
     public void btnUpdate(ActionEvent actionEvent) throws SQLException {
         if(tfName.getText().length()==0 || tfZipcode.getText().length()==0 || tfAddress.getText().length()==0){
             MyAlert.showAlert("Please fill all fields");

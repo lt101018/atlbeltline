@@ -46,8 +46,8 @@ public class RegisterNavigation2 {
         RegisterUserOnly3 controller = fxmlLoader.getController();
         controller.setLastFxml("registernavigation2.fxml");
 
-        fxmlLoader = new FXMLLoader(getClass().getResource("registervisitoronly3.fxml"));
-        root = (Parent)fxmlLoader.load();
+        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("registervisitoronly4.fxml"));
+        root = (Parent)fxmlLoader2.load();
         RegisterVisitorOnly4 controller2 = fxmlLoader.getController();
         controller2.setLastFxml("registernavigation2.fxml");
     }
