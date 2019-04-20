@@ -1,5 +1,6 @@
 package sample;
 
+import connection.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,11 @@ import pojo.StaffViewScheduleRow31;
 import tools.MyAlert;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 
 public class StaffViewSchedule31 {
     public TableView table;
@@ -24,6 +30,7 @@ public class StaffViewSchedule31 {
     public DatePicker datepicker1;
     public DatePicker datepicker2;
     public static String lastFxml;
+    private static Connection conn;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -35,6 +42,7 @@ public class StaffViewSchedule31 {
         col3.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         col4.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         col5.setCellValueFactory(new PropertyValueFactory<>("staffCount"));
+        conn = ConnectionManager.getConn();
     }
 
     public void addElement(String eventName, String siteName, String startDate, String endDate, int staffCount) {
@@ -48,10 +56,59 @@ public class StaffViewSchedule31 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) {
+    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+        table.getItems().clear();
+        String eventSql = "";
+        if(tfEventName.getText().length()!=0){
+            eventSql = "and e.name like '%"+tfEventName.getText()+"%'";
+        }
+
+        String descriptionSql = "";
+        if(tfDescriptionKeyword.getText().length()!=0){
+            descriptionSql = "and  e.description like '%"+tfDescriptionKeyword.getText()+"%'";
+        }
+
+        String dateSql = "";
+        if(datepicker1.getValue()!=null && datepicker2.getValue()!=null){
+            String formattedDate1 = datepicker1.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String formattedDate2 = datepicker2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dateSql = "and e.startdate>='"+formattedDate1+"' and e.enddate<='"+formattedDate2+"'";
+        }
+
+
+        String eventSql1 = "1=1";
+        if(tfEventName.getText().length()!=0){
+            eventSql1 = "ev.name like '%"+tfEventName.getText()+"%'";
+        }
+
+        String descriptionSql1 = "";
+        if(tfDescriptionKeyword.getText().length()!=0){
+            descriptionSql1 = "and  ev.description like '%"+descriptionSql1+"%'";
+        }
+
+        String dateSql1 = "";
+        if(datepicker1.getValue()!=null && datepicker2.getValue()!=null){
+            String formattedDate1 = datepicker1.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String formattedDate2 = datepicker2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dateSql1 = "and ev.startdate>='"+formattedDate1+"' and ev.enddate<='"+formattedDate2+"'";
+        }
+
+        String sql = "select e.name, e.sitename,e.startdate,e.enddate,count(*)as staffcount\n" +
+                "from event as e, assign_to as a\n" +
+                "where e.name =a.name and e.sitename=a.sitename "+eventSql+"  "+descriptionSql+" "+dateSql+" and e.sitename in (select ev.sitename from event as ev where "+eventSql1+"  "+descriptionSql1+" "+dateSql1+" ) and e.startdate=a.startdate\n" +
+                "group by a.sitename,a.name,a.startdate;";
+        System.out.println(sql);
+
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getInt(5));
+        }
+        statement.close();
+
     }
 
-    public void btnViewEvent(ActionEvent actionEvent) throws IOException {
+    public void btnViewEvent(ActionEvent actionEvent) throws IOException, SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
@@ -59,13 +116,12 @@ public class StaffViewSchedule31 {
         StaffViewScheduleRow31 selectedItem = (StaffViewScheduleRow31)table.getSelectionModel().getSelectedItem();
         ///following jobs
 
-
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("staffeventdetail32.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         StaffEventDetail32 controller = fxmlLoader.getController();
         controller.setLastFxml("staffviewschedule31.fxml");
         controller.setLabels(selectedItem.getSiteName(), selectedItem.getEventName(), selectedItem.getStartDate(), selectedItem.getEndDate());
+        controller.initialize1();
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
