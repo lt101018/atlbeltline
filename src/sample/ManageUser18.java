@@ -114,7 +114,17 @@ public class ManageUser18 {
             statement.close();
         }
         else{
-            String sql3 = "("+sql1+") union ("+sql2+") order by username";
+            String sql3 = "(select u.username, count(*) as email_count, emp.employeetype, u.status \n" +
+                    "from user as u, email as e, employee as emp\n" +
+                    "where emp.employeetype in ('manager','staff') and u.username = e.username and u.username = emp.username "+usernameSql+" "+statusSql+" \n" +
+                    "group by e.username)\n" +
+                    "union\n" +
+                    "(select u.username, count(*) as email_count, u.usertype, u.status\n" +
+                    "from user as u, email as e\n" +
+                    "where u.usertype in ('user', 'visitor') and u.username = e.username "+usernameSql+" "+statusSql+" \n" +
+                    "group by e.username\n" +
+                    ")\n" +
+                    "order by username;";
             System.out.println(sql3);
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(sql3);
@@ -125,21 +135,37 @@ public class ManageUser18 {
         }
     }
 
-    public void btnApprove(ActionEvent actionEvent) {
+    public void btnApprove(ActionEvent actionEvent) throws SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a user.");
             return;
         }
         ManageUserRow18 selectedItem = (ManageUserRow18)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+        String sql = "update user\n" +
+                "set status = 'approved' \n" +
+                "where username = '"+selectedItem.getUsername()+"';";
+        Statement statement = conn.createStatement();
+        statement.executeUpdate(sql);
+        statement.close();
+        btnFilter(null);
     }
 
-    public void btnDecline(ActionEvent actionEvent) {
+    public void btnDecline(ActionEvent actionEvent) throws SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a user.");
             return;
         }
         ManageUserRow18 selectedItem = (ManageUserRow18)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
+        String sql = "update user\n" +
+                "set status = 'declined'\n" +
+                "where username = '"+selectedItem.getUsername()+"' and status='pending';\n";
+        Statement statement = conn.createStatement();
+        statement.executeUpdate(sql);
+        statement.close();
+        btnFilter(null);
     }
 }
