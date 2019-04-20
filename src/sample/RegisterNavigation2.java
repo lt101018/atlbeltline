@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class registerNavigationController {
+public class RegisterNavigation2 {
 
     @FXML
     public TextField emailTextField;
@@ -34,24 +34,45 @@ public class registerNavigationController {
     @FXML
     public Button backBttn;
 
+    public static String lastFxml;
+
+    public void setLastFxml(String lastFxml) {
+        this.lastFxml = lastFxml;
+    }
+
+    public void initialize() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("registeruseronly3.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        RegisterUserOnly3 controller = fxmlLoader.getController();
+        controller.setLastFxml("registernavigation2.fxml");
+
+        fxmlLoader = new FXMLLoader(getClass().getResource("registervisitoronly3.fxml"));
+        root = (Parent)fxmlLoader.load();
+        RegisterVisitorOnly4 controller2 = fxmlLoader.getController();
+        controller2.setLastFxml("registernavigation2.fxml");
+    }
+
     public void userOnlyRegister(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("registeremployeeonly.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("registeruseronly3.fxml"));
         Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 500));
     }
 
     public void visitorOnlyRegister(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("newScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("registervisitoronly4.fxml"));
         Stage stage = (Stage)visitorOnlyBttn.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 500));
     }
 
     public void employeeOnlyRegister(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("registeremployeeonly5.fxml"));
+        Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
+        stage.setScene(new Scene(root, 600, 500));
 
     }
 
     public void employeeVisitorRegister(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("registeremployeevisitor.fxml"));
         Stage stage = (Stage)userOnlyBttn.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 500));
 

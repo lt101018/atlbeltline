@@ -105,8 +105,10 @@ public class UserLogin {
         statement.close();
     }
 
-    public void register(ActionEvent actionEvent) {
+    public void register(ActionEvent actionEvent) throws IOException {
+        String nextFxml = "registernavigation2";
+        Parent root = FXMLLoader.load(getClass().getResource(nextFxml+".fxml"));
+        Stage stage = (Stage)tfemail.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
-
-
 }

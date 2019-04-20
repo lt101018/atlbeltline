@@ -13,7 +13,7 @@ import javafx.util.Callback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-public class EmployeeManageController {
+public class EmployeeManageProfile17 {
 
     public String lastFxml;
 

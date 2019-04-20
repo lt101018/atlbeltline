@@ -10,7 +10,7 @@
 <!--<Button layoutX="135.0" layoutY="85.0" mnemonicParsing="false" onAction="#delete" text="Delete" />-->
 <!--<Button fx:id="btnnext" layoutX="463.0" layoutY="157.0" onAction="#nextScreen" mnemonicParsing="false" text="NextScreen" />-->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterUserOnly">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterUserOnly3">
 
     <TextField fx:id="usernameTF" layoutX="145.0" layoutY="134.0" prefHeight="33.0" prefWidth="91.0" promptText="username" />
     <Label layoutX="65.0" layoutY="139.0" text="Username" />
@@ -60,6 +60,6 @@
 
     <PasswordField fx:id="passwordTF" layoutX="132.0" layoutY="194.0" prefHeight="27.0" prefWidth="135.0" promptText="password" />
 
-   <PasswordField fx:id="comfirmasswordTF" layoutX="415.0" layoutY="194.0" prefHeight="27.0" prefWidth="135.0" promptText="password" />
+   <PasswordField fx:id="comfirmpasswordTF" layoutX="415.0" layoutY="194.0" prefHeight="27.0" prefWidth="135.0" promptText="password" />
 
 </AnchorPane>
