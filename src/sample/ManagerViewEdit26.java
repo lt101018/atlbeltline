@@ -11,9 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ManagerViewEdit26 {
-    public Label nameValue;
     public ListView listView;
-    public Label startDateValue;
 
     public static String lastFxml;
 

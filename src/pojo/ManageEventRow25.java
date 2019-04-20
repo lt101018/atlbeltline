@@ -6,9 +6,9 @@ public class ManageEventRow25 {
     private int staffCount;
     private int duration;
     private int totalVisits;
-    private int totalRevenue;
+    private double totalRevenue;
 
-    public ManageEventRow25(String name, int staffCount, int duration, int totalVisits, int totalRevenue) {
+    public ManageEventRow25(String name, int staffCount, int duration, int totalVisits, double totalRevenue) {
         this.name = name;
         this.staffCount = staffCount;
         this.duration = duration;
@@ -32,7 +32,7 @@ public class ManageEventRow25 {
         return totalVisits;
     }
 
-    public int getTotalRevenue() {
+    public double getTotalRevenue() {
         return totalRevenue;
     }
 }

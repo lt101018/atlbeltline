@@ -29,4 +29,7 @@ public class ManagerCreateEvent27 {
         Stage stage = (Stage)listView.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
+
+    public void btnDailyDetail(ActionEvent actionEvent) {
+    }
 }
