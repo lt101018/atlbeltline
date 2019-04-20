@@ -1,5 +1,6 @@
 package sample;
 
+import connection.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,11 @@ import pojo.ManageTransitRow22;
 import tools.MyAlert;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 
 public class ManageEvent25 {
     public TableView table;
@@ -32,6 +38,8 @@ public class ManageEvent25 {
     public DatePicker datepicker2;
     public static String lastFxml;
 
+    private static Connection conn;
+
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
     }
@@ -42,9 +50,11 @@ public class ManageEvent25 {
         col3.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col4.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
         col5.setCellValueFactory(new PropertyValueFactory<>("totalRevenue"));
+
+        conn = ConnectionManager.getConn();
     }
 
-    public void addElement(String name, int staffCount, int duration, int totalVisits, int totalRevenue) {
+    public void addElement(String name, int staffCount, int duration, int totalVisits, double totalRevenue) {
         ManageEventRow25 row = new ManageEventRow25(name, staffCount, duration,totalVisits,totalRevenue);
         table.getItems().add(row);
     }
@@ -55,10 +65,71 @@ public class ManageEvent25 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) {
+    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+        table.getItems().clear();
+
+        String eventSql = "";
+        if(tfname.getText().length()!=0)
+            eventSql = "and e.name like '%"+tfname.getText()+"%'";
+
+        String descriptionSql = "";
+        if(tfKeyword.getText().length()!=0)
+            descriptionSql = "and e.description like '%"+tfKeyword.getText()+"%'";
+
+        String dateSql = "";
+        if(datepicker1.getValue()!=null && datepicker2.getValue()!=null){
+            String formattedDate1 = datepicker1.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String formattedDate2 = datepicker2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dateSql = "and e.startdate >= '"+formattedDate1+"' and e.enddate <= '"+formattedDate2+"'";
+        }
+
+        String durationL = "0", durationR = Integer.MAX_VALUE+"";
+        if(tfduration1.getText().length()!=0)
+            durationL = tfduration1.getText();
+        if(tfduration2.getText().length()!=0)
+            durationR = tfduration2.getText();
+        String dateDifSql = "and datediff(e.enddate, e.startdate) between "+durationL+" and "+durationR;
+
+        String visitL = "0", visitR = Integer.MAX_VALUE+"";
+        if(tfTotalVisits1.getText().length()!=0)
+            visitL = tfTotalVisits1.getText();
+        if(tfTotalVisits2.getText().length()!=0)
+            visitR = tfTotalVisits2.getText();
+        String revenueL = "0", revenueR = Integer.MAX_VALUE+"";
+        if(tfRevenue1.getText().length()!=0)
+            revenueL = tfRevenue1.getText();
+        if(tfRevenue2.getText().length()!=0)
+            revenueR = tfRevenue2.getText();
+        String visitRevenueSql = "having ( count(*) between "+visitL+" and "+visitR+" ) and ( " + "total_revenues between "+revenueL+" and "+revenueR+" )";
+
+
+        String sql = "select e.name, datediff(e.enddate, e.startdate) as duration , count(*) as total_visits, e.price*count(*) as total_revenues, e.sitename, e.startdate\n" +
+                "from visit_event as ve, event as e\n" +
+                "where ve.sitename = e.sitename and ve.eventname = e.name and ve.eventstartdate = e.startdate "+eventSql+" "+descriptionSql+" "+dateSql+" "+dateDifSql+" \n" +
+                "group by ve.sitename, ve.eventname, ve.eventstartdate\n" +
+                visitRevenueSql;
+        System.out.println(sql);
+
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while(resultSet.next()){
+            String sql1 = "select count(*) as staff_count\n" +
+                    "from assign_to as at\n" +
+                    "where at.sitename = '"+resultSet.getString(5)+"' and at.name = '"+resultSet.getString(1)+"' and at.startdate = '"+resultSet.getString(6)+"'\n" +
+                    "group by at.sitename, at.name, at.startdate;";
+            System.out.println(sql);
+            Statement statement1 = conn.createStatement();
+            ResultSet resultSet1 = statement1.executeQuery(sql1);
+            if(resultSet1.next()){
+                addElement(resultSet.getString(1),resultSet1.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getDouble(4));
+            }
+            statement1.close();
+        }
+        statement.close();
     }
 
-    public void btnEdit(ActionEvent actionEvent) {
+    public void btnEdit(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
@@ -67,6 +138,12 @@ public class ManageEvent25 {
         ///following
 
         //go 26
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managerviewedit26.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        ManagerViewEdit26 controller = fxmlLoader.getController();
+        controller.setLastFxml("manageevent25.fxml");
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void btnDelete(ActionEvent actionEvent) {
@@ -76,10 +153,16 @@ public class ManageEvent25 {
         }
         ManageEventRow25 selectedItem = (ManageEventRow25)table.getSelectionModel().getSelectedItem();
         ///following jobs
+
     }
 
-    public void btnCreate(ActionEvent actionEvent) {
+    public void btnCreate(ActionEvent actionEvent) throws IOException {
         //go 27
-
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managercreateevent27.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        ManagerCreateEvent27 controller = fxmlLoader.getController();
+        controller.setLastFxml("manageevent25.fxml");
+        Stage stage = (Stage)table.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }
