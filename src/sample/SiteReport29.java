@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import pojo.ManageEventRow25;
 import pojo.SiteReportRow29;
 import tools.MyAlert;
 

@@ -25,6 +25,8 @@
             <TableColumn fx:id="col3" prefWidth="91.33338928222656" text="Duration(days)" />
             <TableColumn fx:id="col4" prefWidth="116.0" text="Total Visits" />
             <TableColumn fx:id="col5" prefWidth="115.33334350585938" text="Total Revenues($)" />
+           <TableColumn fx:id="col6" prefWidth="115.33334350585938" text="SiteName" visible="false"/>
+           <TableColumn fx:id="col7" prefWidth="115.33334350585938" text="StartDate" visible="false"/>
         </columns>
       </TableView>
       <Button layoutX="277.0" layoutY="495.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />

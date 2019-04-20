@@ -39,6 +39,8 @@ public class ManageEvent25 {
     public static String lastFxml;
 
     private static Connection conn;
+    public TableColumn col6;
+    public TableColumn col7;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -50,12 +52,13 @@ public class ManageEvent25 {
         col3.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col4.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
         col5.setCellValueFactory(new PropertyValueFactory<>("totalRevenue"));
-
+        col6.setCellValueFactory(new PropertyValueFactory<>("siteName"));
+        col7.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         conn = ConnectionManager.getConn();
     }
 
-    public void addElement(String name, int staffCount, int duration, int totalVisits, double totalRevenue) {
-        ManageEventRow25 row = new ManageEventRow25(name, staffCount, duration,totalVisits,totalRevenue);
+    public void addElement(String name, int staffCount, int duration, int totalVisits, double totalRevenue, String siteName, String startDate) {
+        ManageEventRow25 row = new ManageEventRow25(name, staffCount, duration,totalVisits,totalRevenue, siteName, startDate);
         table.getItems().add(row);
     }
 
@@ -122,7 +125,7 @@ public class ManageEvent25 {
             Statement statement1 = conn.createStatement();
             ResultSet resultSet1 = statement1.executeQuery(sql1);
             if(resultSet1.next()){
-                addElement(resultSet.getString(1),resultSet1.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getDouble(4));
+                addElement(resultSet.getString(1),resultSet1.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getDouble(4),resultSet.getString(5),resultSet.getString(6));
             }
             statement1.close();
         }
@@ -137,6 +140,7 @@ public class ManageEvent25 {
         ManageEventRow25 selectedItem = (ManageEventRow25)table.getSelectionModel().getSelectedItem();
         ///following
 
+        System.out.println(selectedItem.getSiteName()+selectedItem.getStartDate());
         //go 26
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managerviewedit26.fxml"));
         Parent root = (Parent)fxmlLoader.load();

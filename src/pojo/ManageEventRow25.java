@@ -7,13 +7,25 @@ public class ManageEventRow25 {
     private int duration;
     private int totalVisits;
     private double totalRevenue;
+    private String siteName;
+    private String startDate;
 
-    public ManageEventRow25(String name, int staffCount, int duration, int totalVisits, double totalRevenue) {
+    public String getSiteName() {
+        return siteName;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public ManageEventRow25(String name, int staffCount, int duration, int totalVisits, double totalRevenue, String siteName, String startDate) {
         this.name = name;
         this.staffCount = staffCount;
         this.duration = duration;
         this.totalVisits = totalVisits;
         this.totalRevenue = totalRevenue;
+        this.siteName = siteName;
+        this.startDate = startDate;
     }
 
     public String getName() {

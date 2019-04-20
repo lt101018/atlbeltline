@@ -1,5 +1,6 @@
 package sample;
 
+import connection.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,10 @@ import pojo.ExploreEventRow33;
 import tools.MyAlert;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ExploreEvent33 {
     public TableView table;
@@ -31,6 +36,8 @@ public class ExploreEvent33 {
     public CheckBox checkVisited;
     public CheckBox checkSoldOut;
 
+    private static Connection conn;
+
     public static String lastFxml;
     public ComboBox cbSiteName;
 
@@ -38,13 +45,27 @@ public class ExploreEvent33 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize(){
+    public void initialize() throws SQLException {
         col1.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         col2.setCellValueFactory(new PropertyValueFactory<>("siteName"));
         col3.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
         col4.setCellValueFactory(new PropertyValueFactory<>("ticketRemaining"));
         col5.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
         col6.setCellValueFactory(new PropertyValueFactory<>("myVisits"));
+
+        conn = ConnectionManager.getConn();
+        String sql = "select name from site";
+
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        cbSiteName.getItems().add("ALL");
+        while(resultSet.next()){
+            cbSiteName.getItems().add(resultSet.getString("name"));
+        }
+
+        cbSiteName.getSelectionModel().select(0);
+        statement.close();
     }
 
     public void addElement(String eventName, String siteName, int ticketPrice, int ticketRemaining, int totalVisits, int myVisits) {
@@ -60,6 +81,9 @@ public class ExploreEvent33 {
     }
 
     public void btnFilter(ActionEvent actionEvent) {
+
+
+
     }
 
     public void btnEventDetail(ActionEvent actionEvent) throws IOException {
