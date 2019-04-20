@@ -86,7 +86,6 @@ public class ManageSite19 {
     }
 
 
-    ///////////////the result is wrong
     public void btnFilter(ActionEvent actionEvent) throws SQLException {
         table.getItems().clear();
 
@@ -167,6 +166,7 @@ public class ManageSite19 {
         }
         cbsite.getItems().add("Other");
         statement.close();
+        cbsite.getSelectionModel().select(0);
     }
 
     public void btnCreate(ActionEvent actionEvent) throws IOException {
