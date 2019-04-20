@@ -21,7 +21,7 @@ public class ManagerFunc10 {
 
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
-g
+
     }
 
     public void manageEvent(ActionEvent actionEvent) throws IOException {
