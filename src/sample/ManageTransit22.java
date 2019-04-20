@@ -38,7 +38,7 @@ public class ManageTransit22 {
     }
 
 
-    public void initialize() throws SQLException {
+    public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
         col2.setCellValueFactory(new PropertyValueFactory<>("transportType"));
         col3.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -49,12 +49,12 @@ public class ManageTransit22 {
                 "ALL",
                 "MARTA",
                 "Bus",
-                "Bike",
-                "Other"
+                "Bike"
         );
 
 
         String sql = "select name from site";
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -62,11 +62,13 @@ public class ManageTransit22 {
         while(resultSet.next()){
             cbsite.getItems().add(resultSet.getString("name"));
         }
-        cbsite.getItems().add("Other");
 
         cbsite.getSelectionModel().select(0);
         cbtransport.getSelectionModel().select(0);
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void addElement(String route, String transportType, double price, int numConnectedSites, int numTransitLogged) {
@@ -80,7 +82,10 @@ public class ManageTransit22 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+
+
+    /////////////query has some problme here. not done.
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
 
         String typeSql1 = "";
@@ -101,7 +106,7 @@ public class ManageTransit22 {
 
         String siteSql = "";
         if(!cbsite.getValue().toString().equals("ALL"))
-            siteSql = "where name='"+cbsite.getValue().toString()+"'";
+            siteSql = "and t.route in (select route from connect where name='"+cbsite.getValue().toString()+"')";
 
 
         String priceL = "0", priceR = Integer.MAX_VALUE+"";
@@ -111,15 +116,16 @@ public class ManageTransit22 {
 
         String sql1 = "select t.route, t.type, t.price, count(*) as connected_sites\n" +
                 "from transit as t, connect as c\n" +
-                "where c.type=t.type and c.route=t.route "+typeSql1+" "+routeSql1+" and t.route in (select route from connect "+siteSql+") "+priceSql+" \n" +
+                "where c.type=t.type and c.route=t.route "+typeSql1+" "+routeSql1+" "+siteSql+" "+priceSql+" \n" +
                 "group by c.route, c.type;\n";
 
-        String sql2 = "select count(*) as transit_logged\n" +
+        String sql2 = "select count(ta.username) as transit_logged\n" +
                 "from take as ta, transit as t\n" +
-                "where ta.type=t.type and ta.route=t.route "+typeSql2+" "+routeSql2+" and t.route in (select route from connect "+siteSql+") "+priceSql+" \n" +
+                "where ta.type=t.type and ta.route=t.route "+typeSql2+" "+routeSql2+" "+siteSql+" "+priceSql+" \n" +
                 "group by ta.type, ta.route;";
         System.out.println(sql1);
         System.out.println(sql2);
+        try{
         Statement statement1 = conn.createStatement();
         Statement statement2 = conn.createStatement();
         ResultSet resultSet1 = statement1.executeQuery(sql1);
@@ -129,9 +135,12 @@ public class ManageTransit22 {
         }
         statement1.close();
         statement2.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void btnEdit(ActionEvent actionEvent) throws IOException {
+    public void btnEdit(ActionEvent actionEvent) throws IOException, SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
@@ -143,12 +152,16 @@ public class ManageTransit22 {
         Parent root = (Parent)fxmlLoader.load();
         EditTransit23 controller = fxmlLoader.getController();
         controller.setLastFxml("managetransit22.fxml");
-        controller.setTransportType(selectedItem.getTransportType());
+
+        controller.prevType = selectedItem.getTransportType();
+        controller.prevRoute = selectedItem.getRoute();
+        controller.tfPrice.setText(selectedItem.getPrice()+"");
+        controller.initialize1();
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 
-    public void btnDelete(ActionEvent actionEvent) throws SQLException {
+    public void btnDelete(ActionEvent actionEvent) {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
@@ -158,6 +171,7 @@ public class ManageTransit22 {
         String sql = "delete from take \n" +
                 "where route = '"+selectedItem.getRoute()+"';";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -165,7 +179,9 @@ public class ManageTransit22 {
         btnFilter(null);
 
         statement.close();
-
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnCreate(ActionEvent actionEvent) throws IOException {

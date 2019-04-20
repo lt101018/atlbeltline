@@ -31,11 +31,11 @@ public class EditSite20 {
     private static Connection conn;
     private Map<String, String> map = new HashMap<>();
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         conn = ConnectionManager.getConn();
     }
 
-    public void initialize1() throws SQLException {
+    public void initialize1() {
         String sql = "(select u.firstname, u.lastname, u.username\n" +
                 "from user as u, employee as e, site as s\n" +
                 "where s.name = '"+sitename+"' and s.managerusername = e.username and u.username = e.username)\n" +
@@ -44,6 +44,7 @@ public class EditSite20 {
                 "from site as s, employee as e, user as u\n" +
                 "where e.username not in (select managerusername from site) and e.employeetype = 'manager' and s.name = '"+sitename+"' and u.username = e.username and u.status = 'approved');";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -66,9 +67,10 @@ public class EditSite20 {
         }else{
             MyAlert.showAlert("Site not exist.");
         }
-
-
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void setLastFxml(String lastFxml) {
@@ -80,8 +82,8 @@ public class EditSite20 {
         Stage stage = (Stage)tfName.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
-g
-    public void btnUpdate(ActionEvent actionEvent) throws SQLException {
+
+    public void btnUpdate(ActionEvent actionEvent) {
         if(tfName.getText().length()==0 || tfZipcode.getText().length()==0 || tfAddress.getText().length()==0){
             MyAlert.showAlert("Please fill all fields");
             return;
@@ -93,8 +95,12 @@ g
                 "where name = '"+sitename+"';";
         sitename = tfName.getText();
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         MyAlert.showAlert("Site updated.");
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 }

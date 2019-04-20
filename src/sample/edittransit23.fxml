@@ -3,9 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EditTransit23">
    <children>
@@ -22,7 +22,7 @@
       <Button layoutX="155.0" layoutY="340.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="55.0" text="Back" />
       <Button layoutX="350.0" layoutY="340.0" mnemonicParsing="false" onAction="#btnUpdate" text="Update" />
       <Label fx:id="labelTransportType" layoutX="147.0" layoutY="76.0" text="Label" />
-      <Label fx:id="labelRoute" layoutX="272.0" layoutY="77.0" text="Label" />
-      <Label fx:id="labelPrice" layoutX="405.0" layoutY="76.0" text="Label" />
+      <TextField fx:id="tfRoute" layoutX="261.0" layoutY="72.0" prefHeight="25.0" prefWidth="89.0" />
+      <TextField fx:id="tfPrice" layoutX="392.0" layoutY="72.0" prefHeight="25.0" prefWidth="89.0" />
    </children>
 </AnchorPane>

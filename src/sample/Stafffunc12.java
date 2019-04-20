@@ -8,9 +8,19 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Stafffunc12 {
     public Button manageProfile;
+
+    public String firstName;
+    public String lastName;
+    public String userName;
+    public String siteName;
+    public String employeeID;
+    public ArrayList<String> address;
+    public String email;
+    public boolean isVisitor;
 
     public void takeTransit(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("taketransit15.fxml"));
@@ -37,9 +47,12 @@ public class Stafffunc12 {
     }
 
     public void manageProfile(ActionEvent actionEvent) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("manageprofile17.fxml"));
-//        Stage stage = (Stage)manageProfile.getScene().getWindow();
-//        stage.setScene(new Scene(root));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("employeemanageprofile17.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        EmployeeManageProfile17 controller = fxmlLoader.getController();
+        controller.setLastFxml("managervisitorfunc11.fxml");
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void viewSchedule(ActionEvent actionEvent) throws IOException {
@@ -50,4 +63,6 @@ public class Stafffunc12 {
         Stage stage = (Stage)manageProfile.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
+
+    //public
 }

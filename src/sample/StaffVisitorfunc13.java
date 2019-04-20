@@ -39,9 +39,12 @@ public class StaffVisitorfunc13 {
     }
 
     public void manageProfile(ActionEvent actionEvent) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("manageprofile17.fxml"));
-//        Stage stage = (Stage)manageProfile.getScene().getWindow();
-//        stage.setScene(new Scene(root));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("employeemanageprofile17.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        EmployeeManageProfile17 controller = fxmlLoader.getController();
+        controller.setLastFxml("staffvisitorfunc13.fxml");
+        Stage stage = (Stage)manageProfile.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void viewSchedule(ActionEvent actionEvent) throws IOException {

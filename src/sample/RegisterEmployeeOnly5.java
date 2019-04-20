@@ -1,12 +1,17 @@
 package sample;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import connection.ConnectionManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,7 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class registerVisitorController {
+public class RegisterEmployeeOnly5 {
 
     @FXML
     public Button addEmailBttn1;
@@ -44,12 +49,18 @@ public class registerVisitorController {
     @FXML
     public Button cancelBttn;
 
+    @FXML
+    public AnchorPane anchorpane;
+
     public TextField usernameTF;
     public TextField passwordTF;
     public TextField firstNameTF;
     public TextField lastNameTF;
     public TextField comfirmpasswordTF;
 
+    public ComboBox typeBox;
+
+    public ComboBox stateBox;
 
     public ArrayList<String> emailList;
 
@@ -60,7 +71,31 @@ public class registerVisitorController {
     public void initialize() {
         emailList = new ArrayList<>();
         emailNumber = 0;
-        System.out.println("Controller initializing for visitor!!");
+
+        ObservableList<String> typeOptions =
+                FXCollections.observableArrayList(
+                        "Manager",
+                        "User",
+                        "Visitor"
+                );
+
+        ObservableList<String> stateOptions =
+                FXCollections.observableArrayList(
+                        "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL",
+                        "IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MO","MT","NE","NV",
+                        "NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TD",
+                        "TX","UT","VT","VA","WA","WV","WI","WY","Other");
+
+        typeBox = new ComboBox(typeOptions);
+        AnchorPane.setTopAnchor(typeBox, 135.0);
+        AnchorPane.setLeftAnchor(typeBox, 415.0);
+        anchorpane.getChildren().add(typeBox);
+
+        stateBox = new ComboBox(stateOptions);
+        AnchorPane.setTopAnchor(stateBox, 263.0);
+        AnchorPane.setLeftAnchor(stateBox, 305.0);
+        anchorpane.getChildren().add(stateBox);
+
         conn = ConnectionManager.getConn();
         Button[] addButtonList = new Button[3];
         Button[] removeButtonList = new Button[3];
@@ -74,6 +109,7 @@ public class registerVisitorController {
         removeEmailBttn1.setDisable(true);
         removeEmailBttn2.setDisable(true);
         removeEmailBttn3.setDisable(true);
+
 
         for (int i = 0; i < addButtonList.length; i++) {
             addButtonList[i].setOnAction(event -> checkIdForAdd((Button) event.getSource()));
@@ -155,8 +191,12 @@ public class registerVisitorController {
         String status = "pending";
         String inputPwd = passwordTF.getText();
         String inputConfirmedPwd = comfirmpasswordTF.getText();
+        String userType = "";
+        String state = "";
 
         if(!checkPassWord(inputPwd, inputConfirmedPwd)) return;
+        userType = typeBox.getValue() + "";
+        state = stateBox.getValue() + "";
 
         String sql = "INSERT INTO user\n" +
                 "(`username`,\n" +
@@ -170,6 +210,7 @@ public class registerVisitorController {
                 lastNameTF.getText()+"',\n'" +
                 status+"',\n'" +
                 passwordTF.getText()+"')";
+
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterNavigation2">
+    <children>
+      <Label layoutX="250.0" layoutY="10.0" text="Register Navigation" />
+
+        <Button fx:id="userOnlyBttn" layoutX="250.0" layoutY="60.0" mnemonicParsing="false" onAction="#userOnlyRegister" text="User Only" />
+
+        <Button fx:id="visitorOnlyBttn" layoutX="250.0" layoutY="100.0" mnemonicParsing="false" onAction="#visitorOnlyRegister" text="Visitor Only" />
+
+        <Button fx:id="employeeOnlyBttn" layoutX="250.0" layoutY="140.0" mnemonicParsing="false" onAction="#employeeOnlyRegister" text="Employee Only" />
+
+        <Button fx:id="employeeVisitorBttn" layoutX="250.0" layoutY="180.0" mnemonicParsing="false" onAction="#employeeVisitorRegister" text="Employee-Visitor" />
+
+        <Button fx:id="backBttn" contentDisplay="CENTER" layoutX="250.0" layoutY="220.0" mnemonicParsing="false" onAction="#backFun" text="Back" />
+
+    </children>
+</AnchorPane>

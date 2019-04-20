@@ -33,19 +33,19 @@ public class ManageSite19 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         col1.setCellValueFactory(new PropertyValueFactory<>("name"));
         col2.setCellValueFactory(new PropertyValueFactory<>("manager"));
         col3.setCellValueFactory(new PropertyValueFactory<>("openeveryday"));
         cbopeneveryday.getItems().addAll(
                 "ALL",
                 "Yes",
-                "No",
-                "Other"
+                "No"
         );
         conn = ConnectionManager.getConn();
 
         String sql = "select name from site";
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -53,7 +53,6 @@ public class ManageSite19 {
         while(resultSet.next()){
             cbsite.getItems().add(resultSet.getString("name"));
         }
-        cbsite.getItems().add("Other");
 
         sql = "select firstname, lastname\n" +
                 "from user\n" +
@@ -64,13 +63,15 @@ public class ManageSite19 {
         while(resultSet1.next()){
             cbmanager.getItems().add(resultSet1.getString(1)+" "+resultSet1.getString(2));
         }
-        cbmanager.getItems().add("Other");
 
         cbsite.getSelectionModel().select(0);
         cbmanager.getSelectionModel().select(0);
         cbopeneveryday.getSelectionModel().select(0);
 
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void addElement(String name, String manager, String openeveryday) {
@@ -86,7 +87,7 @@ public class ManageSite19 {
     }
 
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
 
         String siteSql = "";
@@ -110,12 +111,16 @@ public class ManageSite19 {
                 "and e.username in (select username from user "+managerSql+") \n" +
                 openeverydaySql;
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             addElement(resultSet.getString(1), resultSet.getString(2)+" "+resultSet.getString(3), resultSet.getString(4));
         }
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnEdit(ActionEvent actionEvent) throws IOException {
@@ -132,16 +137,13 @@ public class ManageSite19 {
         EditSite20 controller = fxmlLoader.getController();
         controller.setLastFxml("managesite19.fxml");
         controller.sitename = selectedItem.getName();
-        try {
-            controller.initialize1();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        controller.initialize1();
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 
-    public void btnDelete(ActionEvent actionEvent) throws SQLException {
+    public void btnDelete(ActionEvent actionEvent) {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
@@ -151,6 +153,7 @@ public class ManageSite19 {
         String sql = "delete from site\n" +
                 "where name = '"+selectedItem.getName()+"'";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -164,9 +167,11 @@ public class ManageSite19 {
         while(resultSet.next()){
             cbsite.getItems().add(resultSet.getString("name"));
         }
-        cbsite.getItems().add("Other");
         statement.close();
         cbsite.getSelectionModel().select(0);
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnCreate(ActionEvent actionEvent) throws IOException {

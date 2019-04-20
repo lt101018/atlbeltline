@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.TransitHistroyRow16;
 import pojo.UserInfo;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -36,7 +37,7 @@ public class TransitHistory16 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         col1.setCellValueFactory(new PropertyValueFactory<>("date"));
         col2.setCellValueFactory(new PropertyValueFactory<>("route"));
         col3.setCellValueFactory(new PropertyValueFactory<>("transport"));
@@ -45,12 +46,12 @@ public class TransitHistory16 {
                 "ALL",
                 "MARTA",
                 "Bus",
-                "Bike",
-                "Other"
+                "Bike"
         );
 
         conn = ConnectionManager.getConn();
         String sql = "select name from site";
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -58,9 +59,10 @@ public class TransitHistory16 {
         while(resultSet.next()){
             cbSite.getItems().add(resultSet.getString("name"));
         }
-        cbSite.getItems().add("Other");
         statement.close();
-
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
         cbSite.getSelectionModel().select(0);
         cbTransportType.getSelectionModel().select(0);
     }
@@ -76,7 +78,7 @@ public class TransitHistory16 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
 
         String siteSql = "";
@@ -106,11 +108,15 @@ public class TransitHistory16 {
                 "order by ta.takedate;";
 
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getDouble(4));
         }
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 }
