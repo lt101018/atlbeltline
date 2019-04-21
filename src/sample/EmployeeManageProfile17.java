@@ -203,7 +203,7 @@ public class EmployeeManageProfile17 {
         updatedemails.setText(emailList.toString());
     }
 
-    public void ensureUpdate() throws SQLException {
+    public void ensureUpdate() throws SQLException, IOException {
         Statement statement = conn.createStatement();
         System.out.println("I am here! The usertype is: " + usertype);
         if(usertype.equals(new String("employee"))) {
@@ -247,6 +247,9 @@ public class EmployeeManageProfile17 {
             // Update the user type! and back to the screen 12!
             statement.close();
         }
+        Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
+        Stage stage = (Stage)updateBttn.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
     public void ensureCancel(ActionEvent actionEvent) throws IOException {
