@@ -23,7 +23,7 @@ public class UserLogin {
     private static Connection conn;
 
     public void initialize() {
-        System.out.println("Sample initializing!");
+        System.out.println("User login initializing!");
         conn = ConnectionManager.getConn();
 
         ////admin for testing

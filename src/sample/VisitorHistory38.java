@@ -65,6 +65,8 @@ public class VisitorHistory38 {
     }
 
     public void btnFilter(ActionEvent actionEvent) throws SQLException {
+
+        table.getItems().clear();
         String username = UserInfo.username;
         String formattedStartDate = datepicker1.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String formattedEndDate = datepicker2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -74,26 +76,28 @@ public class VisitorHistory38 {
         Statement statement = conn.createStatement();
 
         String sqlForFilter = "select ve.visitdate, ve.eventname,ve.sitename, e.price"+
-        "from visit_event as ve, event as e" +
-        "where" +
-        "ve.eventname=e.name" +
-        "and ve.sitename=e.sitename" +
-        "and ve.eventstartdate=e.startdate" +
-        "and ve.visitorusername='"+ username +"'" +
-        "and ve.eventname like '%" + eventname + "%'" +
-        "and ve.sitename='"+ sitename +"'" +
-        "and ve.visitdate>='"+ formattedStartDate +"' and ve.visitdate<='" + formattedEndDate + "'" +
-        "union" +
-        "select visitdate, null, name, 0" +
-        "from visit_site" +
-        "where visitorusername='"+ username +"'" +
-        "and name='"+ sitename +"'" +
-        "and visitdate>='"+ formattedStartDate +"' and visitdate<='" + formattedEndDate + "'";
+        " from visit_event as ve, event as e" +
+        " where" +
+        " ve.eventname=e.name" +
+        " and ve.sitename=e.sitename" +
+        " and ve.eventstartdate=e.startdate" +
+        " and ve.visitorusername='"+ username +"'" +
+        " and ve.eventname like '%" + eventname + "%'" +
+        " and ve.sitename='"+ sitename +"'" +
+        " and ve.visitdate>='"+ formattedStartDate +"' and ve.visitdate<='" + formattedEndDate + "'" +
+        " union" +
+        " select visitdate, null, name, 0" +
+        " from visit_site" +
+        " where visitorusername='"+ username +"'" +
+        " and name='"+ sitename +"'" +
+        " and visitdate>='"+ formattedStartDate +"' and visitdate<='" + formattedEndDate + "'";
 
         ResultSet resultSet = statement.executeQuery(sqlForFilter);
         while(resultSet.next()){
-            addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),Integer.parseInt(resultSet.getString(4)));
+            System.out.println(resultSet);
+            addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),Float.valueOf(resultSet.getString(4)).intValue());
         }
+        //System.out.println(resultSet.getString(2));
         statement.close();
     }
 }
