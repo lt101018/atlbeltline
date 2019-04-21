@@ -27,11 +27,11 @@ public class UserLogin {
         conn = ConnectionManager.getConn();
 
         ////admin for testing
-//        tfemail.setText("jsmith@gmail.com");
-//        tfpassword.setText("jsmith123");
+        tfemail.setText("jsmith@gmail.com");
+        tfpassword.setText("jsmith123");
         ////manager for testing
-        tfemail.setText("m2@beltline.com");
-        tfpassword.setText("manager2");
+//        tfemail.setText("m2@beltline.com");
+//        tfpassword.setText("manager2");
         ////staff for testing
 //        tfemail.setText("msmith@gmail.com");
 //        tfpassword.setText("msmith456");

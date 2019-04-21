@@ -58,7 +58,7 @@ public class EditSite20 {
         cbManager.getSelectionModel().select(0);
 
 
-        sql = "select zipcode, address, openeveryday from site";
+        sql = "select zipcode, address, openeveryday from site where name = '"+sitename+"'";
         ResultSet resultSet1 = statement.executeQuery(sql);
         if(resultSet1.next()){
             tfZipcode.setText(resultSet1.getString(1));
@@ -102,5 +102,6 @@ public class EditSite20 {
         }catch (SQLException e){
             MyAlert.showAlert(e.getMessage());
         }
+
     }
 }
