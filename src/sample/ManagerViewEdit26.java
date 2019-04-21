@@ -59,6 +59,7 @@ public class ManagerViewEdit26 {
         startdate = row25.getStartDate();
         sitename = row25.getSiteName();
         getAllParams();
+        getAssignedStaff();
     }
 
     public void setLastFxml(String lastFxml) {
@@ -76,7 +77,6 @@ public class ManagerViewEdit26 {
         col2.setCellValueFactory(new PropertyValueFactory<>("Daily Visits"));
         col3.setCellValueFactory(new PropertyValueFactory<>("Daily Revenue"));
         conn = ConnectionManager.getConn();
-        getAssignedStaff();
     }
 
     public void getAllParams() throws SQLException {
@@ -141,11 +141,13 @@ public class ManagerViewEdit26 {
         double revenuerange1 = Double.parseDouble(tfRevenue1.getText());
         double revenuerange2 = Double.parseDouble(tfRevenue2.getText());
 
-        String sqlForFilterEvents = "select e.sitename, e.name, e.startdate, count(*) as total_visits, e.price*count(*) as total_revenues" +
-        "from visit_event as ve, event as e" +
-        "where ve.sitename = e.sitename and ve.eventname = e.name and ve.eventstartdate = e.startdate and at.sitename = '' and at.name = '' and at.startdate = ''" +
-        "group by ve.sitename, ve.eventname, ve.eventstartdate" +
-        "having 0<count(*) <1000000 and 0<total_revenues< 1000000";
+        String sqlForFilterEvents = "select ve.visitdate as date, count(*) as daily_visits, e.price*count(*) as daily_revenues"+
+        "from event as e, visit_event as ve" +
+        "where" +
+        "e.sitename = ve.sitename and e.name = ve.eventname and e.startdate = ve.eventstartdate" +
+        "and e.sitename = 'inman park' and e.name = 'bus tour' and e.startdate = '2019-02-01'" +
+        "group by ve.visitdate" +
+        "having "+visitrange1+"<daily_visits<"+visitrange2 + " and " + revenuerange1 +"<daily_revenues<" + revenuerange2;
 
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sqlForFilterEvents);
