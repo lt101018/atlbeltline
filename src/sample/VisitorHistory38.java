@@ -75,6 +75,7 @@ public class VisitorHistory38 {
 
         Statement statement = conn.createStatement();
 
+        System.out.println(eventname+"!!!");
         String sqlForFilter = "select ve.visitdate, ve.eventname,ve.sitename, e.price"+
         " from visit_event as ve, event as e" +
         " where" +
@@ -91,10 +92,10 @@ public class VisitorHistory38 {
         " where visitorusername='"+ username +"'" +
         " and name='"+ sitename +"'" +
         " and visitdate>='"+ formattedStartDate +"' and visitdate<='" + formattedEndDate + "'";
-
+        System.out.println(sqlForFilter);
         ResultSet resultSet = statement.executeQuery(sqlForFilter);
         while(resultSet.next()){
-            System.out.println(resultSet);
+            //System.out.println(resultSet);
             addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),Float.valueOf(resultSet.getString(4)).intValue());
         }
         //System.out.println(resultSet.getString(2));

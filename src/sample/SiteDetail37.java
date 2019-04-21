@@ -74,10 +74,11 @@ public class SiteDetail37 {
             return;
         }
 
-        sqlForLog = "insert into visite_site(visitorusername,name,visitdate) values('"+ UserInfo.username +"','" +
+        sqlForLog = "insert into visit_site(visitorusername,name,visitdate) values('"+ UserInfo.username +"','" +
                 siteValue + "','"+ formattedDate +"')";
 
         statement.executeUpdate(sqlForLog);
         statement.close();
+        MyAlert.showAlert("Log Success!");
     }
 }

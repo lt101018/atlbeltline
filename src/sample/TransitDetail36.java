@@ -81,6 +81,7 @@ public class TransitDetail36 {
         String sqlForInsert = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getTransportType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
         statement.executeUpdate(sqlForInsert);
         statement.close();
+        MyAlert.showAlert("Log Success!");
     }
 
     public void refreshTransit(ActionEvent actionEvent) throws SQLException {
