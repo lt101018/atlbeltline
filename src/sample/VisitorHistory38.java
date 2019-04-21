@@ -7,9 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import pojo.UserInfo;
 import pojo.VisitorHistoryRow38;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class VisitorHistory38 {
     public TextField tfEvent;
@@ -21,6 +23,7 @@ public class VisitorHistory38 {
     public DatePicker datepicker1;
     public DatePicker datepicker2;
     public static String lastFxml;
+    public ComboBox cbSite;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -31,6 +34,10 @@ public class VisitorHistory38 {
         col2.setCellValueFactory(new PropertyValueFactory<>("event"));
         col3.setCellValueFactory(new PropertyValueFactory<>("site"));
         col4.setCellValueFactory(new PropertyValueFactory<>("price"));
+        cbSite.getItems().addAll(
+                "MARTA",
+                "Bus","Bike"
+        );
     }
 
     public void addElement(String date, String event, String site, int price) {
@@ -45,5 +52,8 @@ public class VisitorHistory38 {
     }
 
     public void btnFilter(ActionEvent actionEvent) {
+        String username = UserInfo.username;
+        String formattedStartDate = datepicker1.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String formattedEndDate = datepicker2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

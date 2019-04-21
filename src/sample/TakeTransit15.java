@@ -136,8 +136,6 @@ public class TakeTransit15 {
         statement.close();
     }
 
-
-
 }
 
 

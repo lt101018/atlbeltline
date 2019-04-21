@@ -1,5 +1,6 @@
 package sample;
 
+import connection.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,10 +8,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import pojo.TakeTransitRow15;
 import pojo.TransitDetailRow36;
+import pojo.UserInfo;
 import tools.MyAlert;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 
 public class TransitDetail36 {
     public TableView table;
@@ -21,6 +29,8 @@ public class TransitDetail36 {
     public DatePicker datepicker;
     public Label siteName;
     public static String lastFxml;
+    public ComboBox cbTransportType;
+    private static Connection conn;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -35,6 +45,11 @@ public class TransitDetail36 {
         col2.setCellValueFactory(new PropertyValueFactory<>("transportType"));
         col3.setCellValueFactory(new PropertyValueFactory<>("price"));
         col4.setCellValueFactory(new PropertyValueFactory<>("numConnectedSites"));
+        conn = ConnectionManager.getConn();
+        cbTransportType.getItems().addAll(
+                "MARTA",
+                "Bus","Bike"
+        );
     }
 
     public void addElement(String route, String transportType, double price, int numConnectedSites) {
@@ -49,12 +64,36 @@ public class TransitDetail36 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnLogTransit(ActionEvent actionEvent) {
+    public void btnLogTransit(ActionEvent actionEvent) throws SQLException  {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
         }
+        Statement statement = conn.createStatement();
         TransitDetailRow36 selectedItem = (TransitDetailRow36)table.getSelectionModel().getSelectedItem();
         ///following jobs
+        String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        //**********Here should be modified!!***********
+        String sqlForInsert = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getTransportType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
+
+        statement.executeUpdate(sqlForInsert);
+        statement.close();
+    }
+
+
+    //This should be execuated when the comboBox is chosen!
+    public void filterOnType() throws SQLException {
+        Statement statement = conn.createStatement();
+        String transportType = cbTransportType.getValue().toString();
+
+        //**********Here should be modified!!***********
+        String sqlForDifferentType = "";
+
+        ResultSet resultSet = statement.executeQuery(sqlForDifferentType);
+        while(resultSet.next()){
+            addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getDouble(3),resultSet.getInt(4));
+        }
+        statement.close();
     }
 }

@@ -22,18 +22,18 @@
         <columns>
           <TableColumn fx:id="col1" prefWidth="56.666656494140625" text="Date" />
           <TableColumn fx:id="col2" prefWidth="94.6666488647461" text="Daily Visits" />
-            <TableColumn fx:id="col3" prefWidth="91.33338928222656" text="Daily Revenue" />
+           <TableColumn fx:id="col3" prefWidth="91.33338928222656" text="Daily Revenue" />
         </columns>
       </TableView>
       <Button layoutX="278.0" layoutY="741.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
       <Button layoutX="94.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="80.0" text="Filter" />
       <Button layoutX="435.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnUpdate" prefHeight="25.0" prefWidth="80.0" text="Update" />
-      <TextField fx:id="tfRevenue1" layoutX="455.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
-      <TextField fx:id="tfRevenue2" layoutX="515.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="tfRevenue1" layoutX="455.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0"/>
+      <TextField fx:id="tfRevenue2" layoutX="515.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0"/>
       <Label layoutX="320.0" layoutY="455.0" text="Daily Revenue Range" />
       <Label layoutX="500.0" layoutY="455.0" text="--" />
-      <TextField fx:id="tfTotalVisits1" layoutX="182.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
-      <TextField fx:id="tfTotalVisits2" layoutX="243.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="tfvisit1" layoutX="182.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="tfvisit2" layoutX="243.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
       <Label layoutX="67.0" layoutY="455.0" text="Daily Visits Range" />
       <Label layoutX="226.0" layoutY="455.0" text="--" />
       <Label layoutX="365.0" layoutY="130.0" text="End Date" />

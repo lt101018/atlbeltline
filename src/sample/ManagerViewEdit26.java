@@ -1,21 +1,28 @@
 package sample;
 
+import connection.ConnectionManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import pojo.ManageEventRow25;
+import pojo.TransitHistroyRow16;
+import pojo.ViewEventsRow26;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ManagerViewEdit26 {
 
-
-
+    private static Connection conn;
     //This part is for fxml component
     public Label nameValue;
     public ListView listView;
@@ -25,11 +32,14 @@ public class ManagerViewEdit26 {
     public Label endDateValue;
     public Label capacityValue;
     public TextArea descrip;
-    public TextField tfTotalVisits1;
-    public TextField tfTotalVisits2;
+    public TextField tfvisit2;
+    public TextField tfvisit1;
     public TextField tfRevenue1;
     public TextField tfRevenue2;
-    
+    public TableColumn col1;
+    public TableColumn col2;
+    public TableColumn col3;
+    public TableView table;
 
     //This part is for variables
     public static String lastFxml;
@@ -39,9 +49,16 @@ public class ManagerViewEdit26 {
     private String enddate;
     private String minreqstaff;
     private String cap;
+    private String sitename;
+    public static ManageEventRow25 row25;
+    ObservableList<String> list;
 
-    public void setRow() {
-
+    public void setRow(ManageEventRow25 inputRow) throws SQLException {
+        row25 = inputRow;
+        eventname = row25.getName();
+        startdate = row25.getStartDate();
+        sitename = row25.getSiteName();
+        getAllParams();
     }
 
     public void setLastFxml(String lastFxml) {
@@ -54,10 +71,108 @@ public class ManagerViewEdit26 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) {
-
+    public void initialize() throws SQLException {
+        col1.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("Daily Visits"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("Daily Revenue"));
+        conn = ConnectionManager.getConn();
+        getAssignedStaff();
     }
 
-    public void btnUpdate(ActionEvent actionEvent) {
+    public void getAllParams() throws SQLException {
+        Statement statement = conn.createStatement();
+        String sqlForEvent = "";
+        sqlForEvent = "select name, price, startdate, enddate, minstaffreq, capacity, description from event where sitename = '" +
+                sitename + "' and name = '" + eventname +
+                "' and startdate = '" + startdate  +
+                "'";
+
+        ResultSet resultSet = statement.executeQuery(sqlForEvent);
+        while(resultSet.next()) {
+            price = resultSet.getString("name");
+            enddate = resultSet.getString("enddate");
+            minreqstaff = resultSet.getString("minstaffreq");
+            cap = resultSet.getString("capacity");
+            descrip.setText(resultSet.getString("description"));
+        }
+
+        priceValue.setText(price);
+        endDateValue.setText(enddate);
+        minStaffValueminStaffValue.setText(minreqstaff);
+        startDateValue.setText(startdate);
+        nameValue.setText(eventname);
+        capacityValue.setText(cap);
+    }
+
+    public void getAssignedStaff() throws SQLException  {
+        Statement statement = conn.createStatement();
+        list = FXCollections.observableArrayList();
+        listView.setItems(list);
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        String sqlForStaffForFree = "(select u.firstname, u.lastname\n" +
+                "from user as u, employee as emp, event as e, assign_to as at\n" +
+                "where emp.username not in (select staffusername from assign_to) and emp.employeetype = 'staff' and u.status = 'approved' and at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate and emp.username = u.username)\n";
+                //"union\n" +
+        String sqlForStaffForThisEvent = "(select u.firstname, u.lastname\n" +
+                "from assign_to as at, employee as e, user as u\n" +
+                "where u.username = e.username and e.username = at.staffusername and at.sitename = '" +
+                sitename + "' and at.name = '" +
+                eventname + "' and at.startdate = '" +
+                startdate + "')";
+
+        ResultSet resultSet2 = statement.executeQuery(sqlForStaffForThisEvent);
+        while (resultSet2.next()) {
+            list.add(resultSet2.getString("firstname") + " " + resultSet2.getString("lastname"));
+        }
+        listView.getSelectionModel().selectAll();
+
+        ResultSet resultSet1 = statement.executeQuery(sqlForStaffForFree);
+        while (resultSet1.next()) {
+            list.add(resultSet1.getString("firstname") + " " + resultSet1.getString("lastname"));
+        }
+
+        statement.close();
+    }
+
+    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+        int visitrange1 = Integer.parseInt(tfvisit1.getText());
+        int visitrange2 = Integer.parseInt(tfvisit2.getText());
+
+        double revenuerange1 = Double.parseDouble(tfRevenue1.getText());
+        double revenuerange2 = Double.parseDouble(tfRevenue2.getText());
+
+        String sqlForFilterEvents = "select e.sitename, e.name, e.startdate, count(*) as total_visits, e.price*count(*) as total_revenues" +
+        "from visit_event as ve, event as e" +
+        "where ve.sitename = e.sitename and ve.eventname = e.name and ve.eventstartdate = e.startdate and at.sitename = '' and at.name = '' and at.startdate = ''" +
+        "group by ve.sitename, ve.eventname, ve.eventstartdate" +
+        "having 0<count(*) <1000000 and 0<total_revenues< 1000000";
+
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sqlForFilterEvents);
+        while(resultSet.next()) {
+            addElement(resultSet.getString(1),Integer.parseInt(resultSet.getString(2)),Double.parseDouble(resultSet.getString(3)));
+        }
+        statement.close();
+    }
+
+    public void btnUpdate(ActionEvent actionEvent) throws SQLException {
+        Statement statement = conn.createStatement();
+        String newDes = descrip.getText();
+        String sqlForUpdate = "update event" +
+        "set description = '" + newDes +
+        "' where event.sitename = '" + sitename + "' and event.name = '" + eventname
+                + "' and event.startdate = '" + startdate + "'";
+
+        statement.executeQuery(sqlForUpdate);
+        statement.close();
+    }
+
+    public void modifyAssignTo() {
+        //
+    }
+
+    public void addElement(String date, int dailyVisits, double dailyRevenue) {
+        ViewEventsRow26 row = new ViewEventsRow26(date, dailyVisits,  dailyRevenue);
+        table.getItems().add(row);
     }
 }

@@ -105,7 +105,6 @@ public class ManageEvent25 {
             revenueR = tfRevenue2.getText();
         String visitRevenueSql = "having ( count(*) between "+visitL+" and "+visitR+" ) and ( " + "total_revenues between "+revenueL+" and "+revenueR+" )";
 
-
         String sql = "select e.name, datediff(e.enddate, e.startdate) as duration , count(*) as total_visits, e.price*count(*) as total_revenues, e.sitename, e.startdate\n" +
                 "from visit_event as ve, event as e\n" +
                 "where ve.sitename = e.sitename and ve.eventname = e.name and ve.eventstartdate = e.startdate "+eventSql+" "+descriptionSql+" "+dateSql+" "+dateDifSql+" \n" +
@@ -132,19 +131,19 @@ public class ManageEvent25 {
         statement.close();
     }
 
-    public void btnEdit(ActionEvent actionEvent) throws IOException {
+    public void btnEdit(ActionEvent actionEvent) throws IOException, SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
         }
         ManageEventRow25 selectedItem = (ManageEventRow25)table.getSelectionModel().getSelectedItem();
-        ///following
-
         System.out.println(selectedItem.getSiteName()+selectedItem.getStartDate());
         //go 26
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managerviewedit26.fxml"));
         Parent root = (Parent)fxmlLoader.load();
         ManagerViewEdit26 controller = fxmlLoader.getController();
+        controller.setRow(selectedItem);
+
         controller.setLastFxml("manageevent25.fxml");
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
