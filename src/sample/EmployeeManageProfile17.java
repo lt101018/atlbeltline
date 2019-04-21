@@ -217,7 +217,14 @@ public class EmployeeManageProfile17 {
                         "VALUES\n" +
                         "('" + UserInfo.username + "')";
                 statement.executeUpdate(sqlForInsertUser);
-                this.setLastFxml("managervisitorfunc11.fxml");
+
+                String updateUser = "update user\n" +
+                        "set usertype = " +
+                        "'" + "employeevisitor" + "'\n" +
+                        "where username = " + "'" + UserInfo.username + "'";
+                System.out.println(updateUser);
+                statement.executeUpdate(updateUser);
+                this.setLastFxml("userlogin.fxml");
             }
         } else if(usertype.equals(new String("employeevisitor"))) {
             System.out.println("I am a employeevisitor");
@@ -226,7 +233,14 @@ public class EmployeeManageProfile17 {
                 String sqlForDeleteVisitor = "DELETE FROM visitor\n" +
                         "WHERE username ='"+ UserInfo.username +"'";
                 statement.executeUpdate(sqlForDeleteVisitor);
-                this.setLastFxml("managervisitorfunc10.fxml");
+
+                String updateUser = "update user\n" +
+                        "set usertype = " +
+                        "'" + "employee" + "'\n" +
+                        "where username = " + "'" + UserInfo.username + "'";
+                System.out.println(updateUser);
+                statement.executeUpdate(updateUser);
+                this.setLastFxml("userlogin.fxml");
             }
             //System.out.println("!!Here!!");
             // Delete all visit history of the employee
