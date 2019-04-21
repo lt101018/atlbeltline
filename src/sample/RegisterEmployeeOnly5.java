@@ -9,11 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,30 +19,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RegisterEmployeeOnly5 {
-
-    @FXML
-    public Button addEmailBttn1;
-
-    @FXML
-    public Button addEmailBttn2;
-
-    @FXML
-    public Button addEmailBttn3;
-
-    @FXML
-    public Button removeEmailBttn1;
-
-    @FXML
-    public Button removeEmailBttn2;
-
-    @FXML
-    public Button removeEmailBttn3;
-
-    public TextField emailTF1;
-    public TextField emailTF2;
-    public TextField emailTF3;
 
     @FXML
     public Button registerBttn;
@@ -77,6 +53,11 @@ public class RegisterEmployeeOnly5 {
     public TextField zipcodeTF;
 
     public static String lastFxml;
+    public TextArea emailsTA;
+    public Button updateEmailBttn;
+    public Button editBttn;
+    public Label emailLael;
+    public Label updatedemails;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -110,95 +91,23 @@ public class RegisterEmployeeOnly5 {
         anchorpane.getChildren().add(stateBox);
 
         conn = ConnectionManager.getConn();
-        Button[] addButtonList = new Button[3];
-        Button[] removeButtonList = new Button[3];
 
-        addButtonList[0] = addEmailBttn1;
-        addButtonList[1] = addEmailBttn2;
-        addButtonList[2] = addEmailBttn3;
-        removeButtonList[0] = removeEmailBttn1;
-        removeButtonList[1] = removeEmailBttn2;
-        removeButtonList[2] = removeEmailBttn3;
-        removeEmailBttn1.setDisable(true);
-        removeEmailBttn2.setDisable(true);
-        removeEmailBttn3.setDisable(true);
-
-
-        for (int i = 0; i < addButtonList.length; i++) {
-            addButtonList[i].setOnAction(event -> checkIdForAdd((Button) event.getSource()));
-            removeButtonList[i].setOnAction(event -> checkIdForRemove((Button) event.getSource()));
-        }
     }
 
-    private void checkIdForAdd(Button button) {
-        
-        if(button.getId().equals("addEmailBttn1")) {
-            emailList.add(emailTF1.getText());
-            emailTF1.setDisable(true);
-            addEmailBttn1.setDisable(true);
-            removeEmailBttn1.setDisable(false);
-        } else if (button.getId().equals("addEmailBttn2")) {
-            emailList.add(emailTF2.getText());
-            emailTF2.setDisable(true);
-            addEmailBttn2.setDisable(true);
-            removeEmailBttn2.setDisable(false);
-        } else {
-            emailList.add(emailTF3.getText());
-            emailTF3.setDisable(true);
-            addEmailBttn3.setDisable(true);
-            removeEmailBttn3.setDisable(false);
-        }
-        emailNumber++;
-        System.out.println(emailList);
-    }
+    public void ensureUpdateEmail(ActionEvent actionEvent) throws SQLException{
+        String read_wroteemails = "";
+        read_wroteemails = emailsTA.getText();
+        String[] email_string = read_wroteemails.split(",");
 
-    private void checkIdForRemove(Button button) {
-        if(button.getId().equals("removeEmailBttn1")) {
-            emailList.remove(emailTF1.getText());
-            emailTF1.setText("");
-            emailTF1.setDisable(false);
-            addEmailBttn1.setDisable(false);
-            removeEmailBttn1.setDisable(true);
-        } else if (button.getId().equals("removeEmailBttn2")) {
-            emailList.remove(emailTF2.getText());
-            emailTF2.setText("");
-            emailTF2.setDisable(false);
-            addEmailBttn2.setDisable(false);
-            removeEmailBttn2.setDisable(true);
-        } else {
-            emailList.remove(emailTF3.getText());
-            emailTF3.setText("");
-            emailTF3.setDisable(false);
-            emailTF3.setDisable(false);
-            addEmailBttn3.setDisable(false);
-            removeEmailBttn3.setDisable(true);
+        for(int i=0; i<email_string.length; i++) {
+            email_string[i] = email_string[i].trim();
         }
 
-        if(emailNumber>0) emailNumber--;
-        System.out.println(emailList);
+        emailList.clear();
+        emailList.addAll(Arrays.asList(email_string));
+        emailsTA.setDisable(true);
+        updatedemails.setText(emailList.toString());
     }
-
-//    public void addEmailAddress(ActionEvent actionEvent) throws SQLException {
-//
-//        String emailAdd = "";
-//        Statement statementForEmails = conn.createStatement();
-//
-//        for(int i=emailNumber; i>0; i--) {
-//            emailAdd = emailTF1.getText();
-//            String sqlForEmails = "INSERT INTO user\n" +
-//                    "(`email`,\n" +
-//                    "`username`)\n" +
-//                    "VALUES\n" +
-//                    "('"+emailAdd+"',\n'" +
-//                    usernameTF.getText()+"')";
-//
-//            statementForEmails.executeUpdate(sqlForEmails);
-//        }
-//
-//        statementForEmails.close();
-//
-//    }
-
 
     public void ensureRegister(ActionEvent actionEvent) throws SQLException {
         String status = "pending";
@@ -230,22 +139,11 @@ public class RegisterEmployeeOnly5 {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
-//        for(int i=)
-//        String sqlForEmails = "INSERT INTO user\n" +
-//                "(`email`,\n" +
-//                "`username`)\n" +
-//                "VALUES\n" +
-//                "('"+emailTF1.getText()+"',\n'" +
-//                usernameTF.getText()+"')";
-//        Statement statementForEmails = conn.createStatement();
-//        statementForEmails.executeUpdate(sqlForEmails);
-
-        //statement.close();
 
         String emailAdd = "";
         //Statement statementForEmails = conn.createStatement();
 
-        for(int i=emailNumber; i>0; i--) {
+        for(int i=emailList.size(); i>0; i--) {
             emailAdd = emailList.get(i-1);
             String sqlForEmails = "INSERT INTO email\n" +
                     "(`email`,\n" +
@@ -302,5 +200,10 @@ public class RegisterEmployeeOnly5 {
             return false;
         }
         else return true;
+    }
+
+    public void editEmail(ActionEvent actionEvent) {
+        emailsTA.setDisable(false);
+        //updatedemails.setText(emailList.toString());
     }
 }
