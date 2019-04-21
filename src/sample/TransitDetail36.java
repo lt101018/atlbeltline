@@ -56,5 +56,6 @@ public class TransitDetail36 {
         }
         TransitDetailRow36 selectedItem = (TransitDetailRow36)table.getSelectionModel().getSelectedItem();
         ///following jobs
+        
     }
 }

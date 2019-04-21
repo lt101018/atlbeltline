@@ -51,11 +51,9 @@
    <Label fx:id="address" layoutX="145.0" layoutY="248.0" text="address_Content" />
    <CheckBox fx:id="isVisitorCheckBox" layoutX="277.0" layoutY="468.0" mnemonicParsing="false" text="Visitor Account" />
    <TextArea fx:id="emailsTA" layoutX="153.0" layoutY="283.0" prefHeight="140.0" prefWidth="200.0" promptText="Your emails" />
-
-    <Button fx:id="ensureEmailBttn" layoutX="405.0" layoutY="310.0" mnemonicParsing="false" onAction="#ensureUpdateEmail" text="Update Email" />
-    <Button fx:id ="editEmailBttn" layoutX="422.0" layoutY="353.0" mnemonicParsing="false" onAction="#editEmail" text="edit" />
-
-   <Label fx:id= "emailLabel" layoutX="115.0" layoutY="432.0" text="Current Email" />
+   <Button fx:id="updateEmailBttn" layoutX="405.0" layoutY="310.0" mnemonicParsing="false" text="Update Email" />
+   <Button layoutX="422.0" layoutY="353.0" mnemonicParsing="false" text="edit" />
+   <Label fx:id="emailLael" layoutX="115.0" layoutY="432.0" text="Current Email" />
    <Label fx:id="updatedemails" layoutX="232.0" layoutY="432.0" text="Label" />
 
 </AnchorPane>
