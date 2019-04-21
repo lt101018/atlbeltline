@@ -76,9 +76,9 @@ public class ManagerViewEdit26 {
     }
 
     public void initialize() throws SQLException {
-        col1.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        col2.setCellValueFactory(new PropertyValueFactory<>("Daily Visits"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("Daily Revenue"));
+        col1.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("dailyVisits"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("dailyRevenue"));
         conn = ConnectionManager.getConn();
         originalStaff = new HashSet<>();
     }
@@ -169,7 +169,7 @@ public class ManagerViewEdit26 {
         Statement statement = conn.createStatement();
         String newDes = descrip.getText();
         String sqlForUpdate = "update event" +
-        "set description = '" + newDes +
+        " set description = '" + newDes +
         "' where event.sitename = '" + sitename + "' and event.name = '" + eventname
                 + "' and event.startdate = '" + startdate + "'";
         modifyAssignTo();
