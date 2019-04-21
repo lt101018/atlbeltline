@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import pojo.UserInfo;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -55,13 +56,26 @@ public class SiteDetail37 {
     }
 
     public void btnLogVisit(ActionEvent actionEvent) throws IOException, SQLException {
+        Statement statement = conn.createStatement();
         String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String siteValue = siteName.getText();
         String openEverydayValue = openEveryday.getText();
         String addressValue = address.getText();
         String sqlForLog = "";
 
-        Statement statement = conn.createStatement();
+        String sqlForCheck = "select *\n" +
+                "from visit_site\n" +
+                "where visitorusername='"+ UserInfo.username +"' and name='" + siteValue + "' and  visitdate='" + formattedDate + "'";
+
+        ResultSet resultSet = statement.executeQuery(sqlForCheck);
+        while(resultSet.next()){
+            //律师函警告
+            return;
+        }
+
+        sqlForLog = "insert into visite_site(visitorusername,name,visitdate) values('"+ UserInfo.username +"','" +
+                siteValue + "','"+ formattedDate +"')";
+
         statement.executeUpdate(sqlForLog);
         statement.close();
     }
