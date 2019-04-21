@@ -199,8 +199,8 @@ public class RegisterEmployeeOnly5 {
         if(!a.equals(b)) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Look, a Warning Dialog");
-            alert.setContentText("Careful with the next step!");
+            alert.setHeaderText("password");
+            alert.setContentText("password isn't the same as comfirmed password!");
             alert.showAndWait();
             return false;
         }
