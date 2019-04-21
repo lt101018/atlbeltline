@@ -9,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import pojo.UserInfo;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -69,7 +70,7 @@ public class SiteDetail37 {
 
         ResultSet resultSet = statement.executeQuery(sqlForCheck);
         while(resultSet.next()){
-            //律师函警告
+            MyAlert.showAlert("You have visited here!");
             return;
         }
 

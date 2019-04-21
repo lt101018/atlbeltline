@@ -34,12 +34,17 @@ public class UserLogin {
 //        tfemail.setText("m2@beltline.com");
 //        tfpassword.setText("manager2");
         ////staff for testing
-        tfemail.setText("msmith@gmail.com");
-        tfpassword.setText("msmith456");
+//        tfemail.setText("msmith@gmail.com");
+//        tfpassword.setText("msmith456");
 
         ////for testing
 //        tfemail.setText("dsmith@outlook.com");
 //        tfpassword.setText("dsmith456");
+
+        //for visitor testing
+        tfemail.setText("mary@outlook.com");
+        tfpassword.setText("msmith789");
+        //"msmith789"
     }
 
     public void login(ActionEvent actionEvent) throws IOException {

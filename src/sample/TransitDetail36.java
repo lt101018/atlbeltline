@@ -41,6 +41,7 @@ public class TransitDetail36 {
         siteName.setText(name);
     }
 
+
     public void initialize(){
         col1.setCellValueFactory(new PropertyValueFactory<>("route"));
         col2.setCellValueFactory(new PropertyValueFactory<>("transportType"));
@@ -74,6 +75,7 @@ public class TransitDetail36 {
         TransitDetailRow36 selectedItem = (TransitDetailRow36)table.getSelectionModel().getSelectedItem();
         ///following jobs
         String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
 
         //**********Here should be modified!!***********
         String sqlForInsert = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getTransportType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
