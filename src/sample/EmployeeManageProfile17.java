@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import pojo.UserInfo;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -64,7 +65,7 @@ public class EmployeeManageProfile17 {
 //        System.out.println("Currently, in screen17 the username is: ");
 //    }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         conn = ConnectionManager.getConn();
         userName = UserInfo.username;
 
@@ -73,7 +74,7 @@ public class EmployeeManageProfile17 {
          * */
         String sqlForEmail = "SELECT * FROM email where username=" +
                 "'" + userName + "'";
-
+        try{
         Statement statement = conn.createStatement();
         emailList = new ArrayList<>();
 
@@ -147,13 +148,18 @@ public class EmployeeManageProfile17 {
         }
 
         statement.close();
+    } catch (SQLException e){
+        System.out.println(e);
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
-    public void updateAll() throws SQLException {
+    public void updateAll() {
         String newFirstName = firstNameTF.getText();
         String newLastName = lastNameTF.getText();
         String newPhone = phoneTF.getText();
         String username = UserInfo.username;
+        try{
         Statement statement = conn.createStatement();
 
         String updateUser = "update user\n" +
@@ -169,10 +175,15 @@ public class EmployeeManageProfile17 {
                 "where username = " + "'" + username + "'";
         statement.executeUpdate(updatePhone);
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
 
-    public void ensureUpdateEmail(ActionEvent actionEvent) throws SQLException{
+    public void ensureUpdateEmail(ActionEvent actionEvent) {
+        try{
         Statement statement = conn.createStatement();
         for(int i=0; i<emailList.size(); i++) {
             String sqlForDelete = "DELETE FROM email\n" +
@@ -201,9 +212,14 @@ public class EmployeeManageProfile17 {
         }
         emailsTA.setDisable(true);
         updatedemails.setText(emailList.toString());
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void ensureUpdate() throws SQLException, IOException {
+    public void ensureUpdate() throws IOException {
+        try{
         Statement statement = conn.createStatement();
         System.out.println("I am here! The usertype is: " + usertype);
         if(usertype.equals(new String("employee"))) {
@@ -250,6 +266,10 @@ public class EmployeeManageProfile17 {
         Parent root = FXMLLoader.load(getClass().getResource(lastFxml));
         Stage stage = (Stage)updateBttn.getScene().getWindow();
         stage.setScene(new Scene(root));
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void ensureCancel(ActionEvent actionEvent) throws IOException {

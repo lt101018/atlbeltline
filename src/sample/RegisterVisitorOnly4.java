@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -56,7 +57,7 @@ public class RegisterVisitorOnly4 {
         conn = ConnectionManager.getConn();
     }
 
-    public void ensureUpdateEmail(ActionEvent actionEvent) throws SQLException{
+    public void ensureUpdateEmail(ActionEvent actionEvent) {
         String read_wroteemails = "";
         read_wroteemails = emailsTA.getText();
         String[] email_string = read_wroteemails.split(",");
@@ -71,13 +72,13 @@ public class RegisterVisitorOnly4 {
         updatedemails.setText(emailList.toString());
     }
 
-    public void ensureRegister(ActionEvent actionEvent) throws SQLException {
+    public void ensureRegister(ActionEvent actionEvent) {
         String status = "pending";
         String inputPwd = passwordTF.getText();
         String inputConfirmedPwd = comfirmpasswordTF.getText();
 
         if(!checkPassWord(inputPwd, inputConfirmedPwd)) return;
-
+        try {
         Statement statement = conn.createStatement();
         String sql = "INSERT INTO user\n" +
                 "(`username`,\n" +
@@ -118,6 +119,10 @@ public class RegisterVisitorOnly4 {
         }
 
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void ensureCancel(ActionEvent actionEvent) throws IOException {
@@ -131,8 +136,8 @@ public class RegisterVisitorOnly4 {
         if(!a.equals(b)) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Look, a Warning Dialog");
-            alert.setContentText("Careful with the next step!");
+            alert.setHeaderText("password");
+            alert.setContentText("password isn't the same as comfirmed password!");
             alert.showAndWait();
             return false;
         }

@@ -13,6 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pojo.UserInfo;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -101,7 +102,7 @@ public class RegisterEmployeeVisitor6 {
 
     }
 
-    public void ensureUpdateEmail(ActionEvent actionEvent) throws SQLException{
+    public void ensureUpdateEmail(ActionEvent actionEvent) {
         String read_wroteemails = "";
         read_wroteemails = emailsTA.getText();
         String[] email_string = read_wroteemails.split(",");
@@ -117,7 +118,7 @@ public class RegisterEmployeeVisitor6 {
     }
 
 
-    public void ensureRegister(ActionEvent actionEvent) throws SQLException {
+    public void ensureRegister(ActionEvent actionEvent)  {
         String status = "pending";
         String inputPwd = passwordTF.getText();
         String inputConfirmedPwd = comfirmpasswordTF.getText();
@@ -144,6 +145,7 @@ public class RegisterEmployeeVisitor6 {
                 "employeevisitor" +
                 "')";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -209,6 +211,9 @@ public class RegisterEmployeeVisitor6 {
 
 
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void ensureCancel(ActionEvent actionEvent) throws IOException {
@@ -222,8 +227,8 @@ public class RegisterEmployeeVisitor6 {
         if(!a.equals(b)) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Look, a Warning Dialog");
-            alert.setContentText("Careful with the next step!");
+            alert.setHeaderText("password");
+            alert.setContentText("password isn't the same as comfirmed password!");
             alert.showAndWait();
             return false;
         }

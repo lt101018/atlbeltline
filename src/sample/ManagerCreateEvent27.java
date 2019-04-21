@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pojo.UserInfo;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -58,8 +59,9 @@ public class ManagerCreateEvent27 {
 //
 //    insert into assign_to(staffusername, sitename, name, startdate) values('','','',''); -- 把该插的都插进去
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         conn = ConnectionManager.getConn();
+        try{
         Statement statement = conn.createStatement();
         /*
         * Below is for sitename
@@ -75,10 +77,13 @@ public class ManagerCreateEvent27 {
 
         System.out.println("Sitename is " + sitename);
         statement.close();
-
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void createEvent(ActionEvent actionEvent) throws IOException, SQLException {
+    public void createEvent(ActionEvent actionEvent) throws IOException {
         String eventName = nameValue.getText();
         String price = priceValue.getText();
         String cap = capValue.getText();
@@ -96,13 +101,19 @@ public class ManagerCreateEvent27 {
                 cap + "',\n'" +
                 descrp + "',\n'" +
                 min + "')";
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sqlForInsertingEvent);
         statement.close();
         createAssignTo();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void createAssignTo () throws SQLException {
+    public void createAssignTo () {
+        try{
         String eventName = nameValue.getText();
         String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String sqlForInsert = "";
@@ -114,7 +125,10 @@ public class ManagerCreateEvent27 {
         }
         statement.close();
         // insert into assign_to(staffusername, sitename, name, startdate) values('','','','')
-
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void btnBack(ActionEvent actionEvent) throws IOException {
@@ -124,7 +138,8 @@ public class ManagerCreateEvent27 {
     }
 
 
-    public void filterStaff(ActionEvent actionEvent) throws SQLException {
+    public void filterStaff(ActionEvent actionEvent) {
+        try{
         Statement statement = conn.createStatement();
         //*******Populate the listview*******
         String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -152,6 +167,10 @@ public class ManagerCreateEvent27 {
             list.add(resultSet.getString("firstname") + " " + resultSet.getString("lastname"));
         }
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
         //*******Populate the listview*******
     }
 }
