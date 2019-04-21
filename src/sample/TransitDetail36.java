@@ -31,6 +31,7 @@ public class TransitDetail36 {
     public static String lastFxml;
     public ComboBox cbTransportType;
     private static Connection conn;
+    public Button refreshBttn;
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
@@ -76,19 +77,18 @@ public class TransitDetail36 {
 
         //**********Here should be modified!!***********
         String sqlForInsert = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getTransportType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
-
         statement.executeUpdate(sqlForInsert);
         statement.close();
     }
 
-
-    //This should be execuated when the comboBox is chosen!
-    public void filterOnType() throws SQLException {
+    public void refreshTransit(ActionEvent actionEvent) throws SQLException {
         Statement statement = conn.createStatement();
         String transportType = cbTransportType.getValue().toString();
-
-        //**********Here should be modified!!***********
-        String sqlForDifferentType = "";
+        String sitename = siteName.getText();
+        String sqlForDifferentType = "select t.route,t.type, t.price, count(case when c.route=t.route then 1 end) as connectedsites" +
+        " from transit as t, connect as c" +
+        " where t.route in (select route from connect where name='" + sitename + "') and t.type='" + transportType+"'" +
+        " group by t.route";
 
         ResultSet resultSet = statement.executeQuery(sqlForDifferentType);
         while(resultSet.next()){
