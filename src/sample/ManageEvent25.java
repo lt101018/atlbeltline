@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.ManageEventRow25;
 import pojo.ManageTransitRow22;
+import pojo.UserInfo;
 import tools.MyAlert;
 
 import java.io.IOException;
@@ -107,7 +108,10 @@ public class ManageEvent25 {
 
         String sql = "select e.name, datediff(e.enddate, e.startdate) as duration , count(*) as total_visits, e.price*count(*) as total_revenues, e.sitename, e.startdate\n" +
                 "from visit_event as ve, event as e\n" +
-                "where ve.sitename = e.sitename and ve.eventname = e.name and ve.eventstartdate = e.startdate "+eventSql+" "+descriptionSql+" "+dateSql+" "+dateDifSql+" \n" +
+                "where ve.sitename = e.sitename and ve.eventname = e.name and ve.eventstartdate = e.startdate "+eventSql+" "+descriptionSql+" "+dateSql+" "+dateDifSql+" and e.sitename in " +
+                "( select s.name\n" +
+                "from site as s\n" +
+                "where s.managerusername = '"+ UserInfo.username +"')" +
                 "group by ve.sitename, ve.eventname, ve.eventstartdate\n" +
                 visitRevenueSql;
         System.out.println(sql);
