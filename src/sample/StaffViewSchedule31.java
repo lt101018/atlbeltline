@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.StaffViewScheduleRow31;
+import pojo.UserInfo;
 import tools.MyAlert;
 
 import java.io.IOException;
@@ -90,12 +91,12 @@ public class StaffViewSchedule31 {
         if(datepicker1.getValue()!=null && datepicker2.getValue()!=null){
             String formattedDate1 = datepicker1.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String formattedDate2 = datepicker2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            dateSql1 = "and ev.startdate>='"+formattedDate1+"' and ev.enddate<='"+formattedDate2+"'";
+            dateSql1 = "  and not (e.startdate>'"+formattedDate2+"' or e.enddate<'"+formattedDate1+"')  ";
         }
 
         String sql = "select e.name, e.sitename,e.startdate,e.enddate,count(*)as staffcount\n" +
                 "from event as e, assign_to as a\n" +
-                "where e.name =a.name and e.sitename=a.sitename "+eventSql+"  "+descriptionSql+" "+dateSql+" and e.sitename in (select ev.sitename from event as ev where "+eventSql1+"  "+descriptionSql1+" "+dateSql1+" ) and e.startdate=a.startdate\n" +
+                "where e.name =a.name and e.sitename=a.sitename "+eventSql+"  "+descriptionSql+" "+dateSql+" and e.sitename in (select ev.sitename from event as ev where "+eventSql1+"  "+descriptionSql1+" "+dateSql1+" ) and e.startdate=a.startdate and a.staffusername = '"+ UserInfo.username +"' " +
                 "group by a.sitename,a.name,a.startdate;";
         System.out.println(sql);
 
