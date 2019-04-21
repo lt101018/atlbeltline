@@ -124,7 +124,7 @@ public class ManagerViewEdit26 {
         String sqlForStaffForFree = "(select u.firstname, u.lastname\n" +
                 "from user as u, employee as emp, event as e, assign_to as at\n" +
                 "where emp.username not in (select staffusername from assign_to) and emp.employeetype = 'staff' and u.status = 'approved' and at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate and emp.username = u.username)\n";
-                //"union\n" +
+        System.out.println(sqlForStaffForFree);
         String sqlForStaffForThisEvent = "(select u.firstname, u.lastname\n" +
                 "from assign_to as at, employee as e, user as u\n" +
                 "where u.username = e.username and e.username = at.staffusername and at.sitename = '" +

@@ -100,6 +100,11 @@ public class ExploreSite35 {
             dateTableSql2 = " and (v.visitdate between '"+formattedDate1+"' and '"+formattedDate2+"') ";
         }
 
+        String dateTableSql3 = "";
+        if(datepicker1.getValue()!=null && datepicker2.getValue()!=null){
+            dateTableSql3 = " and not (v.startdate>'"+formattedDate2+"' or v.enddate<'"+formattedDate1+"') ";
+        }
+
 
         table.getItems().clear();
         String sql = "CREATE  or replace view sitetotalvisit AS\n" +
@@ -122,7 +127,7 @@ public class ExploreSite35 {
         System.out.println(sql);
 
         sql = "CREATE  or replace view eventcount35 AS\n" +
-                "SELECT s.name,count(case when s.name=v.sitename and not (v.startdate>'"+formattedDate2+"' or v.enddate<'"+formattedDate1+"')then 1 end) as eventcount\n" +
+                "SELECT s.name,count(case when s.name=v.sitename "+dateTableSql3+" then 1 end) as eventcount\n" +
                 "from site as s, event as v\n" +
                 "group by s.name;";
         statement.executeUpdate(sql);
