@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import pojo.ManageEventRow25;
 import pojo.TransitHistroyRow16;
 import pojo.ViewEventsRow26;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -56,7 +57,7 @@ public class ManagerViewEdit26 {
     ObservableList<String> list;
     public HashSet<String> originalStaff;
 
-    public void setRow(ManageEventRow25 inputRow) throws SQLException {
+    public void setRow(ManageEventRow25 inputRow) {
         row25 = inputRow;
         eventname = row25.getName();
         startdate = row25.getStartDate();
@@ -75,7 +76,8 @@ public class ManagerViewEdit26 {
         stage.setScene(new Scene(root));
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
+
         col1.setCellValueFactory(new PropertyValueFactory<>("date"));
         col2.setCellValueFactory(new PropertyValueFactory<>("dailyVisits"));
         col3.setCellValueFactory(new PropertyValueFactory<>("dailyRevenue"));
@@ -83,7 +85,8 @@ public class ManagerViewEdit26 {
         originalStaff = new HashSet<>();
     }
 
-    public void getAllParams() throws SQLException {
+    public void getAllParams()  {
+        try{
         Statement statement = conn.createStatement();
         String sqlForEvent = "";
         sqlForEvent = "select name, price, startdate, enddate, minstaffreq, capacity, description from event where sitename = '" +
@@ -99,6 +102,10 @@ public class ManagerViewEdit26 {
             cap = resultSet.getString("capacity");
             descrip.setText(resultSet.getString("description"));
         }
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
 
         priceValue.setText(price);
         endDateValue.setText(enddate);
@@ -108,7 +115,8 @@ public class ManagerViewEdit26 {
         capacityValue.setText(cap);
     }
 
-    public void getAssignedStaff() throws SQLException  {
+    public void getAssignedStaff() {
+        try{
         Statement statement = conn.createStatement();
         list = FXCollections.observableArrayList();
         listView.setItems(list);
@@ -137,9 +145,13 @@ public class ManagerViewEdit26 {
         }
 
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent)  {
         int visitrange1 = Integer.parseInt(tfvisit1.getText());
         int visitrange2 = Integer.parseInt(tfvisit2.getText());
 
@@ -156,16 +168,21 @@ public class ManagerViewEdit26 {
         " having "+visitrange1+"<daily_visits<"+visitrange2 + " and " + revenuerange1 +"<daily_revenues<" + revenuerange2;
 
         System.out.println(sqlForFilter);
-
+        try{
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sqlForFilter);
         while(resultSet.next()) {
             addElement(resultSet.getString(1),Integer.parseInt(resultSet.getString(2)),Double.parseDouble(resultSet.getString(3)));
         }
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void btnUpdate(ActionEvent actionEvent) throws SQLException {
+    public void btnUpdate(ActionEvent actionEvent)  {
+        try{
         Statement statement = conn.createStatement();
         String newDes = descrip.getText();
         String sqlForUpdate = "update event" +
@@ -175,9 +192,14 @@ public class ManagerViewEdit26 {
         modifyAssignTo();
         statement.executeUpdate(sqlForUpdate);
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
-    public void modifyAssignTo() throws SQLException {
+    public void modifyAssignTo()  {
+        try{
         //Below is for adding
         String sqlForInsert = "";
         Statement statement = conn.createStatement();
@@ -220,6 +242,10 @@ public class ManagerViewEdit26 {
             }
         }
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void addElement(String date, int dailyVisits, double dailyRevenue) {

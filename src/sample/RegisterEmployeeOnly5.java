@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -94,7 +95,7 @@ public class RegisterEmployeeOnly5 {
 
     }
 
-    public void ensureUpdateEmail(ActionEvent actionEvent) throws SQLException{
+    public void ensureUpdateEmail(ActionEvent actionEvent){
         String read_wroteemails = "";
         read_wroteemails = emailsTA.getText();
         String[] email_string = read_wroteemails.split(",");
@@ -109,7 +110,7 @@ public class RegisterEmployeeOnly5 {
         updatedemails.setText(emailList.toString());
     }
 
-    public void ensureRegister(ActionEvent actionEvent) throws SQLException {
+    public void ensureRegister(ActionEvent actionEvent){
         String status = "pending";
         String inputPwd = passwordTF.getText();
         String inputConfirmedPwd = comfirmpasswordTF.getText();
@@ -136,6 +137,7 @@ public class RegisterEmployeeOnly5 {
                 "employee" +
                 "')";
         System.out.println(sql);
+        try{
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -181,6 +183,9 @@ public class RegisterEmployeeOnly5 {
         statement.executeUpdate(sqlForEmployee);
 
         statement.close();
+        }catch (SQLException e){
+            MyAlert.showAlert(e.getMessage());
+        }
     }
 
     public void ensureCancel(ActionEvent actionEvent) throws IOException {
