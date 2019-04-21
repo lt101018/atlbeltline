@@ -182,7 +182,7 @@ public class ExploreEvent33 {
         Parent root = (Parent)fxmlLoader.load();
         VisitorEventDetail34 controller = fxmlLoader.getController();
         controller.setLastFxml("exploreevent33.fxml");
-        controller.setLabels(selectedItem.getSiteName(),selectedItem.getEventName(),selectedItem.getTicketPrice(),selectedItem.getTicketRemaining(),selectedItem.getStartDate(),selectedItem.getEndDate(),selectedItem.getDescription());
+        controller.setLabels(selectedItem.getEventName(),selectedItem.getSiteName(),selectedItem.getTicketPrice(),selectedItem.getTicketRemaining(),selectedItem.getStartDate(),selectedItem.getEndDate(),selectedItem.getDescription());
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));
     }

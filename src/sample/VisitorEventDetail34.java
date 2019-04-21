@@ -54,7 +54,6 @@ public class VisitorEventDetail34 {
 
 
 
-/////////////foreign key constraint???
     public void btnLogVisit(ActionEvent actionEvent) throws SQLException {
         if(datepicker.getValue()==null){
             MyAlert.showAlert("Please select time.");
