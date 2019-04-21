@@ -93,7 +93,7 @@ public class ManagerViewEdit26 {
 
         ResultSet resultSet = statement.executeQuery(sqlForEvent);
         while(resultSet.next()) {
-            price = resultSet.getString("name");
+            price = resultSet.getString("price");
             enddate = resultSet.getString("enddate");
             minreqstaff = resultSet.getString("minstaffreq");
             cap = resultSet.getString("capacity");
@@ -172,8 +172,8 @@ public class ManagerViewEdit26 {
         "set description = '" + newDes +
         "' where event.sitename = '" + sitename + "' and event.name = '" + eventname
                 + "' and event.startdate = '" + startdate + "'";
-
-        statement.executeQuery(sqlForUpdate);
+        modifyAssignTo();
+        statement.executeUpdate(sqlForUpdate);
         statement.close();
     }
 
@@ -194,6 +194,7 @@ public class ManagerViewEdit26 {
                     username = resultSet.getString(1);
                 }
                 sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + username + "','" + sitename + "','" + nameValue + "','" + startdate + "')";
+                System.out.println(sqlForInsert);
                 statement.executeUpdate(sqlForInsert);
             }
         }
@@ -204,6 +205,7 @@ public class ManagerViewEdit26 {
                 String lastname = s.split(" ")[1];
                 String username = "";
                 String sqlForUsername = "select username from user where firstname = '" + firstname +"' and lastname = '"+ lastname +"'";
+                System.out.println(sqlForUsername);
                 ResultSet resultSet = statement.executeQuery(sqlForUsername);
                 while(resultSet.next()) {
                     username = resultSet.getString(1);
@@ -212,7 +214,8 @@ public class ManagerViewEdit26 {
                 String sqlForDelete = "delete from assign_to where sitename = '" +
                         sitename + "' and name = '" +
                         eventname + "' and startdate = '" +
-                        startdate +"' and staffusername ='"+ username +"')";
+                        startdate +"' and staffusername ='"+ username +"'";
+                System.out.println(sqlForDelete);
                 statement.executeUpdate(sqlForDelete);
             }
         }
