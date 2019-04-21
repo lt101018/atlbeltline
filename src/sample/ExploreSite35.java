@@ -11,6 +11,7 @@ import pojo.ExploreSiteRow35;
 import tools.MyAlert;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ExploreSite35 {
     public TableView table;
@@ -64,7 +65,7 @@ public class ExploreSite35 {
         ///test above
     }
 
-    public void btnSiteDetail(ActionEvent actionEvent) throws IOException {
+    public void btnSiteDetail(ActionEvent actionEvent) throws IOException, SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
