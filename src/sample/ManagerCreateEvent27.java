@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 
 public class ManagerCreateEvent27 {
 
@@ -27,8 +28,8 @@ public class ManagerCreateEvent27 {
     public TextField priceValue;
     public TextField capValue;
     public TextField minStaffValue;
-    public TextField startdateValue;
-    public TextField endDateValue;
+    public DatePicker startdateValue;
+    public DatePicker endDateValue;
     private static Connection conn;
 
     public String sitename;
@@ -82,8 +83,8 @@ public class ManagerCreateEvent27 {
         String price = priceValue.getText();
         String cap = capValue.getText();
         String min = minStaffValue.getText();
-        String startdate = startdateValue.getText();
-        String enddate = endDateValue.getText();
+        String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String enddate = endDateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String descrp = descriptionValue.getText();
         String sqlForInsertingEvent = "insert into event(sitename, name, startdate, enddate, price, capacity, description, minstaffreq)" +
                 "values\n('" +
@@ -103,7 +104,7 @@ public class ManagerCreateEvent27 {
 
     public void createAssignTo () throws SQLException {
         String eventName = nameValue.getText();
-        String startdate = startdateValue.getText();
+        String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String sqlForInsert = "";
         Statement statement = conn.createStatement();
         ObservableList<String> selectedStaff = listView.getSelectionModel().getSelectedItems();
@@ -126,8 +127,8 @@ public class ManagerCreateEvent27 {
     public void filterStaff(ActionEvent actionEvent) throws SQLException {
         Statement statement = conn.createStatement();
         //*******Populate the listview*******
-        String startdate = startdateValue.getText();
-        String enddate = endDateValue.getText();
+        String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String enddate = endDateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         list = FXCollections.observableArrayList();
         listView.setItems(list);

@@ -19,6 +19,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ManagerViewEdit26 {
 
@@ -52,6 +54,7 @@ public class ManagerViewEdit26 {
     private String sitename;
     public static ManageEventRow25 row25;
     ObservableList<String> list;
+    public HashSet<String> originalStaff;
 
     public void setRow(ManageEventRow25 inputRow) throws SQLException {
         row25 = inputRow;
@@ -77,6 +80,7 @@ public class ManagerViewEdit26 {
         col2.setCellValueFactory(new PropertyValueFactory<>("Daily Visits"));
         col3.setCellValueFactory(new PropertyValueFactory<>("Daily Revenue"));
         conn = ConnectionManager.getConn();
+        originalStaff = new HashSet<>();
     }
 
     public void getAllParams() throws SQLException {
@@ -122,6 +126,7 @@ public class ManagerViewEdit26 {
 
         ResultSet resultSet2 = statement.executeQuery(sqlForStaffForThisEvent);
         while (resultSet2.next()) {
+            originalStaff.add(resultSet2.getString("firstname") + " " + resultSet2.getString("lastname"));
             list.add(resultSet2.getString("firstname") + " " + resultSet2.getString("lastname"));
         }
         listView.getSelectionModel().selectAll();
@@ -141,16 +146,19 @@ public class ManagerViewEdit26 {
         double revenuerange1 = Double.parseDouble(tfRevenue1.getText());
         double revenuerange2 = Double.parseDouble(tfRevenue2.getText());
 
-        String sqlForFilterEvents = "select ve.visitdate as date, count(*) as daily_visits, e.price*count(*) as daily_revenues"+
-        "from event as e, visit_event as ve" +
-        "where" +
-        "e.sitename = ve.sitename and e.name = ve.eventname and e.startdate = ve.eventstartdate" +
-        "and e.sitename = 'inman park' and e.name = 'bus tour' and e.startdate = '2019-02-01'" +
-        "group by ve.visitdate" +
-        "having "+visitrange1+"<daily_visits<"+visitrange2 + " and " + revenuerange1 +"<daily_revenues<" + revenuerange2;
+        String sqlForFilter = "select ve.visitdate as date, count(*) as daily_visits, e.price*count(*) as daily_revenues" +
+        " from event as e, visit_event as ve" +
+        " where" +
+        " e.sitename = ve.sitename and e.name = ve.eventname and e.startdate = ve.eventstartdate" +
+        " and e.sitename = '"+ sitename +"' and e.name = '"+ eventname +"' " +
+        " and e.startdate<=ve.visitdate<=e.enddate" +
+        " group by ve.visitdate" +
+        " having "+visitrange1+"<daily_visits<"+visitrange2 + " and " + revenuerange1 +"<daily_revenues<" + revenuerange2;
+
+        System.out.println(sqlForFilter);
 
         Statement statement = conn.createStatement();
-        ResultSet resultSet = statement.executeQuery(sqlForFilterEvents);
+        ResultSet resultSet = statement.executeQuery(sqlForFilter);
         while(resultSet.next()) {
             addElement(resultSet.getString(1),Integer.parseInt(resultSet.getString(2)),Double.parseDouble(resultSet.getString(3)));
         }
@@ -169,8 +177,46 @@ public class ManagerViewEdit26 {
         statement.close();
     }
 
-    public void modifyAssignTo() {
-        //
+    public void modifyAssignTo() throws SQLException {
+        //Below is for adding
+        String sqlForInsert = "";
+        Statement statement = conn.createStatement();
+        ObservableList<String> selectedStaff = listView.getSelectionModel().getSelectedItems();
+
+        for(String staff:selectedStaff) {
+            if(!originalStaff.contains(staff)) {
+                String firstname = staff.split(" ")[0];
+                String lastname = staff.split(" ")[1];
+                String username = "";
+                String sqlForUsername = "select username from user where firstname = '" + firstname +"' and lastname = '"+ lastname +"'";
+                ResultSet resultSet = statement.executeQuery(sqlForUsername);
+                while(resultSet.next()) {
+                    username = resultSet.getString(1);
+                }
+                sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + username + "','" + sitename + "','" + nameValue + "','" + startdate + "')";
+                statement.executeUpdate(sqlForInsert);
+            }
+        }
+
+        for(String s:originalStaff) {
+            if(!selectedStaff.contains(s)) {
+                String firstname = s.split(" ")[0];
+                String lastname = s.split(" ")[1];
+                String username = "";
+                String sqlForUsername = "select username from user where firstname = '" + firstname +"' and lastname = '"+ lastname +"'";
+                ResultSet resultSet = statement.executeQuery(sqlForUsername);
+                while(resultSet.next()) {
+                    username = resultSet.getString(1);
+                }
+
+                String sqlForDelete = "delete from assign_to where sitename = '" +
+                        sitename + "' and name = '" +
+                        eventname + "' and startdate = '" +
+                        startdate +"' and staffusername ='"+ username +"')";
+                statement.executeUpdate(sqlForDelete);
+            }
+        }
+        statement.close();
     }
 
     public void addElement(String date, int dailyVisits, double dailyRevenue) {
