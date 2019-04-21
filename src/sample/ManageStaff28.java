@@ -68,12 +68,12 @@ public class ManageStaff28 {
         table.getItems().clear();
         String fnameSql = "";
         if(tfFirstName.getText().length()!=0){
-            fnameSql = "and u.firstname = '"+tfFirstName.getText()+"'";
+            fnameSql = "and u.firstname like '%"+tfFirstName.getText()+"%'";
         }
 
         String lnameSql = "";
         if(tfLastName.getText().length()!=0){
-            lnameSql = "and u.lastname = '"+tfLastName.getText()+"'";
+            lnameSql = "and u.lastname like '%"+tfLastName.getText()+"%'";
         }
 
         String siteSql = "";

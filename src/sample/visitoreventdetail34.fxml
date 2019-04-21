@@ -30,6 +30,6 @@
       <Label layoutX="279.0" layoutY="169.0" prefHeight="17.0" prefWidth="102.0" text="Ticket Remaining" />
       <Label fx:id="labelTicketRemaining" layoutX="402.0" layoutY="169.0" prefHeight="17.0" prefWidth="80.0" text="Label" />
       <Label layoutX="60.0" layoutY="216.0" prefHeight="17.0" prefWidth="63.0" text="Description" />
-      <Label fx:id="description" layoutX="131.0" layoutY="216.0" prefHeight="182.0" prefWidth="406.0" text="Label" />
+      <Label fx:id="description" layoutX="131.0" layoutY="216.0" prefHeight="182.0" prefWidth="406.0" text="Label" wrapText="true" />
    </children>
 </AnchorPane>

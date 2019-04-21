@@ -28,6 +28,9 @@
             <TableColumn fx:id="col4" prefWidth="107.33329772949219" text="Ticket Remaining" />
             <TableColumn fx:id="col5" prefWidth="83.33331298828125" text="Total Visits" />
             <TableColumn fx:id="col6" prefWidth="75.33334350585938" text="My Visits" />
+            <TableColumn fx:id="col7" prefWidth="75.33334350585938" text="startDate" visible="false"/>
+            <TableColumn fx:id="col8" prefWidth="75.33334350585938" text="endDate" visible="false"/>
+            <TableColumn fx:id="col9" prefWidth="75.33334350585938" text="description" visible="false"/>
         </columns>
       </TableView>
       <Button layoutX="277.0" layoutY="495.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />

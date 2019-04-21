@@ -149,7 +149,7 @@ public class ManageEvent25 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnDelete(ActionEvent actionEvent) {
+    public void btnDelete(ActionEvent actionEvent) throws SQLException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
@@ -157,6 +157,14 @@ public class ManageEvent25 {
         ManageEventRow25 selectedItem = (ManageEventRow25)table.getSelectionModel().getSelectedItem();
         ///following jobs
 
+        String sql = "delete from event where sitename = '"+selectedItem.getSiteName()+"' and name = '"+selectedItem.getName()+"' and startdate = '"+selectedItem.getStartDate()+"';";
+
+        Statement statement = conn.createStatement();
+        statement.executeUpdate(sql);
+        statement.close();
+
+        btnFilter(null);
+        MyAlert.showAlert("Event deleted.");
     }
 
     public void btnCreate(ActionEvent actionEvent) throws IOException {
