@@ -146,6 +146,7 @@ public class RegisterEmployeeVisitor6 {
                 "')";
         System.out.println(sql);
         try{
+        conn.setAutoCommit(false);
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -208,11 +209,23 @@ public class RegisterEmployeeVisitor6 {
                 "('" + usernameTF.getText()+"')";
 
         statement.executeUpdate(sqlForVisitor);
-
-
         statement.close();
+        conn.commit();
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+            Stage stage = (Stage)registerBttn.getScene().getWindow();
+            stage.setScene(new Scene(root));} catch (IOException e) {
+            System.out.println(e);
+        }
         }catch (SQLException e){
             MyAlert.showAlert(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException e1)
+            {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
     }
 

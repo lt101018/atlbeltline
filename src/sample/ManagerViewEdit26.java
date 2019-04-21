@@ -201,6 +201,7 @@ public class ManagerViewEdit26 {
     public void modifyAssignTo()  {
         try{
         //Below is for adding
+        conn.setAutoCommit(false);
         String sqlForInsert = "";
         Statement statement = conn.createStatement();
         ObservableList<String> selectedStaff = listView.getSelectionModel().getSelectedItems();
@@ -242,6 +243,7 @@ public class ManagerViewEdit26 {
             }
         }
         statement.close();
+        conn.commit();
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());

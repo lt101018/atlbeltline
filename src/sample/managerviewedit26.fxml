@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="798.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerViewEdit26">
+<AnchorPane prefHeight="798.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManagerViewEdit26">
    <children>
       <Label layoutX="252.0" layoutY="48.0" text="View/Edit Event">
          <font>
@@ -28,19 +28,19 @@
       <Button layoutX="278.0" layoutY="741.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="25.0" prefWidth="63.0" text="Back" />
       <Button layoutX="94.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnFilter" prefHeight="25.0" prefWidth="80.0" text="Filter" />
       <Button layoutX="435.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnUpdate" prefHeight="25.0" prefWidth="80.0" text="Update" />
-      <TextField fx:id="tfRevenue1" layoutX="455.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0"/>
-      <TextField fx:id="tfRevenue2" layoutX="515.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0"/>
+      <TextField fx:id="tfRevenue1" layoutX="455.0" layoutY="451.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField fx:id="tfRevenue2" layoutX="544.0" layoutY="450.0" prefHeight="27.0" prefWidth="56.0" />
       <Label layoutX="320.0" layoutY="455.0" text="Daily Revenue Range" />
-      <Label layoutX="500.0" layoutY="455.0" text="--" />
-      <TextField fx:id="tfvisit1" layoutX="182.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
-      <TextField fx:id="tfvisit2" layoutX="243.0" layoutY="451.0" prefHeight="25.0" prefWidth="38.0" />
+      <Label layoutX="519.0" layoutY="456.0" text="--" />
+      <TextField fx:id="tfvisit1" layoutX="182.0" layoutY="451.0" prefHeight="27.0" prefWidth="54.0" />
+      <TextField fx:id="tfvisit2" layoutX="268.0" layoutY="451.0" prefHeight="27.0" prefWidth="50.0" />
       <Label layoutX="67.0" layoutY="455.0" text="Daily Visits Range" />
-      <Label layoutX="226.0" layoutY="455.0" text="--" />
+      <Label layoutX="246.0" layoutY="455.0" text="--" />
       <Label layoutX="365.0" layoutY="130.0" text="End Date" />
       <Label layoutX="85.0" layoutY="87.0" text="Name" />
       <Label layoutX="368.0" layoutY="90.0" text="Price($)" />
       <Label layoutX="86.0" layoutY="382.0" text="Description" />
-      <TextArea fx:id="descrip" layoutX="178.0" layoutY="341.0" prefHeight="97.0" prefWidth="315.0" />
+      <TextArea fx:id="descrip" layoutX="178.0" layoutY="341.0" prefHeight="97.0" prefWidth="315.0" wrapText="true"/>
       <ListView fx:id="listView" layoutX="182.0" layoutY="204.0" prefHeight="97.0" prefWidth="315.0" />
       <Label layoutX="77.0" layoutY="244.0" text="Staff Assigned" />
       <Label layoutX="34.0" layoutY="161.0" text="Minimum Staff Required" />

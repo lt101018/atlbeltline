@@ -172,6 +172,7 @@ public class ManageUser18 {
                 "set status = 'declined'\n" +
                 "where username = '"+selectedItem.getUsername()+"' and status='pending';\n";
         try{
+        System.out.println(sql);
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
