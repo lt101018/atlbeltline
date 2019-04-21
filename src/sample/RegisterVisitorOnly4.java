@@ -79,49 +79,63 @@ public class RegisterVisitorOnly4 {
 
         if(!checkPassWord(inputPwd, inputConfirmedPwd)) return;
         try {
-        Statement statement = conn.createStatement();
-        String sql = "INSERT INTO user\n" +
-                "(`username`,\n" +
-                "`firstname`,\n" +
-                "`lastname`,\n" +
-                "`status`,\n" +
-                "`password`,\n" +
-                "`usertype`)\n" +
-                "VALUES\n" +
-                "('"+usernameTF.getText()+"',\n'" +
-                firstNameTF.getText()+"',\n'" +
-                lastNameTF.getText()+"',\n'" +
-                status+"',\n'" +
-                passwordTF.getText()+"',\n'"+
-                "visitor" +
-                "')";
-
-        statement.executeUpdate(sql);
-
-        String sqlForVisitor = "INSERT INTO visitor\n" +
-        "(`username`)\n" +
-        "VALUES\n" +
-        "('" + usernameTF.getText()+"')";
-
-        statement.executeUpdate(sqlForVisitor);
-
-        String emailAdd = "";
-
-        for(int i=emailList.size(); i>0; i--) {
-            emailAdd = emailList.get(i-1);
-            String sqlForEmails = "INSERT INTO email\n" +
-                    "(`email`,\n" +
-                    "`username`)\n" +
+            Statement statement = conn.createStatement();
+            String sql = "INSERT INTO user\n" +
+                    "(`username`,\n" +
+                    "`firstname`,\n" +
+                    "`lastname`,\n" +
+                    "`status`,\n" +
+                    "`password`,\n" +
+                    "`usertype`)\n" +
                     "VALUES\n" +
-                    "('"+emailAdd+"',\n'" +
-                    usernameTF.getText()+"')";
-            statement.executeUpdate(sqlForEmails);
-        }
+                    "('"+usernameTF.getText()+"',\n'" +
+                    firstNameTF.getText()+"',\n'" +
+                    lastNameTF.getText()+"',\n'" +
+                    status+"',\n'" +
+                    passwordTF.getText()+"',\n'"+
+                    "visitor" +
+                    "')";
 
-        statement.close();
+            statement.executeUpdate(sql);
+
+            String sqlForVisitor = "INSERT INTO visitor\n" +
+            "(`username`)\n" +
+            "VALUES\n" +
+            "('" + usernameTF.getText()+"')";
+
+            statement.executeUpdate(sqlForVisitor);
+
+            String emailAdd = "";
+
+            for(int i=emailList.size(); i>0; i--) {
+                emailAdd = emailList.get(i-1);
+                String sqlForEmails = "INSERT INTO email\n" +
+                        "(`email`,\n" +
+                        "`username`)\n" +
+                        "VALUES\n" +
+                        "('"+emailAdd+"',\n'" +
+                        usernameTF.getText()+"')";
+                statement.executeUpdate(sqlForEmails);
+            }
+
+            statement.close();
+            conn.commit();
+            try{
+                Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+                Stage stage = (Stage)registerBttn.getScene().getWindow();
+                stage.setScene(new Scene(root));} catch (IOException e) {
+                System.out.println(e);
+            }
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException e1)
+            {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
     }
 

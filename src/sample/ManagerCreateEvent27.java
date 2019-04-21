@@ -88,8 +88,14 @@ public class ManagerCreateEvent27 {
         String price = priceValue.getText();
         String cap = capValue.getText();
         String min = minStaffValue.getText();
+        if(startdateValue.getValue()==null || endDateValue.getValue()==null ) {
+            MyAlert.showAlert("Input your start time and end time!");
+            return;
+        }
         String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String enddate = endDateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if (startdate.length()==0) startdate = 0 + "";
+        if (enddate.length()==0) enddate = Integer.MAX_VALUE + "";
         String descrp = descriptionValue.getText();
         String sqlForInsertingEvent = "insert into event(sitename, name, startdate, enddate, price, capacity, description, minstaffreq)" +
                 "values\n('" +
@@ -102,10 +108,11 @@ public class ManagerCreateEvent27 {
                 descrp + "',\n'" +
                 min + "')";
         try{
-        Statement statement = conn.createStatement();
-        statement.executeUpdate(sqlForInsertingEvent);
-        statement.close();
-        createAssignTo();
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(sqlForInsertingEvent);
+            statement.close();
+            createAssignTo();
+            MyAlert.showAlert("Create Succeeds!");
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());
@@ -114,16 +121,22 @@ public class ManagerCreateEvent27 {
 
     public void createAssignTo () {
         try{
-        String eventName = nameValue.getText();
-        String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String sqlForInsert = "";
-        Statement statement = conn.createStatement();
-        ObservableList<String> selectedStaff = listView.getSelectionModel().getSelectedItems();
-        for(String staff:selectedStaff) {
-            sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + staff + "','" + sitename + "','" + eventName + "','" + startdate + "')";
-            statement.executeUpdate(sqlForInsert);
-        }
-        statement.close();
+            String eventName = nameValue.getText();
+
+            String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));;
+
+            if(startdateValue.getValue()==null || endDateValue.getValue()==null ) {
+                MyAlert.showAlert("Input your start time and end time!");
+                return;
+            }
+            String sqlForInsert = "";
+            Statement statement = conn.createStatement();
+            ObservableList<String> selectedStaff = listView.getSelectionModel().getSelectedItems();
+            for(String staff:selectedStaff) {
+                sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + staff + "','" + sitename + "','" + eventName + "','" + startdate + "')";
+                statement.executeUpdate(sqlForInsert);
+            }
+            statement.close();
         // insert into assign_to(staffusername, sitename, name, startdate) values('','','','')
         } catch (SQLException e){
             System.out.println(e);
@@ -142,9 +155,13 @@ public class ManagerCreateEvent27 {
         try{
         Statement statement = conn.createStatement();
         //*******Populate the listview*******
+
+        if(startdateValue.getValue()==null || endDateValue.getValue()==null ) {
+            MyAlert.showAlert("Input your start time and end time!");
+            return ;
+        }
         String startdate = startdateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String enddate = endDateValue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
         list = FXCollections.observableArrayList();
         listView.setItems(list);
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -170,6 +187,13 @@ public class ManagerCreateEvent27 {
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException e1)
+            {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
         //*******Populate the listview*******
     }

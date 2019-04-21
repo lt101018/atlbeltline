@@ -160,6 +160,7 @@ public class EmployeeManageProfile17 {
         String newPhone = phoneTF.getText();
         String username = UserInfo.username;
         try{
+        conn.setAutoCommit(false);
         Statement statement = conn.createStatement();
 
         String updateUser = "update user\n" +
@@ -175,6 +176,7 @@ public class EmployeeManageProfile17 {
                 "where username = " + "'" + username + "'";
         statement.executeUpdate(updatePhone);
         statement.close();
+        conn.commit();
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());
@@ -193,6 +195,9 @@ public class EmployeeManageProfile17 {
         String read_wroteemails = "";
         read_wroteemails = emailsTA.getText();
         String[] email_string = read_wroteemails.split(",");
+        for(int i=0; i<email_string.length; i++) {
+            email_string[i] = email_string[i].trim();
+        }
         emailList.clear();
         System.out.println("After being cleaned, the emailList is: " + emailList);
         emailList.addAll(Arrays.asList(email_string));
@@ -269,6 +274,7 @@ public class EmployeeManageProfile17 {
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());
+
         }
     }
 

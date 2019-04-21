@@ -138,9 +138,9 @@ public class RegisterEmployeeOnly5 {
                 "')";
         System.out.println(sql);
         try{
+        conn.setAutoCommit(false);
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
-
 
         String emailAdd = "";
         //Statement statementForEmails = conn.createStatement();
@@ -183,8 +183,22 @@ public class RegisterEmployeeOnly5 {
         statement.executeUpdate(sqlForEmployee);
 
         statement.close();
+        conn.commit();
+        try{
+        Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+        Stage stage = (Stage)registerBttn.getScene().getWindow();
+        stage.setScene(new Scene(root));} catch (IOException e) {
+            System.out.println(e);
+        }
         }catch (SQLException e){
             MyAlert.showAlert(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException e1)
+            {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
     }
 

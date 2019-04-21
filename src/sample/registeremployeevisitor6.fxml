@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterEmployeeVisitor6">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterEmployeeVisitor6">
 
     <TextField fx:id="usernameTF" layoutX="139.0" layoutY="134.0" prefHeight="27.0" prefWidth="91.0" promptText="username" />
     <Label layoutX="65.0" layoutY="139.0" text="Username" />
@@ -38,7 +38,7 @@
     <Button fx:id="registerBttn" layoutX="230.0" layoutY="494.0" mnemonicParsing="false" onAction="#ensureRegister" text="Register" />
 
     <Button fx:id="cancelBttn" layoutX="330.0" layoutY="494.0" mnemonicParsing="false" onAction="#ensureCancel" text="Cancel" />
-   <Label layoutX="233.0" layoutY="24.0" text="Register Employee">
+   <Label layoutX="233.0" layoutY="24.0" text="Register EmployeeVisitor">
       <font>
          <Font size="21.0" />
       </font>

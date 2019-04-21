@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pojo.UserInfo;
@@ -19,7 +20,7 @@ import java.sql.Statement;
 
 public class UserLogin {
     public TextField tfemail;
-    public TextField tfpassword;
+    public PasswordField tfpassword;
     private static Connection conn;
 
     public void initialize() {
