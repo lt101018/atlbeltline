@@ -168,8 +168,8 @@ public class ManageTransit22 {
         }
         ManageTransitRow22 selectedItem = (ManageTransitRow22)table.getSelectionModel().getSelectedItem();
         ///following jobs
-        String sql = "delete from take \n" +
-                "where route = '"+selectedItem.getRoute()+"';";
+        String sql = "delete from transit\n" +
+                "where route = '"+selectedItem.getRoute()+"' and type = '"+selectedItem.getTransportType()+"';";
         System.out.println(sql);
         try{
         Statement statement = conn.createStatement();
