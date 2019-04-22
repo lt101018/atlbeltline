@@ -74,31 +74,46 @@ public class VisitorHistory38 {
         String eventname = tfEvent.getText();
 
         Statement statement = conn.createStatement();
-
-        System.out.println(eventname+"!!!");
-        String sqlForFilter = "select ve.visitdate, ve.eventname,ve.sitename, e.price"+
-        " from visit_event as ve, event as e" +
-        " where" +
-        " ve.eventname=e.name" +
-        " and ve.sitename=e.sitename" +
-        " and ve.eventstartdate=e.startdate" +
-        " and ve.visitorusername='"+ username +"'" +
-        " and ve.eventname like '%" + eventname + "%'" +
-        " and ve.sitename='"+ sitename +"'" +
-        " and ve.visitdate>='"+ formattedStartDate +"' and ve.visitdate<='" + formattedEndDate + "'" +
-        " union" +
-        " select visitdate, null, name, 0" +
-        " from visit_site" +
-        " where visitorusername='"+ username +"'" +
-        " and name='"+ sitename +"'" +
-        " and visitdate>='"+ formattedStartDate +"' and visitdate<='" + formattedEndDate + "'";
-        System.out.println(sqlForFilter);
-        ResultSet resultSet = statement.executeQuery(sqlForFilter);
-        while(resultSet.next()){
-            //System.out.println(resultSet);
-            addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),Float.valueOf(resultSet.getString(4)).intValue());
+        System.out.println("eventname is: " + eventname);
+        //Below is for those without eventname!
+        if(eventname.length() == 0) {
+            String sqlForFilter = "select ve.visitdate, ve.eventname,ve.sitename, e.price" +
+                    " from visit_event as ve, event as e" +
+                    " where" +
+                    " ve.eventname=e.name" +
+                    " and ve.sitename=e.sitename" +
+                    " and ve.eventstartdate=e.startdate" +
+                    " and ve.visitorusername='" + username + "'" +
+                    " and ve.eventname like '%" + eventname + "%'" +
+                    " and ve.sitename='" + sitename + "'" +
+                    " and ve.visitdate>='" + formattedStartDate + "' and ve.visitdate<='" + formattedEndDate + "'" +
+                    " union" +
+                    " select visitdate, null, name, 0" +
+                    " from visit_site" +
+                    " where visitorusername='" + username + "'" +
+                    " and name='" + sitename + "'" +
+                    " and visitdate>='" + formattedStartDate + "' and visitdate<='" + formattedEndDate + "'";
+            System.out.println(sqlForFilter);
+            ResultSet resultSet = statement.executeQuery(sqlForFilter);
+            while (resultSet.next()) {
+                addElement(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), Float.valueOf(resultSet.getString(4)).intValue());
+            }
+        } else {
+            String sqlForFilter = "select ve.visitdate, ve.eventname,ve.sitename, e.price" +
+                " from visit_event as ve, event as e" +
+                " where" +
+                " ve.eventname=e.name" +
+                " and ve.sitename=e.sitename" +
+                " and ve.eventstartdate=e.startdate" +
+                " and ve.visitorusername='" + username + "'" +
+                " and ve.eventname like '%" + eventname + "%'" +
+                " and ve.sitename='" + sitename + "'" +
+                " and ve.visitdate>='" + formattedStartDate + "' and ve.visitdate<='" + formattedEndDate + "'";
+            ResultSet resultSet = statement.executeQuery(sqlForFilter);
+            while (resultSet.next()) {
+                addElement(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), Float.valueOf(resultSet.getString(4)).intValue());
+            }
         }
-        //System.out.println(resultSet.getString(2));
         statement.close();
     }
 }
