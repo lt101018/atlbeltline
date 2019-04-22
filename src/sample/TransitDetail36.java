@@ -49,9 +49,11 @@ public class TransitDetail36 {
         col4.setCellValueFactory(new PropertyValueFactory<>("numConnectedSites"));
         conn = ConnectionManager.getConn();
         cbTransportType.getItems().addAll(
+                "ALL",
                 "MARTA",
                 "Bus","Bike"
         );
+        cbTransportType.getSelectionModel().select(0);
     }
 
     public void addElement(String route, String transportType, double price, int numConnectedSites) {
@@ -85,12 +87,18 @@ public class TransitDetail36 {
     }
 
     public void refreshTransit(ActionEvent actionEvent) throws SQLException {
+        table.getItems().clear();
         Statement statement = conn.createStatement();
         String transportType = cbTransportType.getValue().toString();
+        String transportSql = "";
+        if(!cbTransportType.getValue().toString().equals("ALL")){
+            transportSql= "and t.type='" + transportType+"'";
+        }
+
         String sitename = siteName.getText();
         String sqlForDifferentType = "select t.route,t.type, t.price, count(case when c.route=t.route then 1 end) as connectedsites" +
         " from transit as t, connect as c" +
-        " where t.route in (select route from connect where name='" + sitename + "') and t.type='" + transportType+"'" +
+        " where t.route in (select route from connect where name='" + sitename + "') "+transportSql+" "+
         " group by t.route";
 
         ResultSet resultSet = statement.executeQuery(sqlForDifferentType);
