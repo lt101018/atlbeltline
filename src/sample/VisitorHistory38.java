@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import pojo.TransitDetailRow36;
 import pojo.UserInfo;
 import pojo.VisitorHistoryRow38;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -36,13 +37,13 @@ public class VisitorHistory38 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize()throws SQLException, IOException {
+    public void initialize() throws IOException {
         conn = ConnectionManager.getConn();
         col1.setCellValueFactory(new PropertyValueFactory<>("date"));
         col2.setCellValueFactory(new PropertyValueFactory<>("event"));
         col3.setCellValueFactory(new PropertyValueFactory<>("site"));
         col4.setCellValueFactory(new PropertyValueFactory<>("price"));
-
+        try{
         Statement statement = conn.createStatement();
         String sqlForSite = "select name\n" +
                 "from site";
@@ -53,6 +54,11 @@ public class VisitorHistory38 {
         cbSite.getItems().add("--ALL--");
         cbSite.getSelectionModel().select(0);
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+
+        }
     }
 
     public void addElement(String date, String event, String site, int price) {
@@ -66,7 +72,7 @@ public class VisitorHistory38 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
         String username = UserInfo.username;
         String sitename = cbSite.getValue().toString();
@@ -94,7 +100,7 @@ public class VisitorHistory38 {
             sqlForDate =  " and ve.visitdate>='" + formattedStartDate + "' and ve.visitdate<='" + formattedEndDate + "'";
             sqlForDateNoevent = " and visitdate>='" + formattedStartDate + "' and visitdate<='"+ formattedEndDate +"'";
         }
-
+        try{
         Statement statement = conn.createStatement();
         System.out.println("eventname length is: " + eventname.length());
         //Below is for those without eventname!
@@ -141,5 +147,10 @@ public class VisitorHistory38 {
             }
         }
         statement.close();
+        } catch (SQLException e){
+            System.out.println(e);
+            MyAlert.showAlert(e.getMessage());
+
+        }
     }
 }

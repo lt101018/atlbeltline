@@ -183,7 +183,7 @@ public class ManagerViewEdit26 {
         " e.sitename = ve.sitename and e.name = ve.eventname and e.startdate = ve.eventstartdate" +
         " and e.sitename = '"+ sitename +"' and e.name = '"+ eventname +"' " +
         " and ve.visitdate between e.startdate and e.enddate" +
-        " group by ve.visitdate" +
+        " group by ve.visitdate, e.price" +
         " having daily_visits between "+visitrange1+" and "+visitrange2+" " + " and daily_revenues between "+revenuerange1+" and "+revenuerange2+" ";
 
         System.out.println(sqlForFilter);
