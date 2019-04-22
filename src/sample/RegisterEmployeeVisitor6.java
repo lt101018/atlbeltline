@@ -178,7 +178,7 @@ public class RegisterEmployeeVisitor6 {
 
         //String sqlForGettingId = "SELECT * FROM user where " + ;
         Random r=new Random();
-        int i1=r.nextInt(1000);
+        int i1=r.nextInt(100000);
         String sqlForEmployee = "INSERT INTO employee\n" +
                 "(`employeeID`,\n" +
                 "`username`,\n" +
@@ -189,7 +189,7 @@ public class RegisterEmployeeVisitor6 {
                 "`zipcode`,\n" +
                 "`employeetype`)" +
                 "VALUES\n" +
-                "('"+"011044"+i1+"',\n'" +
+                "('"+"0110"+i1+"',\n'" +
                 usernameTF.getText() + "',\n'" +
                 phonenumberTF.getText()+"',\n'" +
                 addressTF.getText()+"',\n'" +

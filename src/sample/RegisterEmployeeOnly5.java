@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class RegisterEmployeeOnly5 {
 
@@ -157,7 +158,8 @@ public class RegisterEmployeeOnly5 {
         }
 
         //String sqlForGettingId = "SELECT * FROM user where " + ;
-
+        Random r=new Random();
+        int i1=r.nextInt(100000);
         String sqlForEmployee = "INSERT INTO employee\n" +
                 "(`employeeID`,\n" +
                 "`username`,\n" +
@@ -168,7 +170,7 @@ public class RegisterEmployeeOnly5 {
                 "`zipcode`,\n" +
                 "`employeetype`)" +
                 "VALUES\n" +
-                "('"+"010004302"+"',\n'" +
+                "('"+"0110"+i1+"',\n'" +
                 usernameTF.getText() + "',\n'" +
                 phonenumberTF.getText()+"',\n'" +
                 addressTF.getText()+"',\n'" +
