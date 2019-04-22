@@ -123,7 +123,16 @@ public class ManagerViewEdit26 {
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         String sqlForStaffForFree = "(select u.firstname, u.lastname\n" +
                 "from user as u, employee as emp, event as e, assign_to as at\n" +
-                "where emp.username not in (select staffusername from assign_to) and emp.employeetype = 'staff' and u.status = 'approved' and at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate and emp.username = u.username)\n";
+                "where emp.username not in (select staffusername from assign_to) and emp.employeetype = 'staff' and u.status = 'approved' and at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate and emp.username = u.username)\n"
+                +" union\n" +
+                "(select u.firstname, u.lastname\n" +
+                "from user as u, assign_to as at\n" +
+                "where u.username = at.staffusername \n" +
+                "and at.staffusername not in (select at.staffusername\n" +
+                "from event as e, assign_to as at\n" +
+                "where\n" +
+                "at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate \n" +
+                "and not (e.enddate<'"+startdate+"' or e.startdate>'"+enddate+"')));";
         System.out.println(sqlForStaffForFree);
         String sqlForStaffForThisEvent = "(select u.firstname, u.lastname\n" +
                 "from assign_to as at, employee as e, user as u\n" +
