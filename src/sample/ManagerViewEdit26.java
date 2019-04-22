@@ -152,11 +152,21 @@ public class ManagerViewEdit26 {
     }
 
     public void btnFilter(ActionEvent actionEvent)  {
-        int visitrange1 = Integer.parseInt(tfvisit1.getText());
-        int visitrange2 = Integer.parseInt(tfvisit2.getText());
+        table.getItems().clear();
+        int visitrange1 = 0;
+        if(tfvisit1.getText().length()!=0)
+            visitrange1 = Integer.parseInt(tfvisit1.getText());
+        int visitrange2 = Integer.MAX_VALUE;
+        if(tfvisit2.getText().length()!=0)
+            visitrange2= Integer.parseInt(tfvisit2.getText());
 
-        double revenuerange1 = Double.parseDouble(tfRevenue1.getText());
-        double revenuerange2 = Double.parseDouble(tfRevenue2.getText());
+
+        double revenuerange1 = 0;
+        if(tfRevenue1.getText().length()!=0)
+            revenuerange1 = Double.parseDouble(tfRevenue1.getText());
+        double revenuerange2 = Integer.MAX_VALUE;
+        if (tfRevenue2.getText().length()!=0)
+            revenuerange2 = Double.parseDouble(tfRevenue2.getText());
 
         String sqlForFilter = "select ve.visitdate as date, count(*) as daily_visits, e.price*count(*) as daily_revenues" +
         " from event as e, visit_event as ve" +
@@ -165,7 +175,7 @@ public class ManagerViewEdit26 {
         " and e.sitename = '"+ sitename +"' and e.name = '"+ eventname +"' " +
         " and e.startdate<=ve.visitdate<=e.enddate" +
         " group by ve.visitdate" +
-        " having "+visitrange1+"<daily_visits<"+visitrange2 + " and " + revenuerange1 +"<daily_revenues<" + revenuerange2;
+        " having daily_visits between "+visitrange1+" and "+visitrange2+" " + " and daily_revenues between "+revenuerange1+" and "+revenuerange2+" ";
 
         System.out.println(sqlForFilter);
         try{
