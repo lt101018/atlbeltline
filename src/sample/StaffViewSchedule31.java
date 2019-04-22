@@ -57,7 +57,7 @@ public class StaffViewSchedule31 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
         String eventSql = "";
         if(tfEventName.getText().length()!=0){
@@ -99,17 +99,19 @@ public class StaffViewSchedule31 {
                 "where e.name =a.name and e.sitename=a.sitename "+eventSql+"  "+descriptionSql+" "+dateSql+" and e.sitename in (select ev.sitename from event as ev where "+eventSql1+"  "+descriptionSql1+" "+dateSql1+" ) and e.startdate=a.startdate and a.staffusername = '"+ UserInfo.username +"' " +
                 "group by a.sitename,a.name,a.startdate;";
         System.out.println(sql);
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getInt(5));
         }
         statement.close();
-
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
-    public void btnViewEvent(ActionEvent actionEvent) throws IOException, SQLException {
+    public void btnViewEvent(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;

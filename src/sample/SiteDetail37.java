@@ -26,8 +26,9 @@ public class SiteDetail37 {
     public static String lastFxml;
     private static Connection conn;
 
-    public void setSite(String site) throws SQLException, IOException {
+    public void setSite(String site) throws  IOException {
         siteName.setText(site);
+
         setAddressAndOpenEveryday(site);
     }
 
@@ -35,11 +36,12 @@ public class SiteDetail37 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws IOException, SQLException {
+    public void initialize() {
         conn = ConnectionManager.getConn();
     }
 
-    public void setAddressAndOpenEveryday(String sitename) throws IOException, SQLException {
+    public void setAddressAndOpenEveryday(String sitename) throws IOException {
+        try {
         Statement statement = conn.createStatement();
         String sqlForSite = "select name, address, openeveryday from site where name=" + "'"+ sitename + "'";
         ResultSet resultSet = statement.executeQuery(sqlForSite);
@@ -48,6 +50,9 @@ public class SiteDetail37 {
             openEveryday.setText(resultSet.getString(3));
         }
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void btnBack(ActionEvent actionEvent) throws IOException {
@@ -56,7 +61,8 @@ public class SiteDetail37 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnLogVisit(ActionEvent actionEvent) throws IOException, SQLException {
+    public void btnLogVisit(ActionEvent actionEvent) throws IOException {
+        try {
         Statement statement = conn.createStatement();
         String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String siteValue = siteName.getText();
@@ -79,6 +85,9 @@ public class SiteDetail37 {
 
         statement.executeUpdate(sqlForLog);
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
         MyAlert.showAlert("Log Success!");
     }
 }

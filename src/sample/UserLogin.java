@@ -42,8 +42,8 @@ public class UserLogin {
 //        tfpassword.setText("dsmith456");
 
         //for visitor testing
-        tfemail.setText("mary@outlook.com");
-        tfpassword.setText("msmith789");
+//        tfemail.setText("mary@outlook.com");
+//        tfpassword.setText("msmith789");
         //"msmith789"
     }
 

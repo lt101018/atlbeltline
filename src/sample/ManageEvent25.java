@@ -69,7 +69,7 @@ public class ManageEvent25 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
         table.getItems().clear();
 
         String eventSql = "";
@@ -115,7 +115,7 @@ public class ManageEvent25 {
                 "group by ve.sitename, ve.eventname, ve.eventstartdate\n" +
                 visitRevenueSql;
         System.out.println(sql);
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -133,9 +133,12 @@ public class ManageEvent25 {
             statement1.close();
         }
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
-    public void btnEdit(ActionEvent actionEvent) throws IOException, SQLException {
+    public void btnEdit(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
@@ -153,7 +156,7 @@ public class ManageEvent25 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnDelete(ActionEvent actionEvent) throws SQLException {
+    public void btnDelete(ActionEvent actionEvent) {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select an event.");
             return;
@@ -162,11 +165,13 @@ public class ManageEvent25 {
         ///following jobs
 
         String sql = "delete from event where sitename = '"+selectedItem.getSiteName()+"' and name = '"+selectedItem.getName()+"' and startdate = '"+selectedItem.getStartDate()+"';";
-
+try {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
-
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
         btnFilter(null);
         MyAlert.showAlert("Event deleted.");
     }
