@@ -173,7 +173,7 @@ public class ManagerViewEdit26 {
         " where" +
         " e.sitename = ve.sitename and e.name = ve.eventname and e.startdate = ve.eventstartdate" +
         " and e.sitename = '"+ sitename +"' and e.name = '"+ eventname +"' " +
-        " and e.startdate<=ve.visitdate<=e.enddate" +
+        " and ve.visitdate between e.startdate and e.enddate" +
         " group by ve.visitdate" +
         " having daily_visits between "+visitrange1+" and "+visitrange2+" " + " and daily_revenues between "+revenuerange1+" and "+revenuerange2+" ";
 

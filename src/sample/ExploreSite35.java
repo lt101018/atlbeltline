@@ -43,7 +43,7 @@ public class ExploreSite35 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize()  {
         col1.setCellValueFactory(new PropertyValueFactory<>("siteName"));
         col2.setCellValueFactory(new PropertyValueFactory<>("eventCount"));
         col3.setCellValueFactory(new PropertyValueFactory<>("totalVisits"));
@@ -56,7 +56,7 @@ public class ExploreSite35 {
 
         conn = ConnectionManager.getConn();
         String sql = "select name from site";
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -68,6 +68,9 @@ public class ExploreSite35 {
         cbName.getSelectionModel().select(0);
         cbOpenEveryday.getSelectionModel().select(0);
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
 
     }
 
@@ -83,7 +86,7 @@ public class ExploreSite35 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent)  {
 
 
         String formattedDate1 = "";
@@ -114,6 +117,8 @@ public class ExploreSite35 {
                 "on s.name=v.name \n" +
                 "group by s.name;";
         System.out.println(sql);
+
+        try {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -176,11 +181,13 @@ public class ExploreSite35 {
             addElement(resultSet.getString(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4));
         }
         statement.close();
-
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
 
     }
 
-    public void btnSiteDetail(ActionEvent actionEvent) throws IOException, SQLException {
+    public void btnSiteDetail(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a site.");
             return;
@@ -192,6 +199,7 @@ public class ExploreSite35 {
         Parent root = (Parent)fxmlLoader.load();
         SiteDetail37 controller = fxmlLoader.getController();
         controller.setLastFxml("exploresite35.fxml");
+
         controller.setSite(selectedItem.getSiteName());
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));

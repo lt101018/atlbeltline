@@ -140,7 +140,7 @@ public class ManageTransit22 {
         }
     }
 
-    public void btnEdit(ActionEvent actionEvent) throws IOException, SQLException {
+    public void btnEdit(ActionEvent actionEvent) throws IOException {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
@@ -156,6 +156,8 @@ public class ManageTransit22 {
         controller.prevType = selectedItem.getTransportType();
         controller.prevRoute = selectedItem.getRoute();
         controller.tfPrice.setText(selectedItem.getPrice()+"");
+
+
         controller.initialize1();
         Stage stage = (Stage)table.getScene().getWindow();
         stage.setScene(new Scene(root));

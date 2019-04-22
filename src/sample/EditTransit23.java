@@ -36,8 +36,8 @@ public class EditTransit23 {
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    public void initialize1() throws SQLException {
-
+    public void initialize1() {
+try {
         labelTransportType.setText(prevType);
         tfRoute.setText(prevRoute);
 
@@ -65,6 +65,9 @@ public class EditTransit23 {
         }
 
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void setLastFxml(String lastFxml) {
@@ -77,17 +80,19 @@ public class EditTransit23 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnUpdate(ActionEvent actionEvent) throws SQLException {
+    public void btnUpdate(ActionEvent actionEvent)  {
         String sql = "update transit\n" +
                 "set route = '"+tfRoute.getText()+"', price = "+tfPrice.getText()+"\n" +
                 "where type = '"+prevType+"' and route = '"+prevRoute+"';";
         prevRoute = tfRoute.getText();
+        try {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
 
         sql = "delete from connect\n" +
                 "where type = '"+prevType+"' and route = '"+prevRoute+"';";
+
         statement.executeUpdate(sql);
 
 
@@ -99,5 +104,8 @@ public class EditTransit23 {
 
         MyAlert.showAlert("Transit updated.");
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 }

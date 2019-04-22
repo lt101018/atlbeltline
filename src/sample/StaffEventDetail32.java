@@ -10,6 +10,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -37,12 +38,12 @@ public class StaffEventDetail32 {
         mbStaff.setText("Click");
     }
 
-    public void initialize1() throws SQLException {
+    public void initialize1()  {
         String sql = "select datediff(e.enddate, e.startdate) as duration, e.capacity,e.price,e.description\n" +
                 "from event as e\n" +
                 "where e.name='"+labelEvent.getText()+"' and e.sitename='"+labelSite.getText()+"' and e.startdate='"+labelStartDate.getText()+"';";
         System.out.println(sql);
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         if(resultSet.next()){
@@ -66,6 +67,9 @@ public class StaffEventDetail32 {
         }
 
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void setLabels(String site, String event, String startDate, String endDate) {

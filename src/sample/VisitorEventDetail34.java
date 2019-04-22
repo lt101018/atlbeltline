@@ -54,7 +54,7 @@ public class VisitorEventDetail34 {
 
 
 
-    public void btnLogVisit(ActionEvent actionEvent) throws SQLException {
+    public void btnLogVisit(ActionEvent actionEvent) {
         if(datepicker.getValue()==null){
             MyAlert.showAlert("Please select time.");
             return;
@@ -70,7 +70,7 @@ public class VisitorEventDetail34 {
         String sql = "select * \n" +
                 "from visit_event\n" +
                 "where visitorusername='"+ UserInfo.username +"' and eventname='"+labelEvent.getText()+"' and sitename='"+labelSite.getText()+"' and visitdate='"+formattedDate+"';";
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         if(resultSet.next()){
@@ -85,6 +85,9 @@ public class VisitorEventDetail34 {
         statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
 
         MyAlert.showAlert("Visit log success.");
     }

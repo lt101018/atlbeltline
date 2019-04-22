@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pojo.ManageStaffRow28;
+import tools.MyAlert;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -33,13 +34,13 @@ public class ManageStaff28 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         conn = ConnectionManager.getConn();
         col1.setCellValueFactory(new PropertyValueFactory<>("staffName"));
         col2.setCellValueFactory(new PropertyValueFactory<>("eventShift"));
 
         String sql = "select name from site";
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -50,6 +51,9 @@ public class ManageStaff28 {
 
         cbSite.getSelectionModel().select(0);
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void addElement(String staffName, int eventShift) {
@@ -63,7 +67,7 @@ public class ManageStaff28 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent)  {
 
         table.getItems().clear();
         String fnameSql = "";
@@ -92,7 +96,7 @@ public class ManageStaff28 {
                 "from user as u, employee as e, assign_to as a\n" +
                 "where u.username = e.username and a.staffusername = e.username and e.employeetype = 'staff' "+fnameSql+" "+lnameSql+" "+siteSql+" "+dateSql+"\n" +
                 "group by u.firstname, u.lastname;";
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -110,5 +114,8 @@ public class ManageStaff28 {
         }
 
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 }

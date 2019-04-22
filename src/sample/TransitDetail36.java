@@ -68,11 +68,12 @@ public class TransitDetail36 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnLogTransit(ActionEvent actionEvent) throws SQLException  {
+    public void btnLogTransit(ActionEvent actionEvent)   {
         if(table.getSelectionModel().getSelectedItem() == null) {
             MyAlert.showAlert("You need to select a transit.");
             return;
         }
+        try {
         Statement statement = conn.createStatement();
         TransitDetailRow36 selectedItem = (TransitDetailRow36)table.getSelectionModel().getSelectedItem();
         ///following jobs
@@ -83,11 +84,16 @@ public class TransitDetail36 {
         String sqlForInsert = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getTransportType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
         statement.executeUpdate(sqlForInsert);
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
         MyAlert.showAlert("Log Success!");
     }
 
-    public void refreshTransit(ActionEvent actionEvent) throws SQLException {
+    public void refreshTransit(ActionEvent actionEvent) {
         table.getItems().clear();
+
+        try {
         Statement statement = conn.createStatement();
         String transportType = cbTransportType.getValue().toString();
         String transportSql = "";
@@ -106,5 +112,9 @@ public class TransitDetail36 {
             addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getDouble(3),resultSet.getInt(4));
         }
         statement.close();
+
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 }

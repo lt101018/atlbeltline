@@ -27,7 +27,7 @@ public class CreateTransit24 {
 
     ObservableList<String> list;
 
-    public void initialize() throws SQLException {
+    public void initialize()  {
 
         list = FXCollections.observableArrayList();
         listView.setItems(list);
@@ -42,22 +42,26 @@ public class CreateTransit24 {
         );
 
         String sql = "select name from site";
+        try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             list.add(resultSet.getString(1));
         }
         statement.close();
-
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void setLastFxml(String lastFxml) {
         this.lastFxml = lastFxml;
     }
 
-    public void btnCreate(ActionEvent actionEvent) throws SQLException {
+    public void btnCreate(ActionEvent actionEvent)  {
         String sql = "insert into transit( type, route, price) values('"+cbTransportType.getValue().toString() +"','"+tfRoute.getText()+"',"+tfPrice.getText()+");";
         System.out.println(sql);
+        try {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
 
@@ -72,6 +76,9 @@ public class CreateTransit24 {
 
         MyAlert.showAlert("Transit created.");
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void btnBack(ActionEvent actionEvent) throws IOException {

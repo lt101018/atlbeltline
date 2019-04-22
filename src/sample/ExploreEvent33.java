@@ -47,7 +47,7 @@ public class ExploreEvent33 {
         this.lastFxml = lastFxml;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize()  {
         col1.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         col2.setCellValueFactory(new PropertyValueFactory<>("siteName"));
         col3.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
@@ -57,7 +57,7 @@ public class ExploreEvent33 {
 
         conn = ConnectionManager.getConn();
         String sql = "select name from site";
-
+try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -68,6 +68,9 @@ public class ExploreEvent33 {
 
         cbSiteName.getSelectionModel().select(0);
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void addElement(String eventName, String siteName, double ticketPrice, int ticketRemaining, int totalVisits, int myVisits, String startDate, String endDate, String description) {
@@ -82,7 +85,7 @@ public class ExploreEvent33 {
         stage.setScene(new Scene(root));
     }
 
-    public void btnFilter(ActionEvent actionEvent) throws SQLException {
+    public void btnFilter(ActionEvent actionEvent) {
 
         String dateTableSql1 = "";
         if(datepicker1.getValue()!=null && datepicker2.getValue()!=null){
@@ -107,6 +110,7 @@ public class ExploreEvent33 {
                 "on e.name=v.eventname and e.sitename=v.sitename and e.startdate=v.eventstartdate\n" +
                 "group by e.name,e.sitename,e.startdate;";
         System.out.println(sql);
+        try {
         Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         sql = "CREATE   or replace view eventmyvisit AS\n" +
@@ -117,7 +121,6 @@ public class ExploreEvent33 {
                 "group by e.name,e.sitename,e.startdate;";
         statement.executeUpdate(sql);
         System.out.println(sql);
-
         String eventNameSql = " 1=1 ";
         if(tfname.getText().length()!=0)
             eventNameSql = " e.name like '%"+tfname.getText()+"%' ";
@@ -172,11 +175,15 @@ public class ExploreEvent33 {
                 " group by e.name,e.sitename,e.startdate;";
 
         System.out.println(sql);
+
         ResultSet resultSet =  statement.executeQuery(sql);
         while(resultSet.next()){
             addElement(resultSet.getString(1),resultSet.getString(2),resultSet.getDouble(3),resultSet.getInt(4),resultSet.getInt(5),resultSet.getInt(6),resultSet.getString(7),resultSet.getString(8),resultSet.getString(9));
         }
         statement.close();
+    }catch (SQLException e){
+        MyAlert.showAlert(e.getMessage());
+    }
     }
 
     public void btnEventDetail(ActionEvent actionEvent) throws IOException {
