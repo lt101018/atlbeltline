@@ -97,7 +97,7 @@ public class TakeTransit15 {
         String sql = "select t.route, t.type, t.price, count(case when c.route=t.route then 1 end) as connected_sites\n" +
                 "from transit as t, connect as c\n" +
                 "where t.type in (select type from connect "+siteSql+") "+transportSql+ priceSql +
-                " group by t.route;";
+                " group by t.route, t.type;";
         System.out.println(sql);
         try{
         Statement statement = conn.createStatement();

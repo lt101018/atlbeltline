@@ -118,7 +118,7 @@ public class ManageUser18 {
             String sql3 = "(select u.username, count(*) as email_count, emp.employeetype, u.status \n" +
                     "from user as u, email as e, employee as emp\n" +
                     "where emp.employeetype in ('manager','staff') and u.username = e.username and u.username = emp.username "+usernameSql+" "+statusSql+" \n" +
-                    "group by e.username)\n" +
+                    "group by e.username, emp.employeetype)\n" +
                     "union\n" +
                     "(select u.username, count(*) as email_count, u.usertype, u.status\n" +
                     "from user as u, email as e\n" +

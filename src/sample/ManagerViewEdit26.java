@@ -225,6 +225,13 @@ public class ManagerViewEdit26 {
         Statement statement = conn.createStatement();
         ObservableList<String> selectedStaff = listView.getSelectionModel().getSelectedItems();
 
+        int minNumberOfStaff = Integer.valueOf(minStaffValueminStaffValue.getText());
+
+        if(selectedStaff.size()<minNumberOfStaff) {
+            MyAlert.showAlert("The number of staff is not enough");
+            return;
+        }
+
         for(String staff:selectedStaff) {
             if(!originalStaff.contains(staff)) {
                 String firstname = staff.split(" ")[0];
@@ -235,7 +242,7 @@ public class ManagerViewEdit26 {
                 while(resultSet.next()) {
                     username = resultSet.getString(1);
                 }
-                sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + username + "','" + sitename + "','" + nameValue + "','" + startdate + "')";
+                sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + username + "','" + sitename + "','" + nameValue.getText() + "','" + startdate + "')";
                 System.out.println(sqlForInsert);
                 statement.executeUpdate(sqlForInsert);
             }
