@@ -143,6 +143,8 @@ public class TakeTransit15 {
         String sql = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
         System.out.println(sql);
         statement.executeUpdate(sql);
+        MyAlert.showAlert("Log succeed!!");
+
         statement.close();
     }
 
