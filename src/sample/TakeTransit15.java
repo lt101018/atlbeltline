@@ -129,9 +129,19 @@ public class TakeTransit15 {
         TakeTransitRow15 selectedItem = (TakeTransitRow15)table.getSelectionModel().getSelectedItem();
         String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         ///following jobs
+        Statement statement = conn.createStatement();
+        String sqlForCheck = "select *\n" +
+                "from take\n" +
+                "where username='"+ UserInfo.username +"' and type='" + selectedItem.getType() + "' and  takedate='" + formattedDate + "'" + " and route='" +selectedItem.getRoute()+ "'";
+        System.out.println(sqlForCheck);
+        ResultSet resultSet = statement.executeQuery(sqlForCheck);
+        while(resultSet.next()){
+            MyAlert.showAlert("You have taken this transit once that day!!");
+            return;
+        }
+
         String sql = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
         System.out.println(sql);
-        Statement statement = conn.createStatement();
         statement.executeUpdate(sql);
         statement.close();
     }
