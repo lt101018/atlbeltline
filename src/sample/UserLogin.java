@@ -63,7 +63,7 @@ public class UserLogin {
             return;
         }
 
-        sql = "select username, status, usertype\n" +
+        sql = "select username, status, usertype, status\n" +
                 "from user natural join email\n" +
                 "where email = '"+tfemail.getText()+"' and password = '"+tfpassword.getText()+"';";
         System.out.println(sql);
@@ -71,6 +71,10 @@ public class UserLogin {
         if (!resultSet1.next()) {
             MyAlert.showAlert("Password is wrong");
         } else {
+            if(!resultSet1.getString("status").equals("Approved")){
+                MyAlert.showAlert("The user is pending.");
+                return;
+            }
             UserInfo.username = resultSet1.getString("username");
             UserInfo.status = resultSet1.getString("status");
             UserInfo.usertype = resultSet1.getString("usertype");
