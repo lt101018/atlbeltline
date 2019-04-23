@@ -16,7 +16,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class VisitorEventDetail34 {
     public DatePicker datepicker;
@@ -67,10 +69,28 @@ public class VisitorEventDetail34 {
 
         String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
+        String startdate = labelStartDate.getText();
+        String enddate = labelEndDate.getText();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date d1 = sdf.parse(startdate);
+            Date d2 = sdf.parse(formattedDate);
+            Date d3 = sdf.parse(enddate);
+            long currentMinusStart = d2.getTime() - d1.getTime();
+            long endMinusCurrent = d3.getTime() - d2.getTime();
+            if(endMinusCurrent<0 || currentMinusStart < 0) {
+                MyAlert.showAlert("You can't choose a day beyond the range!");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
         String sql = "select * \n" +
                 "from visit_event\n" +
                 "where visitorusername='"+ UserInfo.username +"' and eventname='"+labelEvent.getText()+"' and sitename='"+labelSite.getText()+"' and visitdate='"+formattedDate+"';";
-try {
+    try {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         if(resultSet.next()){
