@@ -110,9 +110,10 @@ public class ManagerCreateEvent27 {
         try{
             conn.setAutoCommit(false);
             Statement statement = conn.createStatement();
-            createAssignTo();
+
             statement.executeUpdate(sqlForInsertingEvent);
             statement.close();
+            createAssignTo();
             conn.commit();
             MyAlert.showAlert("Create Succeeds!");
         } catch (SQLException e){

@@ -231,9 +231,11 @@ public class ManagerViewEdit26 {
             MyAlert.showAlert("The number of staff is not enough");
             return;
         }
+            System.out.println(originalStaff);
 
         for(String staff:selectedStaff) {
             if(!originalStaff.contains(staff)) {
+                System.out.println(staff);
                 String firstname = staff.split(" ")[0];
                 String lastname = staff.split(" ")[1];
                 String username = "";

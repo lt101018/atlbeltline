@@ -126,6 +126,7 @@ public class RegisterUserOnly3 {
             statement.close();
             conn.commit();
             try{
+                MyAlert.showAlert("Register succeed");
                 Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
                 Stage stage = (Stage)registerBttn.getScene().getWindow();
                 stage.setScene(new Scene(root));} catch (IOException e) {

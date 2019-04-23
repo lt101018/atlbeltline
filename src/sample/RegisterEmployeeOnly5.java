@@ -187,9 +187,10 @@ public class RegisterEmployeeOnly5 {
         statement.close();
         conn.commit();
         try{
-        Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
-        Stage stage = (Stage)registerBttn.getScene().getWindow();
-        stage.setScene(new Scene(root));} catch (IOException e) {
+            MyAlert.showAlert("Register succeed");
+            Parent root = FXMLLoader.load(getClass().getResource("userlogin.fxml"));
+            Stage stage = (Stage)registerBttn.getScene().getWindow();
+            stage.setScene(new Scene(root));} catch (IOException e) {
             System.out.println(e);
         }
         }catch (SQLException e){
