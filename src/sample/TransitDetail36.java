@@ -79,9 +79,18 @@ public class TransitDetail36 {
         ///following jobs
         String formattedDate = datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-
-        //**********Here should be modified!!***********
+            String sqlForCheck = "select *\n" +
+                    "from take\n" +
+                    "where username='"+ UserInfo.username +"' and type='" + selectedItem.getTransportType() + "' and  takedate='" + formattedDate + "'" + " and route='" +selectedItem.getRoute()+ "'";
+            System.out.println(sqlForCheck);
+            ResultSet resultSet = statement.executeQuery(sqlForCheck);
+            while(resultSet.next()){
+                MyAlert.showAlert("You have taken this transit once that day!!");
+                return;
+            }
+            //**********Here should be modified!!***********
         String sqlForInsert = "insert into take(username, type, route, takedate) values('"+ UserInfo.username +"','"+ selectedItem.getTransportType() +"', '"+selectedItem.getRoute()+"', '"+formattedDate+"');";
+
         statement.executeUpdate(sqlForInsert);
         statement.close();
     }catch (SQLException e){
@@ -97,15 +106,24 @@ public class TransitDetail36 {
         Statement statement = conn.createStatement();
         String transportType = cbTransportType.getValue().toString();
         String transportSql = "";
+        String transportSql2 = " group by t.route,t.type";
         if(!cbTransportType.getValue().toString().equals("ALL")){
             transportSql= "and t.type='" + transportType+"'";
+            transportSql2 = " group by t.route";
         }
 
         String sitename = siteName.getText();
         String sqlForDifferentType = "select t.route,t.type, t.price, count(case when c.route=t.route then 1 end) as connectedsites" +
         " from transit as t, connect as c" +
-        " where t.route in (select route from connect where name='" + sitename + "') "+transportSql+" "+
-        " group by t.route";
+        " where t.route in (select route from connect where name='" + sitename + "') " + transportSql+" "+
+        transportSql2;
+
+        System.out.println(sqlForDifferentType);
+//            select t.route,t.type, t.price, count(case when c.route=t.route then 1 end) as connectedsites
+//                from transit as t, connect as c
+//                where t.route in (select route from connect where name='Inman Park') and t.type='Bus'
+//                group by t.route;
+
 
         ResultSet resultSet = statement.executeQuery(sqlForDifferentType);
         while(resultSet.next()){
