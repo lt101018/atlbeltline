@@ -71,6 +71,8 @@ public class VisitorEventDetail34 {
 
         String startdate = labelStartDate.getText();
         String enddate = labelEndDate.getText();
+
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date d1 = sdf.parse(startdate);
