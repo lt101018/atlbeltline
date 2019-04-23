@@ -31,11 +31,11 @@ public class UserLogin {
 //        tfemail.setText("jsmith@gmail.com");
 //        tfpassword.setText("jsmith123");
         ////manager for testing
-//        tfemail.setText("m2@beltline.com");
-//        tfpassword.setText("manager2");
+        tfemail.setText("m2@beltline.com");
+        tfpassword.setText("manager2");
         ////staff for testing
-        tfemail.setText("msmith@gmail.com");
-        tfpassword.setText("msmith456");
+//        tfemail.setText("msmith@gmail.com");
+//        tfpassword.setText("msmith456");
 
         ////for testing
 //        tfemail.setText("dsmith@outlook.com");

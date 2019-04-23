@@ -108,14 +108,23 @@ public class ManagerCreateEvent27 {
                 descrp + "',\n'" +
                 min + "')";
         try{
+            conn.setAutoCommit(false);
             Statement statement = conn.createStatement();
+            createAssignTo();
             statement.executeUpdate(sqlForInsertingEvent);
             statement.close();
-            createAssignTo();
+            conn.commit();
             MyAlert.showAlert("Create Succeeds!");
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException e1)
+            {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -132,8 +141,23 @@ public class ManagerCreateEvent27 {
             String sqlForInsert = "";
             Statement statement = conn.createStatement();
             ObservableList<String> selectedStaff = listView.getSelectionModel().getSelectedItems();
+            int minNumberOfStaff = Integer.parseInt(minStaffValue.getText());
+            System.out.println("The min value is " + minStaffValue.getText());
+            if(selectedStaff.size()<minNumberOfStaff) {
+                MyAlert.showAlert("The number of staff is not enough, staff assign failed!");
+                throw new SQLException();
+            }
+
             for(String staff:selectedStaff) {
-                sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + staff + "','" + sitename + "','" + eventName + "','" + startdate + "')";
+                String firstname = staff.split(" ")[0];
+                String lastname = staff.split(" ")[1];
+                String username = "";
+                String sqlForUsername = "select username from user where firstname = '" + firstname +"' and lastname = '"+ lastname +"'";
+                ResultSet resultSet = statement.executeQuery(sqlForUsername);
+                while(resultSet.next()) {
+                    username = resultSet.getString(1);
+                }
+                sqlForInsert = "insert into assign_to(staffusername, sitename, name, startdate) values('" + username + "','" + sitename + "','" + eventName + "','" + startdate + "')";
                 statement.executeUpdate(sqlForInsert);
             }
             statement.close();
@@ -172,12 +196,25 @@ public class ManagerCreateEvent27 {
 //                " and e.sitename = " + sitename + " and " + "e.name = " + "";
         //String sql = "select u.firstname, u.lastname, u.username from user as u";
         //'' and e.name = '' and e.startdate = ''; -- 对用户刚创建的新条目进行操作
-        String sql = "select u.firstname, u.lastname, u.username\n" +
-                "from user as u, employee as emp, event as e, assign_to as at\n" +
-                " where emp.username not in (select staffusername from assign_to) and emp.employeetype = 'staff'\n" +
-                "and u.status = 'approved' and at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate\n" +
-                "and at.staffusername = emp.username and emp.username = u.username and (e.enddate<'" + startdate + "' or e.startdate>'" + enddate + "')";
-        System.out.println(sql);
+        String sql = "(select distinct u.firstname, u.lastname, u.username" +
+            " from user as u, employee as emp, event as e, assign_to as at" +
+            " where" +
+            " at.sitename = e.sitename and at.name = e.name and at.startdate = e.startdate" +
+            " and emp.username = u.username" +
+            " and(emp.username not in (select staffusername from assign_to))" +
+            " and emp.employeetype = 'staff' and u.status = 'approved')" +
+            " union" +
+            " select distinct u.firstname, u.lastname, u.username" +
+            " from user as u, employee as emp, event as e,assign_to as at" +
+            " where" +
+            " e.sitename = at.sitename and e.name = at.name and e.startdate = at.startdate" +
+            " and at.staffusername = emp.username" +
+            " and e.sitename = (select name from site where managerusername = '"+ UserInfo.username +"')" +
+            " and emp.username = u.username" +
+            " and emp.employeetype = 'staff' and u.status = 'approved'" +
+            " and (e.enddate<'" +startdate + "' or e.startdate>'" +  enddate + "')";
+
+            System.out.println(sql);
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
             System.out.println(list);
@@ -187,13 +224,6 @@ public class ManagerCreateEvent27 {
         } catch (SQLException e){
             System.out.println(e);
             MyAlert.showAlert(e.getMessage());
-            try {
-                conn.rollback();
-            } catch (SQLException e1)
-            {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
         }
         //*******Populate the listview*******
     }
